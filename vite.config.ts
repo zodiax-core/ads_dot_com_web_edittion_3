@@ -12,4 +12,8 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  nitro: {
+    // Use netlify preset so Nitro outputs Netlify-compatible serverless functions
+    preset: "netlify",
+  },
 });
