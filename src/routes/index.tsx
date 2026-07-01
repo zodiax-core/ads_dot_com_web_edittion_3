@@ -651,24 +651,34 @@ export function Footer() {
 }
 
 function Home() {
-  // Start false so SSR and initial client render match (fixes hydration error).
-  // useEffect fires only in the browser, then shows the intro before first paint.
-  const [showIntro, setShowIntro] = useState(false);
+  // heroReady starts false on both SSR and client — no hydration mismatch.
+  // The white overlay (z-99) hides everything from the very first render.
   const [heroReady, setHeroReady] = useState(false);
+  // mounted ensures CinematicIntro only runs in the browser (client-only)
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setShowIntro(true);
+    setMounted(true);
   }, []);
 
   const handleIntroComplete = () => {
-    setShowIntro(false);
-    setTimeout(() => setHeroReady(true), 100);
+    setTimeout(() => setHeroReady(true), 80);
   };
 
   return (
     <>
-      {showIntro && <CinematicIntro onComplete={handleIntroComplete} />}
-      <main className={`min-h-screen bg-canvas text-ink font-sans relative ${showIntro ? 'opacity-0 pointer-events-none' : 'opacity-100 transition-opacity duration-700'}`}>
+      {/* White screen — always covers everything until heroReady.
+          SSR renders this as opacity-100 (no flash), intro sits on top (z-100). */}
+      <div
+        className={`fixed inset-0 z-[99] bg-white pointer-events-none transition-opacity duration-700 ${heroReady ? "opacity-0" : "opacity-100"}`}
+      />
+
+      {/* Intro mounts only on the client, on top of the white overlay */}
+      {mounted && !heroReady && (
+        <CinematicIntro onComplete={handleIntroComplete} />
+      )}
+
+      <main className={`min-h-screen bg-canvas text-ink font-sans relative transition-opacity duration-700 ${heroReady ? "opacity-100" : "opacity-0"}`}>
         <Nav ready={heroReady} />
         <Hero ready={heroReady} />
         <Marquee />
