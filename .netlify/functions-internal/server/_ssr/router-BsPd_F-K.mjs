@@ -4,10 +4,10 @@ import { M as useRouter, c as HeadContent, d as Outlet, f as lazyRouteComponent,
 import { r as Route$6 } from "./routes-DMbmB-9-.mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { t as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-DOLrC3BD.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-BsPd_F-K.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-n2OxOse7.css";
+var styles_default = "/assets/styles-x7W6rC5v.css";
 function reportLovableError(error, context = {}) {
 	if (typeof window === "undefined") return;
 	window.__lovableEvents?.captureException?.(error, {
@@ -166,7 +166,7 @@ function RootComponent() {
 		})
 	});
 }
-var $$splitComponentImporter$4 = () => import("./work-PaOc4yhX.mjs");
+var $$splitComponentImporter$4 = () => import("./work-62WV3JTo.mjs");
 var Route$4 = createFileRoute("/work")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
 var $$splitComponentImporter$3 = () => import("./studio-oamKibX7.mjs");
 var Route$3 = createFileRoute("/studio")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
@@ -174,7 +174,7 @@ var $$splitComponentImporter$2 = () => import("./services-BVFZqX17.mjs");
 var Route$2 = createFileRoute("/services")({ component: lazyRouteComponent($$splitComponentImporter$2, "component") });
 var $$splitComponentImporter$1 = () => import("./process-DE2gl3xZ.mjs");
 var Route$1 = createFileRoute("/process")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
-var $$splitComponentImporter = () => import("./0i9876r7s7ygs89grt7r9s8rbg9rdb-D5ZR3x6E.mjs");
+var $$splitComponentImporter = () => import("./0i9876r7s7ygs89grt7r9s8rbg9rdb-yUb9ML7c.mjs");
 var Route = createFileRoute("/0i9876r7s7ygs89grt7r9s8rbg9rdb")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
 var WorkRoute = Route$4.update({
 	id: "/work",

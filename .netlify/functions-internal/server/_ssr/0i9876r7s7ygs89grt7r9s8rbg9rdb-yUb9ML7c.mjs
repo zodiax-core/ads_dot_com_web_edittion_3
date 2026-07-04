@@ -2,9 +2,109 @@ import { r as __toESM } from "../_runtime.mjs";
 import { a as useMutation, c as require_react, n as useAuthActions, o as useQuery, r as useConvexAuth, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as api } from "./api-DSJLF2wo.mjs";
 import { M as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/0i9876r7s7ygs89grt7r9s8rbg9rdb-D5ZR3x6E.js
+//#region node_modules/.nitro/vite/services/ssr/assets/0i9876r7s7ygs89grt7r9s8rbg9rdb-yUb9ML7c.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
+function ErrorDialog({ message, onClose }) {
+	const [copied, setCopied] = (0, import_react.useState)(false);
+	const copy = () => {
+		navigator.clipboard.writeText(message).then(() => {
+			setCopied(true);
+			setTimeout(() => setCopied(false), 2e3);
+		});
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "fixed inset-0 z-[300] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4",
+		onClick: onClose,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 flex flex-col gap-4",
+			onClick: (e) => e.stopPropagation(),
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-start justify-between gap-4",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "size-8 rounded-full bg-red-100 flex items-center justify-center shrink-0",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+								className: "size-4 text-red-600",
+								viewBox: "0 0 24 24",
+								fill: "none",
+								stroke: "currentColor",
+								strokeWidth: 2,
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
+									cx: "12",
+									cy: "12",
+									r: "10"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+									d: "M12 8v4M12 16h.01",
+									strokeLinecap: "round"
+								})]
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+							className: "font-semibold text-ink text-base",
+							children: "Error"
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						onClick: onClose,
+						className: "text-ink/40 hover:text-ink transition-colors mt-0.5",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+							className: "size-5",
+							viewBox: "0 0 24 24",
+							fill: "none",
+							stroke: "currentColor",
+							strokeWidth: 2,
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+								d: "M18 6L6 18M6 6l12 12",
+								strokeLinecap: "round"
+							})
+						})
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("pre", {
+					className: "bg-ink/5 rounded-xl p-4 text-xs text-ink font-mono whitespace-pre-wrap break-all leading-relaxed max-h-48 overflow-y-auto",
+					children: message
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex gap-2 justify-end",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						onClick: copy,
+						className: "px-4 py-2 bg-ink/10 rounded-lg text-sm font-medium hover:bg-ink/20 transition-colors flex items-center gap-1.5",
+						children: copied ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+							className: "size-3.5 text-green-600",
+							viewBox: "0 0 24 24",
+							fill: "none",
+							stroke: "currentColor",
+							strokeWidth: 2,
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+								d: "M20 6L9 17l-5-5",
+								strokeLinecap: "round",
+								strokeLinejoin: "round"
+							})
+						}), " Copied!"] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+							className: "size-3.5",
+							viewBox: "0 0 24 24",
+							fill: "none",
+							stroke: "currentColor",
+							strokeWidth: 2,
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", {
+								x: "9",
+								y: "9",
+								width: "13",
+								height: "13",
+								rx: "2"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" })]
+						}), " Copy"] })
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						onClick: onClose,
+						className: "px-4 py-2 bg-ink text-canvas rounded-lg text-sm font-medium hover:bg-ink/90 transition-colors",
+						children: "Dismiss"
+					})]
+				})
+			]
+		})
+	});
+}
 async function uploadFile(file, getUploadUrl) {
 	const uploadUrl = await getUploadUrl();
 	const res = await fetch(uploadUrl, {
@@ -12,12 +112,15 @@ async function uploadFile(file, getUploadUrl) {
 		headers: { "Content-Type": file.type },
 		body: file
 	});
-	if (!res.ok) throw new Error("Upload failed");
-	const { storageId } = await res.json();
+	if (!res.ok) {
+		const text = await res.text().catch(() => res.statusText);
+		throw new Error(`HTTP ${res.status}: ${text}`);
+	}
+	const storageId = (await res.json()).storageId;
 	return `${"https://rosy-crow-160.convex.cloud".replace(".convex.cloud", ".convex.site")}/api/storage/${storageId}`;
 }
-function ImagePicker({ value, onChange, label = "Image" }) {
-	const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+function ImagePicker({ value, onChange, label = "Image", onError }) {
+	const generateUploadUrl = useMutation(api.works.generateUploadUrl);
 	const fileRef = (0, import_react.useRef)(null);
 	const [uploading, setUploading] = (0, import_react.useState)(false);
 	const handleFile = async (e) => {
@@ -27,7 +130,7 @@ function ImagePicker({ value, onChange, label = "Image" }) {
 		try {
 			onChange(await uploadFile(file, generateUploadUrl));
 		} catch (err) {
-			alert("Upload failed: " + err.message);
+			onError(err.message);
 		} finally {
 			setUploading(false);
 			if (fileRef.current) fileRef.current.value = "";
@@ -44,7 +147,7 @@ function ImagePicker({ value, onChange, label = "Image" }) {
 				className: "flex gap-2 items-start",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-						placeholder: "Paste image URL or upload below",
+						placeholder: "Paste image URL or upload",
 						value,
 						onChange: (e) => onChange(e.target.value),
 						className: "flex-1 px-4 py-2 border rounded bg-canvas text-sm"
@@ -77,59 +180,69 @@ function AdminPanel() {
 	const { signOut } = useAuthActions();
 	const router = useRouter();
 	const [activeTab, setActiveTab] = (0, import_react.useState)("works");
+	const [errorMsg, setErrorMsg] = (0, import_react.useState)(null);
 	const handleSignOut = async () => {
 		await signOut();
 		router.navigate({ to: "/" });
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex h-screen bg-canvas text-ink overflow-hidden",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("aside", {
-			className: "w-64 border-r border-ink/10 bg-surface flex flex-col",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "p-6 border-b border-ink/10",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-						className: "text-2xl font-serif italic",
-						children: "Admin"
+		children: [
+			errorMsg && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ErrorDialog, {
+				message: errorMsg,
+				onClose: () => setErrorMsg(null)
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("aside", {
+				className: "w-64 border-r border-ink/10 bg-surface flex flex-col",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "p-6 border-b border-ink/10",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+							className: "text-2xl font-serif italic",
+							children: "Admin"
+						})
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
+						className: "flex-1 p-4 flex flex-col gap-2",
+						children: [
+							"works",
+							"gallery",
+							"messages"
+						].map((tab) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							onClick: () => setActiveTab(tab),
+							className: `text-left px-4 py-2 rounded capitalize transition-colors ${activeTab === tab ? "bg-ink text-canvas" : "hover:bg-ink/5"}`,
+							children: tab
+						}, tab))
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "p-4 border-t border-ink/10",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							onClick: () => void handleSignOut(),
+							className: "w-full px-4 py-2 bg-ink/10 text-ink rounded hover:bg-ink/20 transition-colors",
+							children: "Sign Out"
+						})
 					})
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
-					className: "flex-1 p-4 flex flex-col gap-2",
-					children: [
-						"works",
-						"gallery",
-						"messages"
-					].map((tab) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-						onClick: () => setActiveTab(tab),
-						className: `text-left px-4 py-2 rounded capitalize transition-colors ${activeTab === tab ? "bg-ink text-canvas" : "hover:bg-ink/5"}`,
-						children: tab
-					}, tab))
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "p-4 border-t border-ink/10",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-						onClick: () => void handleSignOut(),
-						className: "w-full px-4 py-2 bg-ink/10 text-ink rounded hover:bg-ink/20 transition-colors",
-						children: "Sign Out"
-					})
-				})
-			]
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
-			className: "flex-1 overflow-y-auto p-8",
-			children: [
-				activeTab === "works" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(WorksTab, {}),
-				activeTab === "gallery" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GalleryTab, {}),
-				activeTab === "messages" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessagesTab, {})
-			]
-		})]
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
+				className: "flex-1 overflow-y-auto p-8",
+				children: [
+					activeTab === "works" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(WorksTab, { onError: setErrorMsg }),
+					activeTab === "gallery" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GalleryTab, { onError: setErrorMsg }),
+					activeTab === "messages" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessagesTab, {})
+				]
+			})
+		]
 	});
 }
-function WorksTab() {
+function WorksTab({ onError }) {
 	const works = useQuery(api.works.getWorks);
 	const addWork = useMutation(api.works.addWork);
 	const updateWork = useMutation(api.works.updateWork);
 	const deleteWork = useMutation(api.works.deleteWork);
 	const seedDummyData = useMutation(api.works.seedDummyData);
+	const fixBrokenImages = useMutation(api.works.fixBrokenImages);
+	const clearAllWorks = useMutation(api.works.clearAllWorks);
 	const [editingId, setEditingId] = (0, import_react.useState)(null);
 	const [formData, setFormData] = (0, import_react.useState)({
 		title: "",
@@ -187,14 +300,31 @@ function WorksTab() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex flex-col gap-8",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "flex justify-between items-center",
+			className: "flex justify-between items-center flex-wrap gap-3",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 				className: "text-2xl font-serif",
 				children: "Manage Works"
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-				onClick: () => seedDummyData().then((r) => r?.message && alert(r.message)),
-				className: "px-4 py-2 bg-ink text-canvas rounded hover:bg-ink/90 text-sm",
-				children: "Seed Dummy Data"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex gap-2 flex-wrap",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						onClick: () => fixBrokenImages().then((r) => r?.message && onError ? alert(r.message) : alert(r?.message)),
+						className: "px-3 py-2 bg-amber-500 text-white rounded hover:bg-amber-600 text-xs font-semibold",
+						children: "🔧 Fix Image URLs"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						onClick: () => {
+							if (confirm("Delete ALL works? This cannot be undone.")) clearAllWorks().then((r) => r?.message && alert(r.message));
+						},
+						className: "px-3 py-2 bg-red-500/10 text-red-600 rounded hover:bg-red-500/20 text-xs font-semibold",
+						children: "🗑 Clear All"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						onClick: () => seedDummyData().then((r) => r?.message && alert(r.message)),
+						className: "px-3 py-2 bg-ink text-canvas rounded hover:bg-ink/90 text-xs font-semibold",
+						children: "Seed Dummy Data"
+					})
+				]
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "grid grid-cols-1 lg:grid-cols-2 gap-8",
@@ -259,7 +389,8 @@ function WorksTab() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ImagePicker, {
 							label: "Main Image",
 							value: formData.mainImage,
-							onChange: (v) => set("mainImage", v)
+							onChange: (v) => set("mainImage", v),
+							onError
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex gap-2 mt-1",
@@ -330,11 +461,11 @@ function WorksTab() {
 		})]
 	});
 }
-function GalleryTab() {
+function GalleryTab({ onError }) {
 	const images = useQuery(api.gallery.getGallery);
 	const addImage = useMutation(api.gallery.addImage);
 	const deleteImage = useMutation(api.gallery.deleteImage);
-	const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+	const generateUploadUrl = useMutation(api.gallery.generateUploadUrl);
 	const [imageUrl, setImageUrl] = (0, import_react.useState)("");
 	const [caption, setCaption] = (0, import_react.useState)("");
 	const [uploading, setUploading] = (0, import_react.useState)(false);
@@ -346,7 +477,7 @@ function GalleryTab() {
 		try {
 			setImageUrl(await uploadFile(file, generateUploadUrl));
 		} catch (err) {
-			alert("Upload failed: " + err.message);
+			onError(err.message);
 		} finally {
 			setUploading(false);
 			if (fileRef.current) fileRef.current.value = "";

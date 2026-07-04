@@ -24,12 +24,78 @@ const ArrowRight = () => (
 
 /* ─── DUMMY DATA — uses bundled asset imports, works in prod ──────────── */
 const dummyProjects = [
-  { _id: "dummy-1", mainImage: projectLumosImg,    serviceCategory: "Retail Identity",   tagColor: "bg-accent-blue",   title: "Project Lumos",          client: "LOEWE",             year: "2025", tags: ["Fabrication","Installation","Lighting"],           smallDescription: "Installation featuring light-reactive fabric panels, CNC-milled chrome signage and structural backdrops.", projectDetail: "The brief called for an immersive retail transformation — one where physical material reacted to ambient light and movement." },
-  { _id: "dummy-2", mainImage: projectMonolithImg, serviceCategory: "Event Space",        tagColor: "bg-accent-coral",  title: "The Monolith",           client: "Geneva Motor Show", year: "2024", tags: ["Stage Build","LED Walls","Facade"],                 smallDescription: "A 40-foot temporary pavilion with neon-wrapped brushed aluminum stands and a rotating debut floor.", projectDetail: "Structural engineering had to account for a 6-ton aluminum superstructure erected inside a convention hall." },
-  { _id: "dummy-3", mainImage: installationImg,    serviceCategory: "Outdoor Campaign",  tagColor: "bg-accent-purple", title: "Cantt. Billboard Circuit", client: "Samsung / Wakgroup", year: "2024", tags: ["Printing","Outdoor","Installation"],               smallDescription: "A series of high-altitude double-sided billboard structures deployed at primary intersections.", projectDetail: "Wakgroup commissioned a 6-site outdoor circuit across the Cantonment corridor." },
-  { _id: "dummy-4", mainImage: eventsImg,          serviceCategory: "Live Production",   tagColor: "bg-accent-mint",   title: "ARY News Studio Set",     client: "ARY Network",       year: "2023", tags: ["Scenic Design","LED","Fabrication"],                smallDescription: "Scenic custom broadcast television set with integrated LED wall mounts and architectural wood cladding.", projectDetail: "ARY News required a complete overhaul of their primary studio set." },
-  { _id: "dummy-5", mainImage: printingImg,        serviceCategory: "Print & Graphics",  tagColor: "bg-accent-yellow", title: "HQ Facade Wrap",          client: "Pak Arab Housing",  year: "2023", tags: ["Wide-Format Print","Installation"],                 smallDescription: "Weatherproof 12-meter continuous graphic applied to structural glass siding.", projectDetail: "Pak Arab Housing wanted their brand vision rendered at architectural scale." },
-  { _id: "dummy-6", mainImage: fabKineticImg,      serviceCategory: "Kinetic Signage",   tagColor: "bg-accent-coral",  title: "Rotating Brand Wall",     client: "Client Confidential", year: "2023", tags: ["Fabrication","Kinetics","Design"],               smallDescription: "A 3-panel kinetic brand wall for a corporate headquarters lobby.", projectDetail: "The brief required a permanent, low-maintenance kinetic installation." },
+  {
+    _id: "dummy-1",
+    mainImage: projectLumosImg,
+    serviceCategory: "Retail Identity",
+    tagColor: "bg-accent-blue",
+    title: "Project Lumos",
+    client: "LOEWE",
+    year: "2025",
+    tags: ["Fabrication", "Installation", "Lighting"],
+    smallDescription: "Installation featuring light-reactive fabric panels, CNC-milled chrome signage and structural backdrops.",
+    projectDetail: "The brief called for an immersive retail transformation — one where physical material reacted to ambient light and movement.",
+  },
+  {
+    _id: "dummy-2",
+    mainImage: projectMonolithImg,
+    serviceCategory: "Event Space",
+    tagColor: "bg-accent-coral",
+    title: "The Monolith",
+    client: "Geneva Motor Show",
+    year: "2024",
+    tags: ["Stage Build", "LED Walls", "Facade"],
+    smallDescription: "A 40-foot temporary pavilion with neon-wrapped brushed aluminum stands and a rotating debut floor.",
+    projectDetail: "Structural engineering had to account for a 6-ton aluminum superstructure erected inside a convention hall.",
+  },
+  {
+    _id: "dummy-3",
+    mainImage: installationImg,
+    serviceCategory: "Outdoor Campaign",
+    tagColor: "bg-accent-purple",
+    title: "Cantt. Billboard Circuit",
+    client: "Samsung / Wakgroup",
+    year: "2024",
+    tags: ["Printing", "Outdoor", "Installation"],
+    smallDescription: "A series of high-altitude double-sided billboard structures deployed at primary intersections.",
+    projectDetail: "Wakgroup commissioned a 6-site outdoor circuit across the Cantonment corridor.",
+  },
+  {
+    _id: "dummy-4",
+    mainImage: eventsImg,
+    serviceCategory: "Live Production",
+    tagColor: "bg-accent-mint",
+    title: "ARY News Studio Set",
+    client: "ARY Network",
+    year: "2023",
+    tags: ["Scenic Design", "LED", "Fabrication"],
+    smallDescription: "Scenic custom broadcast television set with integrated LED wall mounts and architectural wood cladding.",
+    projectDetail: "ARY News required a complete overhaul of their primary studio set.",
+  },
+  {
+    _id: "dummy-5",
+    mainImage: printingImg,
+    serviceCategory: "Print & Graphics",
+    tagColor: "bg-accent-yellow",
+    title: "HQ Facade Wrap",
+    client: "Pak Arab Housing",
+    year: "2023",
+    tags: ["Wide-Format Print", "Installation"],
+    smallDescription: "Weatherproof 12-meter continuous graphic applied to structural glass siding.",
+    projectDetail: "Pak Arab Housing wanted their brand vision rendered at architectural scale.",
+  },
+  {
+    _id: "dummy-6",
+    mainImage: fabKineticImg,
+    serviceCategory: "Kinetic Signage",
+    tagColor: "bg-accent-coral",
+    title: "Rotating Brand Wall",
+    client: "Client Confidential",
+    year: "2023",
+    tags: ["Fabrication", "Kinetics", "Design"],
+    smallDescription: "A 3-panel kinetic brand wall for a corporate headquarters lobby.",
+    projectDetail: "The brief required a permanent, low-maintenance kinetic installation.",
+  },
 ];
 
 /* ─── IMAGE FIX MAP — patches broken /src/assets/ paths from old seeded data ─ */
@@ -46,9 +112,29 @@ function fixImage(src: string): string {
   if (src?.startsWith("/src/assets/")) return IMAGE_FIX_MAP[src] ?? src;
   return src;
 }
-  { quote: "I have worked with Ads Dot COM for 10 years — in that time they have become a valued and trusted vendor. Their attention to detail and solution-driven approach has been invaluable.", author: "Ishfaq Ramey", role: "Senior Set Designer", company: "ARY News", color: "accent-blue" },
-  { quote: "Ads Dot COM has been our preferred advertising agency for the past 6 years. They delivered a great service, rarely if ever unable to meet our short deadlines and still turn out superior quality.", author: "Waqar Ahmad Khan", role: "Chairman", company: "Pak Arab Housing Scheme", color: "accent-coral" },
-  { quote: "I would just like to say thank you for taking care of advertising needs of our company. The service and advice received was second to none and the price was very competitive also.", author: "Sharyar", role: "General Manager", company: "Wakgroup — Samsung", color: "accent-mint" },
+
+const testimonials = [
+  {
+    quote: "I have worked with Ads Dot COM for 10 years — in that time they have become a valued and trusted vendor. Their attention to detail and solution-driven approach has been invaluable.",
+    author: "Ishfaq Ramey",
+    role: "Senior Set Designer",
+    company: "ARY News",
+    color: "accent-blue",
+  },
+  {
+    quote: "Ads Dot COM has been our preferred advertising agency for the past 6 years. They delivered a great service, rarely if ever unable to meet our short deadlines and still turn out superior quality.",
+    author: "Waqar Ahmad Khan",
+    role: "Chairman",
+    company: "Pak Arab Housing Scheme",
+    color: "accent-coral",
+  },
+  {
+    quote: "I would just like to say thank you for taking care of advertising needs of our company. The service and advice received was second to none and the price was very competitive also.",
+    author: "Sharyar",
+    role: "General Manager",
+    company: "Wakgroup — Samsung",
+    color: "accent-mint",
+  },
 ];
 
 /* ─── LIGHTBOX ──────────────────────────────────────────────────────────── */

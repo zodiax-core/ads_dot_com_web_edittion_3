@@ -4,7 +4,7 @@ import { t as api } from "./api-DSJLF2wo.mjs";
 import { t as PageShell } from "./page-shell-ZTxEkQki.mjs";
 import { n as installation_default, r as printing_default, t as events_default } from "./installation-BJHzc0qs.mjs";
 import { n as project_lumos_default, r as project_monolith_default, t as fab_kinetic_default } from "./project-monolith-Dw1qaPyq.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/work-PaOc4yhX.js
+//#region node_modules/.nitro/vite/services/ssr/assets/work-62WV3JTo.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var ArrowRight = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
@@ -34,8 +34,7 @@ var dummyProjects = [
 			"Lighting"
 		],
 		smallDescription: "Installation featuring light-reactive fabric panels, CNC-milled chrome signage and structural backdrops.",
-		projectDetail: "The brief called for an immersive retail transformation — one where physical material reacted to ambient light and movement.",
-		gallery: []
+		projectDetail: "The brief called for an immersive retail transformation — one where physical material reacted to ambient light and movement."
 	},
 	{
 		_id: "dummy-2",
@@ -51,8 +50,7 @@ var dummyProjects = [
 			"Facade"
 		],
 		smallDescription: "A 40-foot temporary pavilion with neon-wrapped brushed aluminum stands and a rotating debut floor.",
-		projectDetail: "Structural engineering had to account for a 6-ton aluminum superstructure erected inside a convention hall.",
-		gallery: []
+		projectDetail: "Structural engineering had to account for a 6-ton aluminum superstructure erected inside a convention hall."
 	},
 	{
 		_id: "dummy-3",
@@ -68,8 +66,7 @@ var dummyProjects = [
 			"Installation"
 		],
 		smallDescription: "A series of high-altitude double-sided billboard structures deployed at primary intersections.",
-		projectDetail: "Wakgroup commissioned a 6-site outdoor circuit across the Cantonment corridor.",
-		gallery: []
+		projectDetail: "Wakgroup commissioned a 6-site outdoor circuit across the Cantonment corridor."
 	},
 	{
 		_id: "dummy-4",
@@ -85,8 +82,7 @@ var dummyProjects = [
 			"Fabrication"
 		],
 		smallDescription: "Scenic custom broadcast television set with integrated LED wall mounts and architectural wood cladding.",
-		projectDetail: "ARY News required a complete overhaul of their primary studio set.",
-		gallery: []
+		projectDetail: "ARY News required a complete overhaul of their primary studio set."
 	},
 	{
 		_id: "dummy-5",
@@ -98,8 +94,7 @@ var dummyProjects = [
 		year: "2023",
 		tags: ["Wide-Format Print", "Installation"],
 		smallDescription: "Weatherproof 12-meter continuous graphic applied to structural glass siding.",
-		projectDetail: "Pak Arab Housing wanted their brand vision rendered at architectural scale.",
-		gallery: []
+		projectDetail: "Pak Arab Housing wanted their brand vision rendered at architectural scale."
 	},
 	{
 		_id: "dummy-6",
@@ -115,10 +110,21 @@ var dummyProjects = [
 			"Design"
 		],
 		smallDescription: "A 3-panel kinetic brand wall for a corporate headquarters lobby.",
-		projectDetail: "The brief required a permanent, low-maintenance kinetic installation.",
-		gallery: []
+		projectDetail: "The brief required a permanent, low-maintenance kinetic installation."
 	}
 ];
+var IMAGE_FIX_MAP = {
+	"/src/assets/project-lumos.jpg": project_lumos_default,
+	"/src/assets/project-monolith.jpg": project_monolith_default,
+	"/src/assets/printing.jpg": printing_default,
+	"/src/assets/events.jpg": events_default,
+	"/src/assets/installation.jpg": installation_default,
+	"/src/assets/fab-kinetic.jpg": fab_kinetic_default
+};
+function fixImage(src) {
+	if (src?.startsWith("/src/assets/")) return IMAGE_FIX_MAP[src] ?? src;
+	return src;
+}
 var testimonials = [
 	{
 		quote: "I have worked with Ads Dot COM for 10 years — in that time they have become a valued and trusted vendor. Their attention to detail and solution-driven approach has been invaluable.",
@@ -188,8 +194,14 @@ function ProjectCarousel({ projects }) {
 	const [startX, setStartX] = (0, import_react.useState)(0);
 	const [expanded, setExpanded] = (0, import_react.useState)(null);
 	const total = projects.length;
-	const prev = (0, import_react.useCallback)(() => setCurrent((c) => (c - 1 + total) % total), [total]);
-	const next = (0, import_react.useCallback)(() => setCurrent((c) => (c + 1) % total), [total]);
+	const prev = (0, import_react.useCallback)(() => {
+		setCurrent((c) => (c - 1 + total) % total);
+		setExpanded(null);
+	}, [total]);
+	const next = (0, import_react.useCallback)(() => {
+		setCurrent((c) => (c + 1) % total);
+		setExpanded(null);
+	}, [total]);
 	(0, import_react.useEffect)(() => {
 		const handleKey = (e) => {
 			if (lightbox) return;
@@ -202,6 +214,16 @@ function ProjectCarousel({ projects }) {
 		prev,
 		next,
 		lightbox
+	]);
+	(0, import_react.useEffect)(() => {
+		[projects[(current + 1) % total]?.mainImage, projects[(current - 1 + total) % total]?.mainImage].filter(Boolean).forEach((src) => {
+			const img = new Image();
+			img.src = src;
+		});
+	}, [
+		current,
+		projects,
+		total
 	]);
 	const handlePointerDown = (e) => {
 		setDragging(true);
@@ -240,7 +262,7 @@ function ProjectCarousel({ projects }) {
 				onClose: () => setLightbox(null)
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "relative h-[340px] md:h-[420px] flex items-center justify-center overflow-hidden select-none",
+				className: "relative h-[340px] md:h-[420px] flex items-center justify-center overflow-visible select-none",
 				style: { perspective: "1200px" },
 				onPointerDown: handlePointerDown,
 				onPointerUp: handlePointerUp,
@@ -249,8 +271,9 @@ function ProjectCarousel({ projects }) {
 					const style = getStyle(i);
 					if (style.display === "none") return null;
 					const isCurrent = i === current;
+					const isAdjacent = Math.abs((i - current + total) % total > total / 2 ? (i - current + total) % total - total : (i - current + total) % total) === 1;
 					return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "absolute w-[260px] md:w-[340px] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl cursor-pointer",
+						className: "absolute w-[240px] md:w-[320px] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl cursor-pointer",
 						style,
 						onClick: () => {
 							if (isCurrent) setLightbox({
@@ -259,56 +282,57 @@ function ProjectCarousel({ projects }) {
 							});
 							else setCurrent(i);
 						},
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-							src: proj.mainImage,
-							alt: proj.title,
-							className: "w-full h-full object-cover"
-						}), isCurrent && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-5",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: `self-start px-2.5 py-0.5 rounded-full ${proj.tagColor || "bg-accent-blue"} text-white text-[10px] font-bold uppercase tracking-wider mb-2`,
-									children: proj.serviceCategory
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-									className: "text-white text-xl font-medium leading-tight",
-									children: proj.title
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-									className: "text-white/60 text-xs mt-1",
-									children: [
-										proj.client,
-										" · ",
-										proj.year
-									]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "mt-2 flex items-center gap-1 text-white/50 text-[10px]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
-										className: "size-3",
-										viewBox: "0 0 24 24",
-										fill: "none",
-										stroke: "currentColor",
-										strokeWidth: 2,
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
-											cx: "11",
-											cy: "11",
-											r: "8"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M21 21l-4.35-4.35" })]
-									}), "Click to enlarge"]
-								})
-							]
-						})]
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-ink/20" }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: proj.mainImage,
+								alt: proj.title,
+								width: 320,
+								height: 427,
+								loading: isCurrent || isAdjacent ? "eager" : "lazy",
+								decoding: isCurrent ? "sync" : "async",
+								fetchPriority: isCurrent ? "high" : isAdjacent ? "low" : void 0,
+								className: "relative w-full h-full object-cover",
+								onError: (e) => {
+									e.target.style.opacity = "0.3";
+								}
+							}),
+							isCurrent && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-5",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: `self-start px-2.5 py-0.5 rounded-full ${proj.tagColor || "bg-accent-blue"} text-white text-[10px] font-bold uppercase tracking-wider mb-2`,
+										children: proj.serviceCategory
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+										className: "text-white text-xl font-medium leading-tight",
+										children: proj.title
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "text-white/60 text-xs mt-1",
+										children: [
+											proj.client,
+											" · ",
+											proj.year
+										]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-white/40 text-[10px] mt-1.5",
+										children: "Click to enlarge"
+									})
+								]
+							})
+						]
 					}, proj._id ?? proj.title);
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "flex items-center justify-center gap-4 mt-6",
+				className: "flex items-center justify-center gap-4 mt-8",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 						onClick: prev,
 						"aria-label": "Previous",
-						className: "size-11 rounded-full border border-ink/15 flex items-center justify-center text-ink hover:bg-ink hover:text-canvas hover:border-ink transition-all",
+						className: "size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
 							className: "size-4",
 							viewBox: "0 0 24 24",
@@ -325,14 +349,17 @@ function ProjectCarousel({ projects }) {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 						className: "flex gap-1.5",
 						children: projects.map((_, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-							onClick: () => setCurrent(i),
-							className: `rounded-full transition-all ${i === current ? "w-5 h-2 bg-canvas" : "size-2 bg-canvas/30 hover:bg-canvas/60"}`
+							onClick: () => {
+								setCurrent(i);
+								setExpanded(null);
+							},
+							className: `rounded-full transition-all duration-300 ${i === current ? "w-6 h-2 bg-canvas" : "size-2 bg-canvas/30 hover:bg-canvas/60"}`
 						}, i))
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 						onClick: next,
 						"aria-label": "Next",
-						className: "size-11 rounded-full border border-ink/15 flex items-center justify-center text-ink hover:bg-ink hover:text-canvas hover:border-ink transition-all",
+						className: "size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
 							className: "size-4",
 							viewBox: "0 0 24 24",
@@ -441,7 +468,10 @@ function GlobalGallery() {
 function WorkPage() {
 	const convexWorks = useQuery(api.works.getWorks);
 	const isLoading = convexWorks === void 0;
-	const projects = convexWorks !== void 0 && convexWorks.length > 0 ? convexWorks : convexWorks !== void 0 ? dummyProjects : [];
+	const projects = (convexWorks !== void 0 && convexWorks.length > 0 ? convexWorks : convexWorks !== void 0 ? dummyProjects : []).map((p) => ({
+		...p,
+		mainImage: fixImage(p.mainImage)
+	}));
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(PageShell, { children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 			className: "relative pt-36 pb-24 px-4 bg-ink text-canvas grain-overlay overflow-hidden",
