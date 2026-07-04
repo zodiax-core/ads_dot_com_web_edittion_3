@@ -1,7 +1,8 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { c as require_react, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as PageShell } from "./page-shell-ZTxEkQki.mjs";
-import { a as installation_default, i as events_default, n as fab_modular_default, o as printing_default, r as fab_venue_default, t as creative_default } from "./creative-F96rBVr_.mjs";
+import { n as installation_default, r as printing_default, t as events_default } from "./installation-BJHzc0qs.mjs";
+import { n as fab_modular_default, r as fab_venue_default, t as creative_default } from "./creative-F96rBVr_.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/services-BVFZqX17.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();

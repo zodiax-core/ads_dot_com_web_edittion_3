@@ -4,6 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  VITE_CONVEX_URL = "https://rosy-crow-160.convex.cloud"
+  VITE_CONVEX_SITE_URL = "https://rosy-crow-160.convex.site"
 
 [functions]
   directory = ".netlify/functions-internal"

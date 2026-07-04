@@ -1,11 +1,8 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { c as require_react, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
-import { a as installation_default, i as events_default, n as fab_modular_default, o as printing_default, r as fab_venue_default, t as creative_default } from "./creative-F96rBVr_.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/project-monolith-Dw1qaPyq.js
-var fab_kinetic_default = "/assets/fab-kinetic-eGQjGbKv.jpg";
-var project_lumos_default = "/assets/project-lumos-T3gF3Z48.jpg";
-var project_monolith_default = "/assets/project-monolith-C93mEHEJ.jpg";
-//#endregion
+import { n as installation_default, r as printing_default, t as events_default } from "./installation-BJHzc0qs.mjs";
+import { n as fab_modular_default, r as fab_venue_default, t as creative_default } from "./creative-F96rBVr_.mjs";
+import { n as project_lumos_default, r as project_monolith_default, t as fab_kinetic_default } from "./project-monolith-Dw1qaPyq.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/routes-BHt5-sPi.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
