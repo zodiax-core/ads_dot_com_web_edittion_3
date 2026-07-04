@@ -1,14 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { PageShell } from "@/components/page-shell";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import projectLumos from "@/assets/project-lumos.jpg";
-import projectMonolith from "@/assets/project-monolith.jpg";
-import printing from "@/assets/printing.jpg";
-import events from "@/assets/events.jpg";
-import installation from "@/assets/installation.jpg";
-import fabKinetic from "@/assets/fab-kinetic.jpg";
+
+// Import as proper bundled assets — these get correct hashed URLs in production
+import projectLumosImg from "@/assets/project-lumos.jpg";
+import projectMonolithImg from "@/assets/project-monolith.jpg";
+import printingImg from "@/assets/printing.jpg";
+import eventsImg from "@/assets/events.jpg";
+import installationImg from "@/assets/installation.jpg";
+import fabKineticImg from "@/assets/fab-kinetic.jpg";
 
 export const Route = createFileRoute("/work")({
   component: WorkPage,
@@ -20,14 +22,14 @@ const ArrowRight = () => (
   </svg>
 );
 
-/* ─── DUMMY DATA (shown only while Convex loads) ──────────────────────── */
+/* ─── DUMMY DATA — uses bundled asset imports, works in prod ──────────── */
 const dummyProjects = [
-  { _id: "dummy-1", mainImage: projectLumos, serviceCategory: "Retail Identity", tagColor: "bg-accent-blue", title: "Project Lumos", client: "LOEWE", year: "2025", tags: ["Fabrication", "Installation", "Lighting"], smallDescription: "Installation featuring light-reactive fabric panels, CNC-milled chrome signage and structural backdrops.", projectDetail: "The brief called for an immersive retail transformation — one where physical material reacted to ambient light and movement.", gallery: [] },
-  { _id: "dummy-2", mainImage: projectMonolith, serviceCategory: "Event Space", tagColor: "bg-accent-coral", title: "The Monolith", client: "Geneva Motor Show", year: "2024", tags: ["Stage Build", "LED Walls", "Facade"], smallDescription: "A 40-foot temporary pavilion with neon-wrapped brushed aluminum stands and a rotating debut floor.", projectDetail: "Structural engineering had to account for a 6-ton aluminum superstructure erected inside a convention hall.", gallery: [] },
-  { _id: "dummy-3", mainImage: installation, serviceCategory: "Outdoor Campaign", tagColor: "bg-accent-purple", title: "Cantt. Billboard Circuit", client: "Samsung / Wakgroup", year: "2024", tags: ["Printing", "Outdoor", "Installation"], smallDescription: "A series of high-altitude double-sided billboard structures deployed at primary intersections.", projectDetail: "Wakgroup commissioned a 6-site outdoor circuit across the Cantonment corridor.", gallery: [] },
-  { _id: "dummy-4", mainImage: events, serviceCategory: "Live Production", tagColor: "bg-accent-mint", title: "ARY News Studio Set", client: "ARY Network", year: "2023", tags: ["Scenic Design", "LED", "Fabrication"], smallDescription: "Scenic custom broadcast television set with integrated LED wall mounts and architectural wood cladding.", projectDetail: "ARY News required a complete overhaul of their primary studio set.", gallery: [] },
-  { _id: "dummy-5", mainImage: printing, serviceCategory: "Print & Graphics", tagColor: "bg-accent-yellow", title: "HQ Facade Wrap", client: "Pak Arab Housing", year: "2023", tags: ["Wide-Format Print", "Installation"], smallDescription: "Weatherproof 12-meter continuous graphic applied to structural glass siding.", projectDetail: "Pak Arab Housing wanted their brand vision rendered at architectural scale.", gallery: [] },
-  { _id: "dummy-6", mainImage: fabKinetic, serviceCategory: "Kinetic Signage", tagColor: "bg-accent-coral", title: "Rotating Brand Wall", client: "Client Confidential", year: "2023", tags: ["Fabrication", "Kinetics", "Design"], smallDescription: "A 3-panel kinetic brand wall for a corporate headquarters lobby.", projectDetail: "The brief required a permanent, low-maintenance kinetic installation.", gallery: [] },
+  { _id: "dummy-1", mainImage: projectLumosImg,    serviceCategory: "Retail Identity",   tagColor: "bg-accent-blue",   title: "Project Lumos",          client: "LOEWE",             year: "2025", tags: ["Fabrication","Installation","Lighting"],           smallDescription: "Installation featuring light-reactive fabric panels, CNC-milled chrome signage and structural backdrops.", projectDetail: "The brief called for an immersive retail transformation — one where physical material reacted to ambient light and movement." },
+  { _id: "dummy-2", mainImage: projectMonolithImg, serviceCategory: "Event Space",        tagColor: "bg-accent-coral",  title: "The Monolith",           client: "Geneva Motor Show", year: "2024", tags: ["Stage Build","LED Walls","Facade"],                 smallDescription: "A 40-foot temporary pavilion with neon-wrapped brushed aluminum stands and a rotating debut floor.", projectDetail: "Structural engineering had to account for a 6-ton aluminum superstructure erected inside a convention hall." },
+  { _id: "dummy-3", mainImage: installationImg,    serviceCategory: "Outdoor Campaign",  tagColor: "bg-accent-purple", title: "Cantt. Billboard Circuit", client: "Samsung / Wakgroup", year: "2024", tags: ["Printing","Outdoor","Installation"],               smallDescription: "A series of high-altitude double-sided billboard structures deployed at primary intersections.", projectDetail: "Wakgroup commissioned a 6-site outdoor circuit across the Cantonment corridor." },
+  { _id: "dummy-4", mainImage: eventsImg,          serviceCategory: "Live Production",   tagColor: "bg-accent-mint",   title: "ARY News Studio Set",     client: "ARY Network",       year: "2023", tags: ["Scenic Design","LED","Fabrication"],                smallDescription: "Scenic custom broadcast television set with integrated LED wall mounts and architectural wood cladding.", projectDetail: "ARY News required a complete overhaul of their primary studio set." },
+  { _id: "dummy-5", mainImage: printingImg,        serviceCategory: "Print & Graphics",  tagColor: "bg-accent-yellow", title: "HQ Facade Wrap",          client: "Pak Arab Housing",  year: "2023", tags: ["Wide-Format Print","Installation"],                 smallDescription: "Weatherproof 12-meter continuous graphic applied to structural glass siding.", projectDetail: "Pak Arab Housing wanted their brand vision rendered at architectural scale." },
+  { _id: "dummy-6", mainImage: fabKineticImg,      serviceCategory: "Kinetic Signage",   tagColor: "bg-accent-coral",  title: "Rotating Brand Wall",     client: "Client Confidential", year: "2023", tags: ["Fabrication","Kinetics","Design"],               smallDescription: "A 3-panel kinetic brand wall for a corporate headquarters lobby.", projectDetail: "The brief required a permanent, low-maintenance kinetic installation." },
 ];
 
 const testimonials = [
@@ -78,8 +80,8 @@ function ProjectCarousel({ projects }: { projects: any[] }) {
   const [expanded, setExpanded] = useState<number | null>(null);
   const total = projects.length;
 
-  const prev = useCallback(() => setCurrent((c) => (c - 1 + total) % total), [total]);
-  const next = useCallback(() => setCurrent((c) => (c + 1) % total), [total]);
+  const prev = useCallback(() => { setCurrent((c) => (c - 1 + total) % total); setExpanded(null); }, [total]);
+  const next = useCallback(() => { setCurrent((c) => (c + 1) % total); setExpanded(null); }, [total]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -90,6 +92,15 @@ function ProjectCarousel({ projects }: { projects: any[] }) {
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [prev, next, lightbox]);
+
+  // Preload adjacent images for instant switching
+  useEffect(() => {
+    const toPreload = [
+      projects[(current + 1) % total]?.mainImage,
+      projects[(current - 1 + total) % total]?.mainImage,
+    ].filter(Boolean);
+    toPreload.forEach((src) => { const img = new Image(); img.src = src; });
+  }, [current, projects, total]);
 
   const handlePointerDown = (e: React.PointerEvent) => { setDragging(true); setStartX(e.clientX); };
   const handlePointerUp = (e: React.PointerEvent) => {
@@ -126,7 +137,7 @@ function ProjectCarousel({ projects }: { projects: any[] }) {
 
       {/* 3D stage */}
       <div
-        className="relative h-[340px] md:h-[420px] flex items-center justify-center overflow-hidden select-none"
+        className="relative h-[340px] md:h-[420px] flex items-center justify-center overflow-visible select-none"
         style={{ perspective: "1200px" }}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
@@ -136,17 +147,27 @@ function ProjectCarousel({ projects }: { projects: any[] }) {
           const style = getStyle(i);
           if (style.display === "none") return null;
           const isCurrent = i === current;
+          const isAdjacent = Math.abs(((i - current + total) % total) > total / 2 ? ((i - current + total) % total) - total : (i - current + total) % total) === 1;
           return (
             <div
               key={proj._id ?? proj.title}
-              className="absolute w-[260px] md:w-[340px] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl cursor-pointer"
+              className="absolute w-[240px] md:w-[320px] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl cursor-pointer"
               style={style as React.CSSProperties}
-              onClick={() => {
-                if (isCurrent) setLightbox({ src: proj.mainImage, alt: proj.title });
-                else setCurrent(i);
-              }}
+              onClick={() => { if (isCurrent) setLightbox({ src: proj.mainImage, alt: proj.title }); else setCurrent(i); }}
             >
-              <img src={proj.mainImage} alt={proj.title} className="w-full h-full object-cover" />
+              {/* Blurhash placeholder bg while image loads */}
+              <div className="absolute inset-0 bg-ink/20" />
+              <img
+                src={proj.mainImage}
+                alt={proj.title}
+                width={320}
+                height={427}
+                loading={isCurrent || isAdjacent ? "eager" : "lazy"}
+                decoding={isCurrent ? "sync" : "async"}
+                fetchPriority={isCurrent ? "high" : isAdjacent ? "low" : undefined}
+                className="relative w-full h-full object-cover"
+                onError={(e) => { (e.target as HTMLImageElement).style.opacity = "0.3"; }}
+              />
               {isCurrent && (
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-5">
                   <span className={`self-start px-2.5 py-0.5 rounded-full ${proj.tagColor || "bg-accent-blue"} text-white text-[10px] font-bold uppercase tracking-wider mb-2`}>
@@ -154,10 +175,7 @@ function ProjectCarousel({ projects }: { projects: any[] }) {
                   </span>
                   <h3 className="text-white text-xl font-medium leading-tight">{proj.title}</h3>
                   <p className="text-white/60 text-xs mt-1">{proj.client} · {proj.year}</p>
-                  <div className="mt-2 flex items-center gap-1 text-white/50 text-[10px]">
-                    <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                    Click to enlarge
-                  </div>
+                  <p className="text-white/40 text-[10px] mt-1.5">Click to enlarge</p>
                 </div>
               )}
             </div>
@@ -166,16 +184,17 @@ function ProjectCarousel({ projects }: { projects: any[] }) {
       </div>
 
       {/* Arrow controls */}
-      <div className="flex items-center justify-center gap-4 mt-6">
-        <button onClick={prev} aria-label="Previous" className="size-11 rounded-full border border-ink/15 flex items-center justify-center text-ink hover:bg-ink hover:text-canvas hover:border-ink transition-all">
+      <div className="flex items-center justify-center gap-4 mt-8">
+        <button onClick={prev} aria-label="Previous" className="size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all">
           <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round"/></svg>
         </button>
         <div className="flex gap-1.5">
           {projects.map((_: any, i: number) => (
-            <button key={i} onClick={() => setCurrent(i)} className={`rounded-full transition-all ${i === current ? "w-5 h-2 bg-canvas" : "size-2 bg-canvas/30 hover:bg-canvas/60"}`} />
+            <button key={i} onClick={() => { setCurrent(i); setExpanded(null); }}
+              className={`rounded-full transition-all duration-300 ${i === current ? "w-6 h-2 bg-canvas" : "size-2 bg-canvas/30 hover:bg-canvas/60"}`} />
           ))}
         </div>
-        <button onClick={next} aria-label="Next" className="size-11 rounded-full border border-ink/15 flex items-center justify-center text-ink hover:bg-ink hover:text-canvas hover:border-ink transition-all">
+        <button onClick={next} aria-label="Next" className="size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all">
           <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/></svg>
         </button>
       </div>
