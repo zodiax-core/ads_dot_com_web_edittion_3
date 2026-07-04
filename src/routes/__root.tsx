@@ -8,9 +8,13 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { ConvexReactClient } from "convex/react";
+import { ConvexAuthProvider } from "@convex-dev/auth/react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+
+const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
 
 function NotFoundComponent() {
   return (
@@ -95,7 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/logo.png", type: "image/png", sizes: "any" },
     ],
   }),
   shellComponent: RootShell,
@@ -120,10 +124,23 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.altKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+        router.navigate({ to: '/0i9876r7s7ygs89grt7r9s8rbg9rdb' as any });
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <ConvexAuthProvider client={convex}>
+        <Outlet />
+      </ConvexAuthProvider>
     </QueryClientProvider>
   );
 }

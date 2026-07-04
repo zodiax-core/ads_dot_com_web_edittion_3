@@ -193,7 +193,7 @@ function ServiceBlock({ s, reverse }: { s: typeof services[0]; reverse: boolean 
           ))}
         </ul>
         <a
-          href="mailto:adsdotcom786@gmail.com"
+          href="mailto:info@adsdotcom.net"
           className="inline-flex items-center gap-2 px-5 py-2.5 bg-ink text-canvas rounded-full text-sm font-semibold hover:scale-105 active:scale-95 transition-transform"
         >
           Get a quote <ArrowRight />
@@ -264,9 +264,9 @@ function ServicesPage() {
             Tell us your brief. We'll walk you through which services, materials, and approach will deliver the best result for your brand.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="mailto:adsdotcom786@gmail.com"
+            <a href="mailto:info@adsdotcom.net"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-canvas text-ink rounded-full text-sm font-semibold hover:scale-[1.03] transition-transform">
-              adsdotcom786@gmail.com <ArrowRight />
+              info@adsdotcom.net <ArrowRight />
             </a>
             <a href="tel:+923349955475"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-canvas/20 text-canvas rounded-full text-sm font-semibold hover:bg-canvas/10 transition-colors">

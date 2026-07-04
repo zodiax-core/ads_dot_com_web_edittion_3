@@ -13,6 +13,7 @@ import { Route as WorkRouteImport } from './routes/work'
 import { Route as StudioRouteImport } from './routes/studio'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProcessRouteImport } from './routes/process'
+import { Route as R0i9876r7s7ygs89grt7r9s8rbg9rdbRouteImport } from './routes/0i9876r7s7ygs89grt7r9s8rbg9rdb'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WorkRoute = WorkRouteImport.update({
@@ -35,6 +36,12 @@ const ProcessRoute = ProcessRouteImport.update({
   path: '/process',
   getParentRoute: () => rootRouteImport,
 } as any)
+const R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute =
+  R0i9876r7s7ygs89grt7r9s8rbg9rdbRouteImport.update({
+    id: '/0i9876r7s7ygs89grt7r9s8rbg9rdb',
+    path: '/0i9876r7s7ygs89grt7r9s8rbg9rdb',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,6 +50,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRoute
   '/studio': typeof StudioRoute
@@ -50,6 +58,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRoute
   '/studio': typeof StudioRoute
@@ -58,6 +67,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRoute
   '/studio': typeof StudioRoute
@@ -65,14 +75,34 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/process' | '/services' | '/studio' | '/work'
+  fullPaths:
+    | '/'
+    | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
+    | '/process'
+    | '/services'
+    | '/studio'
+    | '/work'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/process' | '/services' | '/studio' | '/work'
-  id: '__root__' | '/' | '/process' | '/services' | '/studio' | '/work'
+  to:
+    | '/'
+    | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
+    | '/process'
+    | '/services'
+    | '/studio'
+    | '/work'
+  id:
+    | '__root__'
+    | '/'
+    | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
+    | '/process'
+    | '/services'
+    | '/studio'
+    | '/work'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   ProcessRoute: typeof ProcessRoute
   ServicesRoute: typeof ServicesRoute
   StudioRoute: typeof StudioRoute
@@ -109,6 +139,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProcessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/0i9876r7s7ygs89grt7r9s8rbg9rdb': {
+      id: '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
+      path: '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
+      fullPath: '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
+      preLoaderRoute: typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -121,6 +158,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute,
   ProcessRoute: ProcessRoute,
   ServicesRoute: ServicesRoute,
   StudioRoute: StudioRoute,

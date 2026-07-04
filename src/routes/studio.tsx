@@ -1,11 +1,37 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { PageShell } from "@/components/page-shell";
+import { useState } from 'react';
+import { useMutation } from 'convex/react';
+import { api } from '../../convex/_generated/api';
 
 export const Route = createFileRoute('/studio')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const sendMessage = useMutation(api.messages.sendMessage);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      await sendMessage({ name, email, message });
+      alert('Message sent successfully!');
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch (error) {
+      console.error(error);
+      alert('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const values = [
     {
       title: "Data-Driven Insight",
@@ -155,27 +181,30 @@ function RouteComponent() {
                 </div>
                 <div>
                   <h4 className="text-[10px] uppercase font-bold tracking-widest text-ink-mute mb-1">Inquiries</h4>
-                  <a href="mailto:adsdotcom786@gmail.com" className="text-xs text-ink-soft hover:text-accent-blue transition-colors">
-                    adsdotcom786@gmail.com
+                  <a href="mailto:info@adsdotcom.net" className="text-xs text-ink-soft hover:text-accent-blue transition-colors block">
+                    info@adsdotcom.net
+                  </a>
+                  <a href="mailto:sales@adsdotcom.net" className="text-xs text-ink-soft hover:text-accent-blue transition-colors block mt-0.5">
+                    sales@adsdotcom.net
                   </a>
                 </div>
               </div>
 
-              <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-[10px] uppercase font-bold tracking-wider text-ink-mute mb-1.5">Your Name</label>
-                  <input type="text" className="w-full bg-surface border border-ink/5 rounded-xl px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent-blue transition-colors" placeholder="e.g. Waqar Khan" />
+                  <input type="text" value={name} onChange={e => setName(e.target.value)} required className="w-full bg-surface border border-ink/5 rounded-xl px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent-blue transition-colors" placeholder="e.g. Waqar Khan" />
                 </div>
                 <div>
                   <label className="block text-[10px] uppercase font-bold tracking-wider text-ink-mute mb-1.5">Email Address</label>
-                  <input type="email" className="w-full bg-surface border border-ink/5 rounded-xl px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent-blue transition-colors" placeholder="e.g. name@company.com" />
+                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} required className="w-full bg-surface border border-ink/5 rounded-xl px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent-blue transition-colors" placeholder="e.g. name@company.com" />
                 </div>
                 <div>
                   <label className="block text-[10px] uppercase font-bold tracking-wider text-ink-mute mb-1.5">Message</label>
-                  <textarea rows={4} className="w-full bg-surface border border-ink/5 rounded-xl px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent-blue transition-colors resize-none" placeholder="Tell us about your project..."></textarea>
+                  <textarea rows={4} value={message} onChange={e => setMessage(e.target.value)} required className="w-full bg-surface border border-ink/5 rounded-xl px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent-blue transition-colors resize-none" placeholder="Tell us about your project..."></textarea>
                 </div>
-                <button type="submit" className="w-full py-3 bg-ink text-canvas rounded-xl text-xs font-semibold hover:scale-[1.02] active:scale-[0.98] transition-transform">
-                  Send Message
+                <button type="submit" disabled={isSubmitting} className="w-full py-3 bg-ink text-canvas rounded-xl text-xs font-semibold hover:scale-[1.02] active:scale-[0.98] transition-transform disabled:opacity-50 disabled:hover:scale-100">
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>
