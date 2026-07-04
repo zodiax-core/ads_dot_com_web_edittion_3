@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { PageShell } from "@/components/page-shell";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
@@ -142,18 +142,24 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", handler);
+    // Lock body scroll while lightbox is open
+    const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.removeEventListener("keydown", handler); document.body.style.overflow = ""; };
+    return () => {
+      document.removeEventListener("keydown", handler);
+      document.body.style.overflow = prev;
+    };
   }, [onClose]);
 
   return (
     <div
       className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
-      onClick={onClose}
+      onPointerDown={(e) => { e.stopPropagation(); onClose(); }}
     >
       <button
+        onPointerDown={(e) => e.stopPropagation()}
         onClick={onClose}
-        className="absolute top-5 right-5 size-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors z-10"
+        className="absolute top-4 right-4 size-11 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white transition-colors z-10"
         aria-label="Close"
       >
         <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
@@ -163,7 +169,8 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
       <img
         src={src}
         alt={alt}
-        className="max-w-full max-h-[90vh] rounded-2xl object-contain shadow-2xl"
+        className="max-w-full max-h-[88vh] rounded-2xl object-contain shadow-2xl"
+        onPointerDown={(e) => e.stopPropagation()}
         onClick={(e) => e.stopPropagation()}
       />
     </div>
@@ -174,9 +181,11 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
 function ProjectCarousel({ projects }: { projects: any[] }) {
   const [current, setCurrent] = useState(0);
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
-  const [dragging, setDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
+  const [dragState, setDragState] = useState<{ active: boolean; startX: number; deltaX: number }>({
+    active: false, startX: 0, deltaX: 0,
+  });
   const [expanded, setExpanded] = useState<number | null>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const total = projects.length;
 
   const prev = useCallback(() => { setCurrent((c) => (c - 1 + total) % total); setExpanded(null); }, [total]);
@@ -192,39 +201,51 @@ function ProjectCarousel({ projects }: { projects: any[] }) {
     return () => window.removeEventListener("keydown", handleKey);
   }, [prev, next, lightbox]);
 
-  // Preload adjacent images for instant switching
+  // Preload adjacent images
   useEffect(() => {
-    const toPreload = [
-      projects[(current + 1) % total]?.mainImage,
-      projects[(current - 1 + total) % total]?.mainImage,
-    ].filter(Boolean);
-    toPreload.forEach((src) => { const img = new Image(); img.src = src; });
+    [projects[(current + 1) % total]?.mainImage, projects[(current - 1 + total) % total]?.mainImage]
+      .filter(Boolean)
+      .forEach((src) => { const img = new Image(); img.src = src; });
   }, [current, projects, total]);
 
-  const handlePointerDown = (e: React.PointerEvent) => { setDragging(true); setStartX(e.clientX); };
-  const handlePointerUp = (e: React.PointerEvent) => {
-    if (!dragging) return;
-    setDragging(false);
-    const diff = e.clientX - startX;
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // Capture pointer so drag continues even if finger leaves element
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setDragState({ active: true, startX: e.clientX, deltaX: 0 });
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!dragState.active) return;
+    // Prevent page scroll while dragging horizontally
+    e.preventDefault();
+    setDragState((s) => ({ ...s, deltaX: e.clientX - s.startX }));
+  };
+
+  const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!dragState.active) return;
+    const diff = e.clientX - dragState.startX;
+    setDragState({ active: false, startX: 0, deltaX: 0 });
     if (diff < -50) next();
     else if (diff > 50) prev();
   };
 
   const getStyle = (i: number) => {
-    const offset = ((i - current + total) % total);
+    const offset = (i - current + total) % total;
     const normalized = offset > total / 2 ? offset - total : offset;
     const absOff = Math.abs(normalized);
     if (absOff > 2) return { display: "none" };
-    const x = normalized * 220;
-    const z = -absOff * 120;
+    // On mobile use tighter spacing
+    const spacing = typeof window !== "undefined" && window.innerWidth < 768 ? 160 : 220;
+    const x = normalized * spacing + (dragState.active ? dragState.deltaX * 0.3 : 0);
+    const z = -absOff * 100;
     const scale = 1 - absOff * 0.18;
-    const opacity = 1 - absOff * 0.35;
-    const rotateY = normalized * -12;
+    const opacity = 1 - absOff * 0.4;
+    const rotateY = normalized * -10;
     return {
       transform: `translateX(${x}px) translateZ(${z}px) scale(${scale}) rotateY(${rotateY}deg)`,
       opacity,
       zIndex: 10 - absOff,
-      transition: "all 0.55s cubic-bezier(0.16,1,0.3,1)",
+      transition: dragState.active ? "none" : "all 0.5s cubic-bezier(0.16,1,0.3,1)",
     };
   };
 
@@ -232,80 +253,108 @@ function ProjectCarousel({ projects }: { projects: any[] }) {
 
   return (
     <div className="w-full">
-      {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />}
+      {lightbox && (
+        <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
+      )}
 
-      {/* 3D stage */}
-      <div
-        className="relative h-[340px] md:h-[420px] flex items-center justify-center overflow-visible select-none"
-        style={{ perspective: "1200px" }}
-        onPointerDown={handlePointerDown}
-        onPointerUp={handlePointerUp}
-        onPointerLeave={() => setDragging(false)}
-      >
-        {projects.map((proj: any, i: number) => {
-          const style = getStyle(i);
-          if (style.display === "none") return null;
-          const isCurrent = i === current;
-          const isAdjacent = Math.abs(((i - current + total) % total) > total / 2 ? ((i - current + total) % total) - total : (i - current + total) % total) === 1;
-          return (
-            <div
-              key={proj._id ?? proj.title}
-              className="absolute w-[240px] md:w-[320px] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl cursor-pointer"
-              style={style as React.CSSProperties}
-              onClick={() => { if (isCurrent) setLightbox({ src: proj.mainImage, alt: proj.title }); else setCurrent(i); }}
-            >
-              {/* Blurhash placeholder bg while image loads */}
-              <div className="absolute inset-0 bg-ink/20" />
-              <img
-                src={proj.mainImage}
-                alt={proj.title}
-                width={320}
-                height={427}
-                loading={isCurrent || isAdjacent ? "eager" : "lazy"}
-                decoding={isCurrent ? "sync" : "async"}
-                fetchPriority={isCurrent ? "high" : isAdjacent ? "low" : undefined}
-                className="relative w-full h-full object-cover"
-                onError={(e) => { (e.target as HTMLImageElement).style.opacity = "0.3"; }}
-              />
-              {isCurrent && (
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-5">
-                  <span className={`self-start px-2.5 py-0.5 rounded-full ${proj.tagColor || "bg-accent-blue"} text-white text-[10px] font-bold uppercase tracking-wider mb-2`}>
-                    {proj.serviceCategory}
-                  </span>
-                  <h3 className="text-white text-xl font-medium leading-tight">{proj.title}</h3>
-                  <p className="text-white/60 text-xs mt-1">{proj.client} · {proj.year}</p>
-                  <p className="text-white/40 text-[10px] mt-1.5">Click to enlarge</p>
-                </div>
-              )}
-            </div>
-          );
-        })}
+      {/* Outer clip so side cards don't bleed into navbar */}
+      <div className="overflow-hidden px-4 md:px-0">
+        {/* 3D stage — touch-action none stops browser scroll hijack */}
+        <div
+          ref={stageRef}
+          className="relative h-[320px] md:h-[420px] flex items-center justify-center select-none"
+          style={{ perspective: "1100px", touchAction: "none" }}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={() => setDragState({ active: false, startX: 0, deltaX: 0 })}
+        >
+          {projects.map((proj: any, i: number) => {
+            const style = getStyle(i);
+            if ((style as any).display === "none") return null;
+            const isCurrent = i === current;
+            const offset = (i - current + total) % total;
+            const normalized = offset > total / 2 ? offset - total : offset;
+            const isAdjacent = Math.abs(normalized) === 1;
+            return (
+              <div
+                key={proj._id ?? proj.title}
+                className="absolute w-[200px] md:w-[300px] aspect-[3/4] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl"
+                style={style as React.CSSProperties}
+                onClick={() => {
+                  if (dragState.active) return;
+                  if (isCurrent) setLightbox({ src: proj.mainImage, alt: proj.title });
+                  else setCurrent(i);
+                }}
+              >
+                <div className="absolute inset-0 bg-ink/20" />
+                <img
+                  src={proj.mainImage}
+                  alt={proj.title}
+                  width={300}
+                  height={400}
+                  loading={isCurrent || isAdjacent ? "eager" : "lazy"}
+                  decoding={isCurrent ? "sync" : "async"}
+                  className="relative w-full h-full object-cover pointer-events-none"
+                  onError={(e) => { (e.target as HTMLImageElement).style.opacity = "0.3"; }}
+                />
+                {isCurrent && (
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex flex-col justify-end p-4 md:p-5 pointer-events-none">
+                    <span className={`self-start px-2.5 py-0.5 rounded-full ${proj.tagColor || "bg-accent-blue"} text-white text-[9px] md:text-[10px] font-bold uppercase tracking-wider mb-2`}>
+                      {proj.serviceCategory}
+                    </span>
+                    <h3 className="text-white text-base md:text-xl font-medium leading-tight">{proj.title}</h3>
+                    <p className="text-white/60 text-[10px] md:text-xs mt-1">{proj.client} · {proj.year}</p>
+                    <p className="text-white/40 text-[9px] mt-1">Tap to enlarge</p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Arrow controls */}
-      <div className="flex items-center justify-center gap-4 mt-8">
-        <button onClick={prev} aria-label="Previous" className="size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all">
-          <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      <div className="flex items-center justify-center gap-4 mt-6">
+        <button
+          onClick={prev}
+          aria-label="Previous"
+          className="size-10 md:size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all active:scale-95"
+        >
+          <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+            <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </button>
         <div className="flex gap-1.5">
           {projects.map((_: any, i: number) => (
-            <button key={i} onClick={() => { setCurrent(i); setExpanded(null); }}
-              className={`rounded-full transition-all duration-300 ${i === current ? "w-6 h-2 bg-canvas" : "size-2 bg-canvas/30 hover:bg-canvas/60"}`} />
+            <button
+              key={i}
+              onClick={() => { setCurrent(i); setExpanded(null); }}
+              className={`rounded-full transition-all duration-300 ${i === current ? "w-6 h-2 bg-canvas" : "size-2 bg-canvas/30 hover:bg-canvas/60"}`}
+            />
           ))}
         </div>
-        <button onClick={next} aria-label="Next" className="size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all">
-          <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        <button
+          onClick={next}
+          aria-label="Next"
+          className="size-10 md:size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all active:scale-95"
+        >
+          <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+            <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </button>
       </div>
 
       {/* Active project detail */}
-      <div className="mt-10 max-w-2xl mx-auto text-center">
+      <div className="mt-8 max-w-2xl mx-auto text-center px-4">
         <div className="flex flex-wrap justify-center gap-2 mb-4">
           {p.tags?.map((t: string) => (
-            <span key={t} className="px-2.5 py-1 rounded-full bg-canvas/10 border border-canvas/15 text-[10px] font-medium text-canvas/70">{t}</span>
+            <span key={t} className="px-2.5 py-1 rounded-full bg-canvas/10 border border-canvas/15 text-[10px] font-medium text-canvas/70">
+              {t}
+            </span>
           ))}
         </div>
-        <h2 className="text-2xl md:text-3xl font-medium text-canvas mb-2">{p.title}</h2>
+        <h2 className="text-xl md:text-3xl font-medium text-canvas mb-2">{p.title}</h2>
         <p className="text-canvas/50 text-sm leading-relaxed mb-4">{p.smallDescription}</p>
         <button
           onClick={() => setExpanded(expanded === current ? null : current)}

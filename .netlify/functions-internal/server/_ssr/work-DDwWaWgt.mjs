@@ -4,7 +4,7 @@ import { t as api } from "./api-DSJLF2wo.mjs";
 import { t as PageShell } from "./page-shell-ZTxEkQki.mjs";
 import { n as installation_default, r as printing_default, t as events_default } from "./installation-BJHzc0qs.mjs";
 import { n as project_lumos_default, r as project_monolith_default, t as fab_kinetic_default } from "./project-monolith-Dw1qaPyq.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/work-62WV3JTo.js
+//#region node_modules/.nitro/vite/services/ssr/assets/work-DDwWaWgt.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var ArrowRight = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
@@ -154,18 +154,23 @@ function Lightbox({ src, alt, onClose }) {
 			if (e.key === "Escape") onClose();
 		};
 		document.addEventListener("keydown", handler);
+		const prev = document.body.style.overflow;
 		document.body.style.overflow = "hidden";
 		return () => {
 			document.removeEventListener("keydown", handler);
-			document.body.style.overflow = "";
+			document.body.style.overflow = prev;
 		};
 	}, [onClose]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4",
-		onClick: onClose,
+		onPointerDown: (e) => {
+			e.stopPropagation();
+			onClose();
+		},
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+			onPointerDown: (e) => e.stopPropagation(),
 			onClick: onClose,
-			className: "absolute top-5 right-5 size-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors z-10",
+			className: "absolute top-4 right-4 size-11 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white transition-colors z-10",
 			"aria-label": "Close",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
 				className: "size-5",
@@ -182,7 +187,8 @@ function Lightbox({ src, alt, onClose }) {
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 			src,
 			alt,
-			className: "max-w-full max-h-[90vh] rounded-2xl object-contain shadow-2xl",
+			className: "max-w-full max-h-[88vh] rounded-2xl object-contain shadow-2xl",
+			onPointerDown: (e) => e.stopPropagation(),
 			onClick: (e) => e.stopPropagation()
 		})]
 	});
@@ -190,9 +196,13 @@ function Lightbox({ src, alt, onClose }) {
 function ProjectCarousel({ projects }) {
 	const [current, setCurrent] = (0, import_react.useState)(0);
 	const [lightbox, setLightbox] = (0, import_react.useState)(null);
-	const [dragging, setDragging] = (0, import_react.useState)(false);
-	const [startX, setStartX] = (0, import_react.useState)(0);
+	const [dragState, setDragState] = (0, import_react.useState)({
+		active: false,
+		startX: 0,
+		deltaX: 0
+	});
 	const [expanded, setExpanded] = (0, import_react.useState)(null);
+	const stageRef = (0, import_react.useRef)(null);
 	const total = projects.length;
 	const prev = (0, import_react.useCallback)(() => {
 		setCurrent((c) => (c - 1 + total) % total);
@@ -225,14 +235,30 @@ function ProjectCarousel({ projects }) {
 		projects,
 		total
 	]);
-	const handlePointerDown = (e) => {
-		setDragging(true);
-		setStartX(e.clientX);
+	const onPointerDown = (e) => {
+		e.currentTarget.setPointerCapture(e.pointerId);
+		setDragState({
+			active: true,
+			startX: e.clientX,
+			deltaX: 0
+		});
 	};
-	const handlePointerUp = (e) => {
-		if (!dragging) return;
-		setDragging(false);
-		const diff = e.clientX - startX;
+	const onPointerMove = (e) => {
+		if (!dragState.active) return;
+		e.preventDefault();
+		setDragState((s) => ({
+			...s,
+			deltaX: e.clientX - s.startX
+		}));
+	};
+	const onPointerUp = (e) => {
+		if (!dragState.active) return;
+		const diff = e.clientX - dragState.startX;
+		setDragState({
+			active: false,
+			startX: 0,
+			deltaX: 0
+		});
 		if (diff < -50) next();
 		else if (diff > 50) prev();
 	};
@@ -241,15 +267,15 @@ function ProjectCarousel({ projects }) {
 		const normalized = offset > total / 2 ? offset - total : offset;
 		const absOff = Math.abs(normalized);
 		if (absOff > 2) return { display: "none" };
-		const x = normalized * 220;
-		const z = -absOff * 120;
+		const x = normalized * (typeof window !== "undefined" && window.innerWidth < 768 ? 160 : 220) + (dragState.active ? dragState.deltaX * .3 : 0);
+		const z = -absOff * 100;
 		const scale = 1 - absOff * .18;
-		const opacity = 1 - absOff * .35;
+		const opacity = 1 - absOff * .4;
 		return {
-			transform: `translateX(${x}px) translateZ(${z}px) scale(${scale}) rotateY(${normalized * -12}deg)`,
+			transform: `translateX(${x}px) translateZ(${z}px) scale(${scale}) rotateY(${normalized * -10}deg)`,
 			opacity,
 			zIndex: 10 - absOff,
-			transition: "all 0.55s cubic-bezier(0.16,1,0.3,1)"
+			transition: dragState.active ? "none" : "all 0.5s cubic-bezier(0.16,1,0.3,1)"
 		};
 	};
 	const p = projects[current];
@@ -262,77 +288,91 @@ function ProjectCarousel({ projects }) {
 				onClose: () => setLightbox(null)
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "relative h-[340px] md:h-[420px] flex items-center justify-center overflow-visible select-none",
-				style: { perspective: "1200px" },
-				onPointerDown: handlePointerDown,
-				onPointerUp: handlePointerUp,
-				onPointerLeave: () => setDragging(false),
-				children: projects.map((proj, i) => {
-					const style = getStyle(i);
-					if (style.display === "none") return null;
-					const isCurrent = i === current;
-					const isAdjacent = Math.abs((i - current + total) % total > total / 2 ? (i - current + total) % total - total : (i - current + total) % total) === 1;
-					return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "absolute w-[240px] md:w-[320px] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl cursor-pointer",
-						style,
-						onClick: () => {
-							if (isCurrent) setLightbox({
-								src: proj.mainImage,
-								alt: proj.title
-							});
-							else setCurrent(i);
-						},
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-ink/20" }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-								src: proj.mainImage,
-								alt: proj.title,
-								width: 320,
-								height: 427,
-								loading: isCurrent || isAdjacent ? "eager" : "lazy",
-								decoding: isCurrent ? "sync" : "async",
-								fetchPriority: isCurrent ? "high" : isAdjacent ? "low" : void 0,
-								className: "relative w-full h-full object-cover",
-								onError: (e) => {
-									e.target.style.opacity = "0.3";
-								}
-							}),
-							isCurrent && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-5",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: `self-start px-2.5 py-0.5 rounded-full ${proj.tagColor || "bg-accent-blue"} text-white text-[10px] font-bold uppercase tracking-wider mb-2`,
-										children: proj.serviceCategory
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-										className: "text-white text-xl font-medium leading-tight",
-										children: proj.title
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-										className: "text-white/60 text-xs mt-1",
-										children: [
-											proj.client,
-											" · ",
-											proj.year
-										]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "text-white/40 text-[10px] mt-1.5",
-										children: "Click to enlarge"
-									})
-								]
-							})
-						]
-					}, proj._id ?? proj.title);
+				className: "overflow-hidden px-4 md:px-0",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					ref: stageRef,
+					className: "relative h-[320px] md:h-[420px] flex items-center justify-center select-none",
+					style: {
+						perspective: "1100px",
+						touchAction: "none"
+					},
+					onPointerDown,
+					onPointerMove,
+					onPointerUp,
+					onPointerCancel: () => setDragState({
+						active: false,
+						startX: 0,
+						deltaX: 0
+					}),
+					children: projects.map((proj, i) => {
+						const style = getStyle(i);
+						if (style.display === "none") return null;
+						const isCurrent = i === current;
+						const offset = (i - current + total) % total;
+						const normalized = offset > total / 2 ? offset - total : offset;
+						const isAdjacent = Math.abs(normalized) === 1;
+						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "absolute w-[200px] md:w-[300px] aspect-[3/4] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl",
+							style,
+							onClick: () => {
+								if (dragState.active) return;
+								if (isCurrent) setLightbox({
+									src: proj.mainImage,
+									alt: proj.title
+								});
+								else setCurrent(i);
+							},
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-ink/20" }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+									src: proj.mainImage,
+									alt: proj.title,
+									width: 300,
+									height: 400,
+									loading: isCurrent || isAdjacent ? "eager" : "lazy",
+									decoding: isCurrent ? "sync" : "async",
+									className: "relative w-full h-full object-cover pointer-events-none",
+									onError: (e) => {
+										e.target.style.opacity = "0.3";
+									}
+								}),
+								isCurrent && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex flex-col justify-end p-4 md:p-5 pointer-events-none",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: `self-start px-2.5 py-0.5 rounded-full ${proj.tagColor || "bg-accent-blue"} text-white text-[9px] md:text-[10px] font-bold uppercase tracking-wider mb-2`,
+											children: proj.serviceCategory
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+											className: "text-white text-base md:text-xl font-medium leading-tight",
+											children: proj.title
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+											className: "text-white/60 text-[10px] md:text-xs mt-1",
+											children: [
+												proj.client,
+												" · ",
+												proj.year
+											]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-white/40 text-[9px] mt-1",
+											children: "Tap to enlarge"
+										})
+									]
+								})
+							]
+						}, proj._id ?? proj.title);
+					})
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "flex items-center justify-center gap-4 mt-8",
+				className: "flex items-center justify-center gap-4 mt-6",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 						onClick: prev,
 						"aria-label": "Previous",
-						className: "size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all",
+						className: "size-10 md:size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all active:scale-95",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
 							className: "size-4",
 							viewBox: "0 0 24 24",
@@ -359,7 +399,7 @@ function ProjectCarousel({ projects }) {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 						onClick: next,
 						"aria-label": "Next",
-						className: "size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all",
+						className: "size-10 md:size-11 rounded-full border border-canvas/20 flex items-center justify-center text-canvas hover:bg-canvas hover:text-ink transition-all active:scale-95",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
 							className: "size-4",
 							viewBox: "0 0 24 24",
@@ -376,7 +416,7 @@ function ProjectCarousel({ projects }) {
 				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "mt-10 max-w-2xl mx-auto text-center",
+				className: "mt-8 max-w-2xl mx-auto text-center px-4",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 						className: "flex flex-wrap justify-center gap-2 mb-4",
@@ -386,7 +426,7 @@ function ProjectCarousel({ projects }) {
 						}, t))
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-						className: "text-2xl md:text-3xl font-medium text-canvas mb-2",
+						className: "text-xl md:text-3xl font-medium text-canvas mb-2",
 						children: p.title
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
