@@ -32,7 +32,20 @@ const dummyProjects = [
   { _id: "dummy-6", mainImage: fabKineticImg,      serviceCategory: "Kinetic Signage",   tagColor: "bg-accent-coral",  title: "Rotating Brand Wall",     client: "Client Confidential", year: "2023", tags: ["Fabrication","Kinetics","Design"],               smallDescription: "A 3-panel kinetic brand wall for a corporate headquarters lobby.", projectDetail: "The brief required a permanent, low-maintenance kinetic installation." },
 ];
 
-const testimonials = [
+/* ─── IMAGE FIX MAP — patches broken /src/assets/ paths from old seeded data ─ */
+const IMAGE_FIX_MAP: Record<string, string> = {
+  "/src/assets/project-lumos.jpg":    projectLumosImg,
+  "/src/assets/project-monolith.jpg": projectMonolithImg,
+  "/src/assets/printing.jpg":         printingImg,
+  "/src/assets/events.jpg":           eventsImg,
+  "/src/assets/installation.jpg":     installationImg,
+  "/src/assets/fab-kinetic.jpg":      fabKineticImg,
+};
+
+function fixImage(src: string): string {
+  if (src?.startsWith("/src/assets/")) return IMAGE_FIX_MAP[src] ?? src;
+  return src;
+}
   { quote: "I have worked with Ads Dot COM for 10 years — in that time they have become a valued and trusted vendor. Their attention to detail and solution-driven approach has been invaluable.", author: "Ishfaq Ramey", role: "Senior Set Designer", company: "ARY News", color: "accent-blue" },
   { quote: "Ads Dot COM has been our preferred advertising agency for the past 6 years. They delivered a great service, rarely if ever unable to meet our short deadlines and still turn out superior quality.", author: "Waqar Ahmad Khan", role: "Chairman", company: "Pak Arab Housing Scheme", color: "accent-coral" },
   { quote: "I would just like to say thank you for taking care of advertising needs of our company. The service and advice received was second to none and the price was very competitive also.", author: "Sharyar", role: "General Manager", company: "Wakgroup — Samsung", color: "accent-mint" },
@@ -275,7 +288,9 @@ function WorkPage() {
   const convexWorks = useQuery(api.works.getWorks);
 
   const isLoading = convexWorks === undefined;
-  const projects = convexWorks !== undefined && convexWorks.length > 0 ? convexWorks : (convexWorks !== undefined ? dummyProjects : []);
+  // Fix any records that have old /src/assets/ paths, then fall back to dummy if empty
+  const rawProjects = convexWorks !== undefined && convexWorks.length > 0 ? convexWorks : (convexWorks !== undefined ? dummyProjects : []);
+  const projects = rawProjects.map((p: any) => ({ ...p, mainImage: fixImage(p.mainImage) }));
 
   return (
     <PageShell>
