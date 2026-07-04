@@ -152,6 +152,8 @@ function WorksTab({ onError }: { onError: (msg: string) => void }) {
   const updateWork = useMutation(api.works.updateWork);
   const deleteWork = useMutation(api.works.deleteWork);
   const seedDummyData = useMutation(api.works.seedDummyData);
+  const fixBrokenImages = useMutation(api.works.fixBrokenImages);
+  const clearAllWorks = useMutation(api.works.clearAllWorks);
 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
@@ -180,11 +182,22 @@ function WorksTab({ onError }: { onError: (msg: string) => void }) {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center flex-wrap gap-3">
         <h2 className="text-2xl font-serif">Manage Works</h2>
-        <button onClick={() => seedDummyData().then(r => r?.message && alert(r.message))} className="px-4 py-2 bg-ink text-canvas rounded hover:bg-ink/90 text-sm">
-          Seed Dummy Data
-        </button>
+        <div className="flex gap-2 flex-wrap">
+          <button onClick={() => fixBrokenImages().then(r => r?.message && onError ? alert(r.message) : alert(r?.message))}
+            className="px-3 py-2 bg-amber-500 text-white rounded hover:bg-amber-600 text-xs font-semibold">
+            🔧 Fix Image URLs
+          </button>
+          <button onClick={() => { if (confirm("Delete ALL works? This cannot be undone.")) clearAllWorks().then(r => r?.message && alert(r.message)); }}
+            className="px-3 py-2 bg-red-500/10 text-red-600 rounded hover:bg-red-500/20 text-xs font-semibold">
+            🗑 Clear All
+          </button>
+          <button onClick={() => seedDummyData().then(r => r?.message && alert(r.message))}
+            className="px-3 py-2 bg-ink text-canvas rounded hover:bg-ink/90 text-xs font-semibold">
+            Seed Dummy Data
+          </button>
+        </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-surface p-6 rounded-lg border border-ink/10">

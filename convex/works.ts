@@ -11,6 +11,51 @@ export const generateUploadUrl = mutation({
   },
 });
 
+// Maps old broken /src/assets/ paths → working Unsplash URLs
+const IMAGE_FIX_MAP: Record<string, string> = {
+  "/src/assets/project-lumos.jpg":   "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&q=80",
+  "/src/assets/project-monolith.jpg":"https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80",
+  "/src/assets/printing.jpg":        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+  "/src/assets/events.jpg":          "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80",
+  "/src/assets/fab-kinetic.jpg":     "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800&q=80",
+  "/src/assets/installation.jpg":    "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
+  "/src/assets/fab-modular.jpg":     "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80",
+  "/src/assets/fab-venue.jpg":       "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80",
+  "/src/assets/creative.jpg":        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+  "/src/assets/hero-scene.jpg":      "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&q=80",
+};
+
+// Run this once from Admin panel to fix all broken image paths in the DB
+export const fixBrokenImages = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) throw new Error("Unauthorized");
+    const works = await ctx.db.query("works").collect();
+    let fixed = 0;
+    for (const work of works) {
+      const fixedUrl = IMAGE_FIX_MAP[work.mainImage];
+      if (fixedUrl) {
+        await ctx.db.patch(work._id, { mainImage: fixedUrl });
+        fixed++;
+      }
+    }
+    return { success: true, message: `Fixed ${fixed} broken image(s).` };
+  },
+});
+
+// Delete ALL works (for a clean re-seed)
+export const clearAllWorks = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) throw new Error("Unauthorized");
+    const works = await ctx.db.query("works").collect();
+    for (const work of works) await ctx.db.delete(work._id);
+    return { success: true, message: `Deleted ${works.length} work(s).` };
+  },
+});
+
 export const getWorks = query({
   args: {},
   handler: async (ctx) => {
