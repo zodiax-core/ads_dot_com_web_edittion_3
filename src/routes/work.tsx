@@ -30,8 +30,6 @@ const dummyProjects = [
   { _id: "dummy-6", mainImage: fabKinetic, serviceCategory: "Kinetic Signage", tagColor: "bg-accent-coral", title: "Rotating Brand Wall", client: "Client Confidential", year: "2023", tags: ["Fabrication", "Kinetics", "Design"], smallDescription: "A 3-panel kinetic brand wall for a corporate headquarters lobby.", projectDetail: "The brief required a permanent, low-maintenance kinetic installation.", gallery: [] },
 ];
 
-const allTags = ["All", "Outdoor", "Fabrication", "Print & Graphics", "Live Production", "Event Space", "Kinetic Signage", "Retail Identity"];
-
 const testimonials = [
   { quote: "I have worked with Ads Dot COM for 10 years — in that time they have become a valued and trusted vendor. Their attention to detail and solution-driven approach has been invaluable.", author: "Ishfaq Ramey", role: "Senior Set Designer", company: "ARY News", color: "accent-blue" },
   { quote: "Ads Dot COM has been our preferred advertising agency for the past 6 years. They delivered a great service, rarely if ever unable to meet our short deadlines and still turn out superior quality.", author: "Waqar Ahmad Khan", role: "Chairman", company: "Pak Arab Housing Scheme", color: "accent-coral" },
@@ -255,15 +253,10 @@ function GlobalGallery() {
 
 /* ─── PAGE ──────────────────────────────────────────────────────────────── */
 function WorkPage() {
-  const [activeTag, setActiveTag] = useState("All");
   const convexWorks = useQuery(api.works.getWorks);
 
-  // While loading show skeleton, not dummy data
   const isLoading = convexWorks === undefined;
-  // Once loaded: if Convex has data use it, else fall back to dummy
   const projects = convexWorks !== undefined && convexWorks.length > 0 ? convexWorks : (convexWorks !== undefined ? dummyProjects : []);
-
-  const filtered = activeTag === "All" ? projects : projects.filter((p: any) => p.serviceCategory === activeTag);
 
   return (
     <PageShell>

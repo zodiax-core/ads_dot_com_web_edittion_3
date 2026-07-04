@@ -15,5 +15,7 @@ export default defineConfig({
   nitro: {
     // Use netlify preset so Nitro outputs Netlify-compatible serverless functions
     preset: "netlify",
+    // Ensure all public/ files are included in output
+    publicAssets: [{ dir: "public", maxAge: 31536000 }],
   },
 });

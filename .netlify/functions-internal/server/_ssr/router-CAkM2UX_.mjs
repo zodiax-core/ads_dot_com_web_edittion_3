@@ -1,12 +1,13 @@
 import { r as __toESM } from "../_runtime.mjs";
-import { n as require_jsx_runtime, r as require_react, t as QueryClientProvider } from "../_libs/react+tanstack__react-query.mjs";
+import { c as require_react, i as ConvexReactClient, s as require_jsx_runtime, t as ConvexAuthProvider } from "../_libs/@convex-dev/auth+[...].mjs";
 import { M as useRouter, c as HeadContent, d as Outlet, f as lazyRouteComponent, h as Link, m as createRootRouteWithContext, p as createFileRoute, s as Scripts, u as createRouter } from "../_libs/@tanstack/react-router+[...].mjs";
-import { r as Route$5 } from "./routes-cz_hh9GU.mjs";
+import { r as Route$6 } from "./routes-DMbmB-9-.mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-Bb80bl9W.js
+import { t as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/router-CAkM2UX_.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-oOkS25w7.css";
+var styles_default = "/assets/styles-BQcFy_fp.css";
 function reportLovableError(error, context = {}) {
 	if (typeof window === "undefined") return;
 	window.__lovableEvents?.captureException?.(error, {
@@ -19,6 +20,7 @@ function reportLovableError(error, context = {}) {
 		severity: "error"
 	});
 }
+var convex = new ConvexReactClient("https://rosy-crow-160.convex.cloud");
 function NotFoundComponent() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "flex min-h-screen items-center justify-center bg-canvas px-4",
@@ -87,7 +89,7 @@ function ErrorComponent({ error, reset }) {
 		})
 	});
 }
-var Route$4 = createRootRouteWithContext()({
+var Route$5 = createRootRouteWithContext()({
 	head: () => ({
 		meta: [
 			{ charSet: "utf-8" },
@@ -126,8 +128,9 @@ var Route$4 = createRootRouteWithContext()({
 			href: styles_default
 		}, {
 			rel: "icon",
-			href: "/favicon.ico",
-			type: "image/x-icon"
+			href: "/logo.png",
+			type: "image/png",
+			sizes: "any"
 		}]
 	}),
 	shellComponent: RootShell,
@@ -138,56 +141,79 @@ var Route$4 = createRootRouteWithContext()({
 function RootShell({ children }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("html", {
 		lang: "en",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("head", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HeadContent, {}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("body", { children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Scripts, {})] })]
+		suppressHydrationWarning: true,
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("head", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HeadContent, {}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("body", {
+			suppressHydrationWarning: true,
+			children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Scripts, {})]
+		})]
 	});
 }
 function RootComponent() {
-	const { queryClient } = Route$4.useRouteContext();
+	const { queryClient } = Route$5.useRouteContext();
+	const router = useRouter();
+	(0, import_react.useEffect)(() => {
+		const handleKeyDown = (e) => {
+			if (e.ctrlKey && e.altKey && e.shiftKey && e.key.toLowerCase() === "a") router.navigate({ to: "/0i9876r7s7ygs89grt7r9s8rbg9rdb" });
+		};
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, [router]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(QueryClientProvider, {
 		client: queryClient,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {})
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ConvexAuthProvider, {
+			client: convex,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {})
+		})
 	});
 }
-var $$splitComponentImporter$3 = () => import("./work-B6SHjKKb.mjs");
-var Route$3 = createFileRoute("/work")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
-var $$splitComponentImporter$2 = () => import("./studio-Dpu1o5pA.mjs");
-var Route$2 = createFileRoute("/studio")({ component: lazyRouteComponent($$splitComponentImporter$2, "component") });
-var $$splitComponentImporter$1 = () => import("./services-ClFhbrC0.mjs");
-var Route$1 = createFileRoute("/services")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
-var $$splitComponentImporter = () => import("./process-D5e-zTXv.mjs");
-var Route = createFileRoute("/process")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
-var WorkRoute = Route$3.update({
+var $$splitComponentImporter$4 = () => import("./work-CezVvhBB.mjs");
+var Route$4 = createFileRoute("/work")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
+var $$splitComponentImporter$3 = () => import("./studio-oamKibX7.mjs");
+var Route$3 = createFileRoute("/studio")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
+var $$splitComponentImporter$2 = () => import("./services-BVFZqX17.mjs");
+var Route$2 = createFileRoute("/services")({ component: lazyRouteComponent($$splitComponentImporter$2, "component") });
+var $$splitComponentImporter$1 = () => import("./process-DE2gl3xZ.mjs");
+var Route$1 = createFileRoute("/process")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
+var $$splitComponentImporter = () => import("./0i9876r7s7ygs89grt7r9s8rbg9rdb-D5ZR3x6E.mjs");
+var Route = createFileRoute("/0i9876r7s7ygs89grt7r9s8rbg9rdb")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
+var WorkRoute = Route$4.update({
 	id: "/work",
 	path: "/work",
-	getParentRoute: () => Route$4
+	getParentRoute: () => Route$5
 });
-var StudioRoute = Route$2.update({
+var StudioRoute = Route$3.update({
 	id: "/studio",
 	path: "/studio",
-	getParentRoute: () => Route$4
+	getParentRoute: () => Route$5
 });
-var ServicesRoute = Route$1.update({
+var ServicesRoute = Route$2.update({
 	id: "/services",
 	path: "/services",
-	getParentRoute: () => Route$4
+	getParentRoute: () => Route$5
 });
-var ProcessRoute = Route.update({
+var ProcessRoute = Route$1.update({
 	id: "/process",
 	path: "/process",
-	getParentRoute: () => Route$4
+	getParentRoute: () => Route$5
+});
+var R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute = Route.update({
+	id: "/0i9876r7s7ygs89grt7r9s8rbg9rdb",
+	path: "/0i9876r7s7ygs89grt7r9s8rbg9rdb",
+	getParentRoute: () => Route$5
 });
 var rootRouteChildren = {
-	IndexRoute: Route$5.update({
+	IndexRoute: Route$6.update({
 		id: "/",
 		path: "/",
-		getParentRoute: () => Route$4
+		getParentRoute: () => Route$5
 	}),
+	R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute,
 	ProcessRoute,
 	ServicesRoute,
 	StudioRoute,
 	WorkRoute
 };
-var routeTree = Route$4._addFileChildren(rootRouteChildren)._addFileTypes();
+var routeTree = Route$5._addFileChildren(rootRouteChildren)._addFileTypes();
 var getRouter = () => {
 	return createRouter({
 		routeTree,

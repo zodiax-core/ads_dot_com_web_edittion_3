@@ -1,8 +1,36 @@
-import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.mjs";
-import { t as PageShell } from "./page-shell-B2k5CaRz.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/studio-Dpu1o5pA.js
+import { r as __toESM } from "../_runtime.mjs";
+import { a as useMutation, c as require_react, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
+import { t as api } from "./api-DSJLF2wo.mjs";
+import { t as PageShell } from "./page-shell-ZTxEkQki.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/studio-oamKibX7.js
+var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function RouteComponent() {
+	const sendMessage = useMutation(api.messages.sendMessage);
+	const [name, setName] = (0, import_react.useState)("");
+	const [email, setEmail] = (0, import_react.useState)("");
+	const [message, setMessage] = (0, import_react.useState)("");
+	const [isSubmitting, setIsSubmitting] = (0, import_react.useState)(false);
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setIsSubmitting(true);
+		try {
+			await sendMessage({
+				name,
+				email,
+				message
+			});
+			alert("Message sent successfully!");
+			setName("");
+			setEmail("");
+			setMessage("");
+		} catch (error) {
+			console.error(error);
+			alert("Failed to send message. Please try again.");
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PageShell, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
 		className: "pt-28 pb-20",
 		children: [
@@ -235,17 +263,25 @@ function RouteComponent() {
 									className: "text-xs text-ink-soft hover:text-accent-blue transition-colors",
 									children: "+92 334 9955475"
 								})] }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-									className: "text-[10px] uppercase font-bold tracking-widest text-ink-mute mb-1",
-									children: "Inquiries"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-									href: "mailto:adsdotcom786@gmail.com",
-									className: "text-xs text-ink-soft hover:text-accent-blue transition-colors",
-									children: "adsdotcom786@gmail.com"
-								})] })
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+										className: "text-[10px] uppercase font-bold tracking-widest text-ink-mute mb-1",
+										children: "Inquiries"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+										href: "mailto:info@adsdotcom.net",
+										className: "text-xs text-ink-soft hover:text-accent-blue transition-colors block",
+										children: "info@adsdotcom.net"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+										href: "mailto:sales@adsdotcom.net",
+										className: "text-xs text-ink-soft hover:text-accent-blue transition-colors block mt-0.5",
+										children: "sales@adsdotcom.net"
+									})
+								] })
 							]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-							onSubmit: (e) => e.preventDefault(),
+							onSubmit: handleSubmit,
 							className: "space-y-4",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
@@ -253,6 +289,9 @@ function RouteComponent() {
 									children: "Your Name"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
 									type: "text",
+									value: name,
+									onChange: (e) => setName(e.target.value),
+									required: true,
 									className: "w-full bg-surface border border-ink/5 rounded-xl px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent-blue transition-colors",
 									placeholder: "e.g. Waqar Khan"
 								})] }),
@@ -261,6 +300,9 @@ function RouteComponent() {
 									children: "Email Address"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
 									type: "email",
+									value: email,
+									onChange: (e) => setEmail(e.target.value),
+									required: true,
 									className: "w-full bg-surface border border-ink/5 rounded-xl px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent-blue transition-colors",
 									placeholder: "e.g. name@company.com"
 								})] }),
@@ -269,13 +311,17 @@ function RouteComponent() {
 									children: "Message"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
 									rows: 4,
+									value: message,
+									onChange: (e) => setMessage(e.target.value),
+									required: true,
 									className: "w-full bg-surface border border-ink/5 rounded-xl px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent-blue transition-colors resize-none",
 									placeholder: "Tell us about your project..."
 								})] }),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 									type: "submit",
-									className: "w-full py-3 bg-ink text-canvas rounded-xl text-xs font-semibold hover:scale-[1.02] active:scale-[0.98] transition-transform",
-									children: "Send Message"
+									disabled: isSubmitting,
+									className: "w-full py-3 bg-ink text-canvas rounded-xl text-xs font-semibold hover:scale-[1.02] active:scale-[0.98] transition-transform disabled:opacity-50 disabled:hover:scale-100",
+									children: isSubmitting ? "Sending..." : "Send Message"
 								})
 							]
 						})]
