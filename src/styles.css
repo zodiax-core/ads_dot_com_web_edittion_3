@@ -126,6 +126,9 @@
 @utility animate-reveal-up { animation: reveal-up 1s cubic-bezier(0.16, 1, 0.3, 1) both; }
 @utility animate-ribbon-flow { animation: ribbon-flow 18s linear infinite alternate; }
 @utility animate-marquee { animation: marquee 40s linear infinite; }
+@media (max-width: 767px) {
+  .animate-marquee { animation-duration: 18s; }
+}
 @utility chrome-shimmer {
   background: linear-gradient(90deg, oklch(0.88 0.005 250) 0%, oklch(0.98 0 0) 50%, oklch(0.88 0.005 250) 100%);
   background-size: 200% 100%;
