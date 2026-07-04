@@ -4,21 +4,72 @@ import { api } from '../../../convex/_generated/api';
 import { useAuthActions } from "@convex-dev/auth/react";
 import { useRouter } from "@tanstack/react-router";
 
+/* ─── Error dialog ───────────────────────────────────────────────────────── */
+function ErrorDialog({ message, onClose }: { message: string; onClose: () => void }) {
+  const [copied, setCopied] = useState(false);
+  const copy = () => {
+    navigator.clipboard.writeText(message).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+  };
+  return (
+    <div className="fixed inset-0 z-[300] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={onClose}>
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 flex flex-col gap-4" onClick={e => e.stopPropagation()}>
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <div className="size-8 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+              <svg className="size-4 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01" strokeLinecap="round"/>
+              </svg>
+            </div>
+            <h3 className="font-semibold text-ink text-base">Error</h3>
+          </div>
+          <button onClick={onClose} className="text-ink/40 hover:text-ink transition-colors mt-0.5">
+            <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+              <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <pre className="bg-ink/5 rounded-xl p-4 text-xs text-ink font-mono whitespace-pre-wrap break-all leading-relaxed max-h-48 overflow-y-auto">{message}</pre>
+        <div className="flex gap-2 justify-end">
+          <button onClick={copy} className="px-4 py-2 bg-ink/10 rounded-lg text-sm font-medium hover:bg-ink/20 transition-colors flex items-center gap-1.5">
+            {copied ? (
+              <><svg className="size-3.5 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round"/></svg> Copied!</>
+            ) : (
+              <><svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</>
+            )}
+          </button>
+          <button onClick={onClose} className="px-4 py-2 bg-ink text-canvas rounded-lg text-sm font-medium hover:bg-ink/90 transition-colors">Dismiss</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Global error state ─────────────────────────────────────────────────── */
+let _showError: ((msg: string) => void) | null = null;
+export function useErrorDialog() {
+  return (msg: string) => _showError?.(msg);
+}
+
 /* ─── File upload helper ─────────────────────────────────────────────────── */
 async function uploadFile(file: File, getUploadUrl: () => Promise<string>): Promise<string> {
   const uploadUrl = await getUploadUrl();
   const res = await fetch(uploadUrl, { method: "POST", headers: { "Content-Type": file.type }, body: file });
-  if (!res.ok) throw new Error("Upload failed");
-  const { storageId } = await res.json();
-  // Build a direct Convex storage URL
-  const convexUrl = import.meta.env.VITE_CONVEX_URL as string;
-  const baseUrl = convexUrl.replace(".convex.cloud", ".convex.site");
-  return `${baseUrl}/api/storage/${storageId}`;
+  if (!res.ok) {
+    const text = await res.text().catch(() => res.statusText);
+    throw new Error(`HTTP ${res.status}: ${text}`);
+  }
+  const data = await res.json();
+  const storageId: string = data.storageId;
+  // Use the Convex HTTP site URL to serve the file
+  const convexUrl = (import.meta.env.VITE_CONVEX_URL as string) ?? "";
+  const siteUrl = convexUrl.replace(".convex.cloud", ".convex.site");
+  return `${siteUrl}/api/storage/${storageId}`;
 }
 
 /* ─── Image picker with upload ──────────────────────────────────────────── */
-function ImagePicker({ value, onChange, label = "Image" }: { value: string; onChange: (url: string) => void; label?: string }) {
-  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+function ImagePicker({ value, onChange, label = "Image", onError }: { value: string; onChange: (url: string) => void; label?: string; onError: (msg: string) => void }) {
+  // Use works.generateUploadUrl since files.ts may not be deployed
+  const generateUploadUrl = useMutation(api.works.generateUploadUrl);
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
 
@@ -30,7 +81,7 @@ function ImagePicker({ value, onChange, label = "Image" }: { value: string; onCh
       const url = await uploadFile(file, generateUploadUrl);
       onChange(url);
     } catch (err) {
-      alert("Upload failed: " + (err as Error).message);
+      onError((err as Error).message);
     } finally {
       setUploading(false);
       if (fileRef.current) fileRef.current.value = "";
@@ -41,14 +92,8 @@ function ImagePicker({ value, onChange, label = "Image" }: { value: string; onCh
     <div className="flex flex-col gap-2">
       <label className="text-sm text-ink-soft">{label}</label>
       <div className="flex gap-2 items-start">
-        <input
-          placeholder="Paste image URL or upload below"
-          value={value}
-          onChange={e => onChange(e.target.value)}
-          className="flex-1 px-4 py-2 border rounded bg-canvas text-sm"
-        />
-        <button type="button" onClick={() => fileRef.current?.click()}
-          className="px-3 py-2 bg-ink/10 rounded hover:bg-ink/20 text-xs font-medium whitespace-nowrap shrink-0" disabled={uploading}>
+        <input placeholder="Paste image URL or upload" value={value} onChange={e => onChange(e.target.value)} className="flex-1 px-4 py-2 border rounded bg-canvas text-sm" />
+        <button type="button" onClick={() => fileRef.current?.click()} className="px-3 py-2 bg-ink/10 rounded hover:bg-ink/20 text-xs font-medium whitespace-nowrap shrink-0" disabled={uploading}>
           {uploading ? "Uploading…" : "Upload"}
         </button>
         <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleFile} />
@@ -57,11 +102,14 @@ function ImagePicker({ value, onChange, label = "Image" }: { value: string; onCh
     </div>
   );
 }
-
 export default function AdminPanel() {
   const { signOut } = useAuthActions();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<'works' | 'gallery' | 'messages'>('works');
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // Wire global error handler
+  _showError = setErrorMsg;
 
   const handleSignOut = async () => {
     await signOut();
@@ -70,6 +118,7 @@ export default function AdminPanel() {
 
   return (
     <div className="flex h-screen bg-canvas text-ink overflow-hidden">
+      {errorMsg && <ErrorDialog message={errorMsg} onClose={() => setErrorMsg(null)} />}
       <aside className="w-64 border-r border-ink/10 bg-surface flex flex-col">
         <div className="p-6 border-b border-ink/10">
           <h1 className="text-2xl font-serif italic">Admin</h1>
@@ -89,15 +138,15 @@ export default function AdminPanel() {
         </div>
       </aside>
       <main className="flex-1 overflow-y-auto p-8">
-        {activeTab === 'works' && <WorksTab />}
-        {activeTab === 'gallery' && <GalleryTab />}
+        {activeTab === 'works' && <WorksTab onError={setErrorMsg} />}
+        {activeTab === 'gallery' && <GalleryTab onError={setErrorMsg} />}
         {activeTab === 'messages' && <MessagesTab />}
       </main>
     </div>
   );
 }
 
-function WorksTab() {
+function WorksTab({ onError }: { onError: (msg: string) => void }) {
   const works = useQuery(api.works.getWorks);
   const addWork = useMutation(api.works.addWork);
   const updateWork = useMutation(api.works.updateWork);
@@ -148,7 +197,7 @@ function WorksTab() {
             <input placeholder="Client" value={formData.client} onChange={e => set('client', e.target.value)} className="px-4 py-2 border rounded bg-canvas text-sm" required />
             <input placeholder="Year" value={formData.year} onChange={e => set('year', e.target.value)} className="px-4 py-2 border rounded bg-canvas text-sm" required />
             <textarea placeholder="Project Detail" value={formData.projectDetail} onChange={e => set('projectDetail', e.target.value)} className="px-4 py-2 border rounded bg-canvas text-sm h-24" required />
-            <ImagePicker label="Main Image" value={formData.mainImage} onChange={v => set('mainImage', v)} />
+            <ImagePicker label="Main Image" value={formData.mainImage} onChange={v => set('mainImage', v)} onError={onError} />
             <div className="flex gap-2 mt-1">
               <button type="submit" className="px-4 py-2 bg-ink text-canvas rounded hover:bg-ink/90 flex-1 text-sm">{editingId ? 'Update' : 'Add'}</button>
               {editingId && <button type="button" onClick={handleCancel} className="px-4 py-2 border border-ink text-ink rounded hover:bg-ink/10 flex-1 text-sm">Cancel</button>}
@@ -178,11 +227,11 @@ function WorksTab() {
   );
 }
 
-function GalleryTab() {
+function GalleryTab({ onError }: { onError: (msg: string) => void }) {
   const images = useQuery(api.gallery.getGallery);
   const addImage = useMutation(api.gallery.addImage);
   const deleteImage = useMutation(api.gallery.deleteImage);
-  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+  const generateUploadUrl = useMutation(api.gallery.generateUploadUrl);
   const [imageUrl, setImageUrl] = useState('');
   const [caption, setCaption] = useState('');
   const [uploading, setUploading] = useState(false);
@@ -196,7 +245,7 @@ function GalleryTab() {
       const url = await uploadFile(file, generateUploadUrl);
       setImageUrl(url);
     } catch (err) {
-      alert("Upload failed: " + (err as Error).message);
+      onError((err as Error).message);
     } finally {
       setUploading(false);
       if (fileRef.current) fileRef.current.value = "";
