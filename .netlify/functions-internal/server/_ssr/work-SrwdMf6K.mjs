@@ -2,9 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { c as require_react, o as useQuery, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as api } from "./api-DSJLF2wo.mjs";
 import { t as PageShell } from "./page-shell-ZTxEkQki.mjs";
-import { n as installation_default, r as printing_default, t as events_default } from "./installation-BJHzc0qs.mjs";
-import { n as project_lumos_default, r as project_monolith_default, t as fab_kinetic_default } from "./project-monolith-Dw1qaPyq.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/work-CezVvhBB.js
+//#region node_modules/.nitro/vite/services/ssr/assets/work-SrwdMf6K.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var ArrowRight = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
@@ -19,116 +17,6 @@ var ArrowRight = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
 		strokeLinejoin: "round"
 	})
 });
-var dummyProjects = [
-	{
-		_id: "dummy-1",
-		mainImage: project_lumos_default,
-		serviceCategory: "Retail Identity",
-		tagColor: "bg-accent-blue",
-		title: "Project Lumos",
-		client: "LOEWE",
-		year: "2025",
-		tags: [
-			"Fabrication",
-			"Installation",
-			"Lighting"
-		],
-		smallDescription: "Installation featuring light-reactive fabric panels, CNC-milled chrome signage and structural backdrops.",
-		projectDetail: "The brief called for an immersive retail transformation — one where physical material reacted to ambient light and movement.",
-		gallery: []
-	},
-	{
-		_id: "dummy-2",
-		mainImage: project_monolith_default,
-		serviceCategory: "Event Space",
-		tagColor: "bg-accent-coral",
-		title: "The Monolith",
-		client: "Geneva Motor Show",
-		year: "2024",
-		tags: [
-			"Stage Build",
-			"LED Walls",
-			"Facade"
-		],
-		smallDescription: "A 40-foot temporary pavilion with neon-wrapped brushed aluminum stands and a rotating debut floor.",
-		projectDetail: "Structural engineering had to account for a 6-ton aluminum superstructure erected inside a convention hall.",
-		gallery: []
-	},
-	{
-		_id: "dummy-3",
-		mainImage: installation_default,
-		serviceCategory: "Outdoor Campaign",
-		tagColor: "bg-accent-purple",
-		title: "Cantt. Billboard Circuit",
-		client: "Samsung / Wakgroup",
-		year: "2024",
-		tags: [
-			"Printing",
-			"Outdoor",
-			"Installation"
-		],
-		smallDescription: "A series of high-altitude double-sided billboard structures deployed at primary intersections.",
-		projectDetail: "Wakgroup commissioned a 6-site outdoor circuit across the Cantonment corridor.",
-		gallery: []
-	},
-	{
-		_id: "dummy-4",
-		mainImage: events_default,
-		serviceCategory: "Live Production",
-		tagColor: "bg-accent-mint",
-		title: "ARY News Studio Set",
-		client: "ARY Network",
-		year: "2023",
-		tags: [
-			"Scenic Design",
-			"LED",
-			"Fabrication"
-		],
-		smallDescription: "Scenic custom broadcast television set with integrated LED wall mounts and architectural wood cladding.",
-		projectDetail: "ARY News required a complete overhaul of their primary studio set.",
-		gallery: []
-	},
-	{
-		_id: "dummy-5",
-		mainImage: printing_default,
-		serviceCategory: "Print & Graphics",
-		tagColor: "bg-accent-yellow",
-		title: "HQ Facade Wrap",
-		client: "Pak Arab Housing",
-		year: "2023",
-		tags: ["Wide-Format Print", "Installation"],
-		smallDescription: "Weatherproof 12-meter continuous graphic applied to structural glass siding.",
-		projectDetail: "Pak Arab Housing wanted their brand vision rendered at architectural scale.",
-		gallery: []
-	},
-	{
-		_id: "dummy-6",
-		mainImage: fab_kinetic_default,
-		serviceCategory: "Kinetic Signage",
-		tagColor: "bg-accent-coral",
-		title: "Rotating Brand Wall",
-		client: "Client Confidential",
-		year: "2023",
-		tags: [
-			"Fabrication",
-			"Kinetics",
-			"Design"
-		],
-		smallDescription: "A 3-panel kinetic brand wall for a corporate headquarters lobby.",
-		projectDetail: "The brief required a permanent, low-maintenance kinetic installation.",
-		gallery: []
-	}
-];
-var allTags = [
-	"All",
-	"Outdoor",
-	"Fabrication",
-	"Print & Graphics",
-	"Live Production",
-	"Event Space",
-	"Kinetic Signage",
-	"Retail Identity"
-];
 var testimonials = [
 	{
 		quote: "I have worked with Ads Dot COM for 10 years — in that time they have become a valued and trusted vendor. Their attention to detail and solution-driven approach has been invaluable.",
@@ -449,11 +337,9 @@ function GlobalGallery() {
 	})] });
 }
 function WorkPage() {
-	const [activeTag, setActiveTag] = (0, import_react.useState)("All");
 	const convexWorks = useQuery(api.works.getWorks);
 	const isLoading = convexWorks === void 0;
-	const projects = convexWorks !== void 0 && convexWorks.length > 0 ? convexWorks : convexWorks !== void 0 ? dummyProjects : [];
-	const filtered = activeTag === "All" ? projects : projects.filter((p) => p.serviceCategory === activeTag);
+	convexWorks !== void 0 && convexWorks.length;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(PageShell, { children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 			className: "relative pt-36 pb-24 px-4 bg-ink text-canvas grain-overlay overflow-hidden",

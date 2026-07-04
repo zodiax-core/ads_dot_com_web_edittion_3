@@ -288,17 +288,6 @@ function WorkPage() {
         </div>
       </section>
 
-      {/* ── FILTER BAR ── */}
-      <section className="px-4 pt-[30px] pb-6 -mt-[72px] bg-ink border-b border-canvas/10 sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto flex gap-2 overflow-x-auto pb-1 scrollbar-none mt-[72px]">
-          {allTags.map((tag) => (
-            <button key={tag} onClick={() => setActiveTag(tag)}
-              className={`whitespace-nowrap px-4 py-2 rounded-full border text-[12px] font-semibold transition-all ${activeTag === tag ? "bg-canvas text-ink border-canvas" : "border-canvas/15 text-canvas/50 hover:border-canvas/40 hover:text-canvas"}`}>
-              {tag}
-            </button>
-          ))}
-        </div>
-      </section>
 
       {/* ── PROJECT CAROUSEL ── */}
       <section className="bg-ink text-canvas px-4 pt-16 pb-20">
@@ -307,10 +296,10 @@ function WorkPage() {
             <div className="flex items-center justify-center h-[420px]">
               <div className="size-10 rounded-full border-2 border-canvas/20 border-t-canvas/80 animate-spin" />
             </div>
-          ) : filtered.length === 0 ? (
-            <div className="text-center py-24 text-canvas/30 font-serif italic text-xl">No projects in this category yet.</div>
+          ) : projects.length === 0 ? (
+            <div className="text-center py-24 text-canvas/30 font-serif italic text-xl">No projects yet.</div>
           ) : (
-            <ProjectCarousel key={activeTag} projects={filtered} />
+            <ProjectCarousel projects={projects} />
           )}
         </div>
       </section>

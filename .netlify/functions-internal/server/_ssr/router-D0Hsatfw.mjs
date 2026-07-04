@@ -4,7 +4,7 @@ import { M as useRouter, c as HeadContent, d as Outlet, f as lazyRouteComponent,
 import { r as Route$6 } from "./routes-DMbmB-9-.mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { t as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-CAkM2UX_.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-D0Hsatfw.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var styles_default = "/assets/styles-BQcFy_fp.css";
@@ -166,7 +166,7 @@ function RootComponent() {
 		})
 	});
 }
-var $$splitComponentImporter$4 = () => import("./work-CezVvhBB.mjs");
+var $$splitComponentImporter$4 = () => import("./work-SrwdMf6K.mjs");
 var Route$4 = createFileRoute("/work")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
 var $$splitComponentImporter$3 = () => import("./studio-oamKibX7.mjs");
 var Route$3 = createFileRoute("/studio")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
