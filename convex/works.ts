@@ -62,7 +62,6 @@ export const getWorks = query({
     const works = await ctx.db.query("works").order("desc").collect();
     return await Promise.all(
       works.map(async (work) => {
-        // A real Convex storageId has no slashes, no dots, no spaces, ~32+ chars
         const looksLikeStorageId = work.mainImage &&
           !work.mainImage.startsWith("http") &&
           !work.mainImage.startsWith("/") &&

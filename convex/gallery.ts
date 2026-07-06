@@ -15,7 +15,7 @@ export const getGallery = query({
   args: {},
   handler: async (ctx) => {
     const images = await ctx.db.query("globalGallery").order("desc").collect();
-    return await Promise.all(
+    const resolved = await Promise.all(
       images.map(async (img) => {
         const looksLikeStorageId = img.imageUrl &&
           !img.imageUrl.startsWith("http") &&
@@ -24,11 +24,14 @@ export const getGallery = query({
           img.imageUrl.length > 20;
         if (looksLikeStorageId) {
           const url = await ctx.storage.getUrl(img.imageUrl as any);
-          return { ...img, imageUrl: url ?? img.imageUrl };
+          if (!url) return null; // storageId not found — skip
+          return { ...img, imageUrl: url };
         }
         return img;
       })
     );
+    // Filter out nulls (unresolvable storageIds)
+    return resolved.filter(Boolean);
   },
 });
 
