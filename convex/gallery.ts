@@ -17,12 +17,16 @@ export const getGallery = query({
     const images = await ctx.db.query("globalGallery").order("desc").collect();
     return await Promise.all(
       images.map(async (img) => {
-        // If imageUrl looks like a storageId (no http), resolve it
-        const isStorageId = img.imageUrl && !img.imageUrl.startsWith("http");
-        const url = isStorageId
-          ? await ctx.storage.getUrl(img.imageUrl as any)
-          : img.imageUrl;
-        return { ...img, imageUrl: url ?? img.imageUrl };
+        const looksLikeStorageId = img.imageUrl &&
+          !img.imageUrl.startsWith("http") &&
+          !img.imageUrl.startsWith("/") &&
+          !img.imageUrl.includes(".") &&
+          img.imageUrl.length > 20;
+        if (looksLikeStorageId) {
+          const url = await ctx.storage.getUrl(img.imageUrl as any);
+          return { ...img, imageUrl: url ?? img.imageUrl };
+        }
+        return img;
       })
     );
   },

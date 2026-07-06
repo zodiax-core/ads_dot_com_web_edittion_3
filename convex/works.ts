@@ -62,12 +62,17 @@ export const getWorks = query({
     const works = await ctx.db.query("works").order("desc").collect();
     return await Promise.all(
       works.map(async (work) => {
-        // If mainImage is a storageId (no http), resolve it
-        const isStorageId = work.mainImage && !work.mainImage.startsWith("http");
-        const imageUrl = isStorageId
-          ? await ctx.storage.getUrl(work.mainImage as any)
-          : work.mainImage;
-        return { ...work, mainImage: imageUrl ?? work.mainImage };
+        // A real Convex storageId has no slashes, no dots, no spaces, ~32+ chars
+        const looksLikeStorageId = work.mainImage &&
+          !work.mainImage.startsWith("http") &&
+          !work.mainImage.startsWith("/") &&
+          !work.mainImage.includes(".") &&
+          work.mainImage.length > 20;
+        if (looksLikeStorageId) {
+          const url = await ctx.storage.getUrl(work.mainImage as any);
+          return { ...work, mainImage: url ?? work.mainImage };
+        }
+        return work;
       })
     );
   },
