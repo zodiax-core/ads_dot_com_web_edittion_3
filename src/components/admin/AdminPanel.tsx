@@ -60,10 +60,9 @@ async function uploadFile(file: File, getUploadUrl: () => Promise<string>): Prom
   }
   const data = await res.json();
   const storageId: string = data.storageId;
-  // Use the Convex HTTP site URL to serve the file
-  const convexUrl = (import.meta.env.VITE_CONVEX_URL as string) ?? "";
-  const siteUrl = convexUrl.replace(".convex.cloud", ".convex.site");
-  return `${siteUrl}/api/storage/${storageId}`;
+  // Storage files are served from .convex.cloud (not .convex.site)
+  const convexUrl = (import.meta.env.VITE_CONVEX_URL as string) ?? "https://decisive-trout-646.convex.cloud";
+  return `${convexUrl}/api/storage/${storageId}`;
 }
 
 /* ─── Image picker with upload ──────────────────────────────────────────── */
