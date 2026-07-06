@@ -59,10 +59,8 @@ async function uploadFile(file: File, getUploadUrl: () => Promise<string>): Prom
     throw new Error(`HTTP ${res.status}: ${text}`);
   }
   const data = await res.json();
-  const storageId: string = data.storageId;
-  // Storage files are served from .convex.cloud (not .convex.site)
-  const convexUrl = (import.meta.env.VITE_CONVEX_URL as string) ?? "https://decisive-trout-646.convex.cloud";
-  return `${convexUrl}/api/storage/${storageId}`;
+  // Return just the storageId — Convex resolves it server-side via ctx.storage.getUrl()
+  return data.storageId as string;
 }
 
 /* ─── Image picker with upload ──────────────────────────────────────────── */
@@ -242,6 +240,7 @@ function WorksTab({ onError }: { onError: (msg: string) => void }) {
 function GalleryTab({ onError }: { onError: (msg: string) => void }) {
   const images = useQuery(api.gallery.getGallery);
   const addImage = useMutation(api.gallery.addImage);
+  const addImageByStorageId = useMutation(api.gallery.addImageByStorageId);
   const deleteImage = useMutation(api.gallery.deleteImage);
   const generateUploadUrl = useMutation(api.gallery.generateUploadUrl);
   const [imageUrl, setImageUrl] = useState('');
@@ -254,8 +253,10 @@ function GalleryTab({ onError }: { onError: (msg: string) => void }) {
     if (!file) return;
     setUploading(true);
     try {
-      const url = await uploadFile(file, generateUploadUrl);
-      setImageUrl(url);
+      const storageId = await uploadFile(file, generateUploadUrl);
+      // Store storageId directly — getGallery resolves it via ctx.storage.getUrl()
+      await addImageByStorageId({ storageId, caption: caption || undefined });
+      setCaption('');
     } catch (err) {
       onError((err as Error).message);
     } finally {

@@ -59,7 +59,17 @@ export const clearAllWorks = mutation({
 export const getWorks = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("works").order("desc").collect();
+    const works = await ctx.db.query("works").order("desc").collect();
+    return await Promise.all(
+      works.map(async (work) => {
+        // If mainImage is a storageId (no http), resolve it
+        const isStorageId = work.mainImage && !work.mainImage.startsWith("http");
+        const imageUrl = isStorageId
+          ? await ctx.storage.getUrl(work.mainImage as any)
+          : work.mainImage;
+        return { ...work, mainImage: imageUrl ?? work.mainImage };
+      })
+    );
   },
 });
 
