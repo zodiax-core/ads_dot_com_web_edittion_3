@@ -445,9 +445,56 @@ function BlogTab({ onError }: { onError: (msg: string) => void }) {
             <textarea placeholder="Excerpt (1-2 sentences)" value={form.excerpt}
               onChange={e => set('excerpt', e.target.value)}
               className="px-4 py-2 border rounded bg-canvas text-sm h-16" required />
-            <textarea placeholder="Body (HTML supported — use <h2>, <p>, <ul>, <blockquote>, <img> tags)"
-              value={form.body} onChange={e => set('body', e.target.value)}
-              className="px-4 py-2 border rounded bg-canvas text-sm h-48 font-mono" required />
+            {/* Body editor with toolbar */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs text-ink-soft">Body (HTML)</label>
+              {/* Toolbar */}
+              <div className="flex flex-wrap gap-1.5 p-2 bg-ink/5 rounded-t border border-b-0 border-ink/10">
+                {[
+                  { label: "H2", insert: "<h2>Heading</h2>" },
+                  { label: "H3", insert: "<h3>Sub-heading</h3>" },
+                  { label: "¶", insert: "<p>Paragraph text here.</p>" },
+                  { label: "• List", insert: "<ul>\n  <li>Item one</li>\n  <li>Item two</li>\n</ul>" },
+                  { label: "❝ Quote", insert: '<blockquote>Quote text here.</blockquote>' },
+                  { label: "🖼 Image", insert: '<img src="YOUR-IMAGE-URL-HERE" alt="Description of image" />' },
+                  { label: "🔗 Link", insert: '<a href="https://adsdotcom.net/services/printing">Link text</a>' },
+                  { label: "<strong>", insert: "<strong>bold text</strong>" },
+                  { label: "<em>", insert: "<em>italic text</em>" },
+                ].map(({ label, insert }) => (
+                  <button
+                    key={label}
+                    type="button"
+                    onClick={() => {
+                      const ta = document.getElementById('blog-body-editor') as HTMLTextAreaElement | null;
+                      if (!ta) return;
+                      const start = ta.selectionStart;
+                      const end = ta.selectionEnd;
+                      const selected = form.body.slice(start, end);
+                      const newVal = form.body.slice(0, start) + insert + form.body.slice(end);
+                      set('body', newVal);
+                      // Move cursor after insertion
+                      setTimeout(() => {
+                        ta.focus();
+                        ta.setSelectionRange(start + insert.length, start + insert.length);
+                      }, 0);
+                    }}
+                    className="px-2 py-1 bg-canvas border border-ink/10 rounded text-xs font-mono hover:bg-ink/10 transition-colors"
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <textarea
+                id="blog-body-editor"
+                placeholder="Write HTML here. Use the toolbar buttons above to insert elements. Tip: <h2> for headings, <p> for paragraphs, <img src=&quot;URL&quot; alt=&quot;desc&quot; /> for images."
+                value={form.body}
+                onChange={e => set('body', e.target.value)}
+                className="px-4 py-3 border border-ink/10 rounded-b bg-canvas text-sm h-64 font-mono leading-relaxed resize-y"
+                required
+                spellCheck={false}
+              />
+              <p className="text-[10px] text-ink-mute">Supports: &lt;h2&gt; &lt;h3&gt; &lt;p&gt; &lt;ul&gt;&lt;li&gt; &lt;blockquote&gt; &lt;img&gt; &lt;a&gt; &lt;strong&gt; &lt;em&gt;</p>
+            </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>

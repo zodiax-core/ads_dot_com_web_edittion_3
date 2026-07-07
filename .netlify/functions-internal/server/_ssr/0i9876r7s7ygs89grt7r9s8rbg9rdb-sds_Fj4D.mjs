@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { a as useMutation, c as require_react, n as useAuthActions, o as useQuery, r as useConvexAuth, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as api } from "./api-DSJLF2wo.mjs";
 import { M as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/0i9876r7s7ygs89grt7r9s8rbg9rdb-DFBinbKn.js
+//#region node_modules/.nitro/vite/services/ssr/assets/0i9876r7s7ygs89grt7r9s8rbg9rdb-sds_Fj4D.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function ErrorDialog({ message, onClose }) {
@@ -816,12 +816,84 @@ function BlogTab({ onError }) {
 							className: "px-4 py-2 border rounded bg-canvas text-sm h-16",
 							required: true
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
-							placeholder: "Body (HTML supported — use <h2>, <p>, <ul>, <blockquote>, <img> tags)",
-							value: form.body,
-							onChange: (e) => set("body", e.target.value),
-							className: "px-4 py-2 border rounded bg-canvas text-sm h-48 font-mono",
-							required: true
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex flex-col gap-1.5",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+									className: "text-xs text-ink-soft",
+									children: "Body (HTML)"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "flex flex-wrap gap-1.5 p-2 bg-ink/5 rounded-t border border-b-0 border-ink/10",
+									children: [
+										{
+											label: "H2",
+											insert: "<h2>Heading</h2>"
+										},
+										{
+											label: "H3",
+											insert: "<h3>Sub-heading</h3>"
+										},
+										{
+											label: "¶",
+											insert: "<p>Paragraph text here.</p>"
+										},
+										{
+											label: "• List",
+											insert: "<ul>\n  <li>Item one</li>\n  <li>Item two</li>\n</ul>"
+										},
+										{
+											label: "❝ Quote",
+											insert: "<blockquote>Quote text here.</blockquote>"
+										},
+										{
+											label: "🖼 Image",
+											insert: "<img src=\"YOUR-IMAGE-URL-HERE\" alt=\"Description of image\" />"
+										},
+										{
+											label: "🔗 Link",
+											insert: "<a href=\"https://adsdotcom.net/services/printing\">Link text</a>"
+										},
+										{
+											label: "<strong>",
+											insert: "<strong>bold text</strong>"
+										},
+										{
+											label: "<em>",
+											insert: "<em>italic text</em>"
+										}
+									].map(({ label, insert }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+										type: "button",
+										onClick: () => {
+											const ta = document.getElementById("blog-body-editor");
+											if (!ta) return;
+											const start = ta.selectionStart;
+											const end = ta.selectionEnd;
+											form.body.slice(start, end);
+											set("body", form.body.slice(0, start) + insert + form.body.slice(end));
+											setTimeout(() => {
+												ta.focus();
+												ta.setSelectionRange(start + insert.length, start + insert.length);
+											}, 0);
+										},
+										className: "px-2 py-1 bg-canvas border border-ink/10 rounded text-xs font-mono hover:bg-ink/10 transition-colors",
+										children: label
+									}, label))
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
+									id: "blog-body-editor",
+									placeholder: "Write HTML here. Use the toolbar buttons above to insert elements. Tip: <h2> for headings, <p> for paragraphs, <img src=\"URL\" alt=\"desc\" /> for images.",
+									value: form.body,
+									onChange: (e) => set("body", e.target.value),
+									className: "px-4 py-3 border border-ink/10 rounded-b bg-canvas text-sm h-64 font-mono leading-relaxed resize-y",
+									required: true,
+									spellCheck: false
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[10px] text-ink-mute",
+									children: "Supports: <h2> <h3> <p> <ul><li> <blockquote> <img> <a> <strong> <em>"
+								})
+							]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "grid grid-cols-2 gap-3",

@@ -1,7 +1,7 @@
 import { f as lazyRouteComponent, p as createFileRoute } from "../_libs/@tanstack/react-router+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/blog._slug-Dg-G9Cfx.js
-var $$splitComponentImporter = () => import("./blog._slug-DPao_xSE.mjs");
-var Route = createFileRoute("/blog/$slug")({
+//#region node_modules/.nitro/vite/services/ssr/assets/blog_._slug-CYfnTPd7.js
+var $$splitComponentImporter = () => import("./blog_._slug-D-hkntry.mjs");
+var Route = createFileRoute("/blog_/$slug")({
 	head: ({ params }) => ({
 		meta: [
 			{ title: `${params.slug.replace(/-/g, " ")} | ADS DOT COM Blog` },

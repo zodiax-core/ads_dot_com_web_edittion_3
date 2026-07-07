@@ -22,7 +22,7 @@ import { Route as ServicesInstallationRouteImport } from './routes/services.inst
 import { Route as ServicesFabricationRouteImport } from './routes/services.fabrication'
 import { Route as ServicesEventsRouteImport } from './routes/services.events'
 import { Route as ServicesCreativeDesignRouteImport } from './routes/services.creative-design'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
@@ -92,15 +92,15 @@ const ServicesCreativeDesignRoute = ServicesCreativeDesignRouteImport.update({
   getParentRoute: () => ServicesRoute,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
+  id: '/blog_/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
-  '/blog': typeof BlogRouteWithChildren
+  '/blog': typeof BlogRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
@@ -116,7 +116,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
-  '/blog': typeof BlogRouteWithChildren
+  '/blog': typeof BlogRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
@@ -133,12 +133,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
-  '/blog': typeof BlogRouteWithChildren
+  '/blog': typeof BlogRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
-  '/blog/$slug': typeof BlogSlugRoute
+  '/blog_/$slug': typeof BlogSlugRoute
   '/services/creative-design': typeof ServicesCreativeDesignRoute
   '/services/events': typeof ServicesEventsRoute
   '/services/fabrication': typeof ServicesFabricationRoute
@@ -188,7 +188,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/studio'
     | '/work'
-    | '/blog/$slug'
+    | '/blog_/$slug'
     | '/services/creative-design'
     | '/services/events'
     | '/services/fabrication'
@@ -200,11 +200,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
-  BlogRoute: typeof BlogRouteWithChildren
+  BlogRoute: typeof BlogRoute
   ProcessRoute: typeof ProcessRoute
   ServicesRoute: typeof ServicesRouteWithChildren
   StudioRoute: typeof StudioRoute
   WorkRoute: typeof WorkRoute
+  BlogSlugRoute: typeof BlogSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -300,25 +301,15 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCreativeDesignRouteImport
       parentRoute: typeof ServicesRoute
     }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/$slug'
+    '/blog_/$slug': {
+      id: '/blog_/$slug'
+      path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface BlogRouteChildren {
-  BlogSlugRoute: typeof BlogSlugRoute
-}
-
-const BlogRouteChildren: BlogRouteChildren = {
-  BlogSlugRoute: BlogSlugRoute,
-}
-
-const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 interface ServicesRouteChildren {
   ServicesCreativeDesignRoute: typeof ServicesCreativeDesignRoute
@@ -345,11 +336,12 @@ const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute,
-  BlogRoute: BlogRouteWithChildren,
+  BlogRoute: BlogRoute,
   ProcessRoute: ProcessRoute,
   ServicesRoute: ServicesRouteWithChildren,
   StudioRoute: StudioRoute,
   WorkRoute: WorkRoute,
+  BlogSlugRoute: BlogSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

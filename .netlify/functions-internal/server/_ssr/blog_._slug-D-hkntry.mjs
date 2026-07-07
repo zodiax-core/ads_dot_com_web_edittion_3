@@ -2,8 +2,8 @@ import { r as __toESM } from "../_runtime.mjs";
 import { a as useMutation, c as require_react, o as useQuery, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as api } from "./api-DSJLF2wo.mjs";
 import { t as PageShell } from "./page-shell-DZ0Y3aO0.mjs";
-import { t as Route } from "./blog._slug-Dg-G9Cfx.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/blog._slug-DPao_xSE.js
+import { t as Route } from "./blog_._slug-CYfnTPd7.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/blog_._slug-D-hkntry.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var WA_LINK = "https://wa.me/923349955475";

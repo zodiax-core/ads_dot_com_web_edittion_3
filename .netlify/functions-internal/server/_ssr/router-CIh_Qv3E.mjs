@@ -2,13 +2,13 @@ import { r as __toESM } from "../_runtime.mjs";
 import { c as require_react, i as ConvexReactClient, s as require_jsx_runtime, t as ConvexAuthProvider } from "../_libs/@convex-dev/auth+[...].mjs";
 import { M as useRouter, c as HeadContent, d as Outlet, f as lazyRouteComponent, h as Link, m as createRootRouteWithContext, p as createFileRoute, s as Scripts, u as createRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { r as Route$13 } from "./routes-Dh__B6iw.mjs";
-import { t as Route$14 } from "./blog._slug-Dg-G9Cfx.mjs";
+import { t as Route$14 } from "./blog_._slug-CYfnTPd7.mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { t as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-CaR7BnNP.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-CIh_Qv3E.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-Borm3GBc.css";
+var styles_default = "/assets/styles-BDrXhCiI.css";
 function reportLovableError(error, context = {}) {
 	if (typeof window === "undefined") return;
 	window.__lovableEvents?.captureException?.(error, {
@@ -569,7 +569,7 @@ var Route$7 = createFileRoute("/blog")({
 	}),
 	component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-var $$splitComponentImporter$6 = () => import("./0i9876r7s7ygs89grt7r9s8rbg9rdb-DFBinbKn.mjs");
+var $$splitComponentImporter$6 = () => import("./0i9876r7s7ygs89grt7r9s8rbg9rdb-sds_Fj4D.mjs");
 var Route$6 = createFileRoute("/0i9876r7s7ygs89grt7r9s8rbg9rdb")({
 	head: () => ({ meta: [{
 		name: "robots",
@@ -816,12 +816,11 @@ var ServicesCreativeDesignRoute = Route.update({
 	path: "/creative-design",
 	getParentRoute: () => ServicesRoute
 });
-var BlogRouteChildren = { BlogSlugRoute: Route$14.update({
-	id: "/$slug",
-	path: "/$slug",
-	getParentRoute: () => BlogRoute
-}) };
-var BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren);
+var BlogSlugRoute = Route$14.update({
+	id: "/blog_/$slug",
+	path: "/blog/$slug",
+	getParentRoute: () => Route$12
+});
 var ServicesRouteChildren = {
 	ServicesCreativeDesignRoute,
 	ServicesEventsRoute,
@@ -833,11 +832,12 @@ var ServicesRouteChildren = {
 var rootRouteChildren = {
 	IndexRoute,
 	R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute,
-	BlogRoute: BlogRouteWithChildren,
+	BlogRoute,
 	ProcessRoute,
 	ServicesRoute: ServicesRoute._addFileChildren(ServicesRouteChildren),
 	StudioRoute,
-	WorkRoute
+	WorkRoute,
+	BlogSlugRoute
 };
 var routeTree = Route$12._addFileChildren(rootRouteChildren)._addFileTypes();
 var getRouter = () => {

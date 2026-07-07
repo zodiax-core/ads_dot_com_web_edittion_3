@@ -1,4 +1,4 @@
-//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-BZYS1X5S.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-28lO1wnH.js
 var tsrStartManifest = () => ({ routes: {
 	__root__: {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/__root.tsx",
@@ -9,13 +9,14 @@ var tsrStartManifest = () => ({ routes: {
 			"/process",
 			"/services",
 			"/studio",
-			"/work"
+			"/work",
+			"/blog_/$slug"
 		],
-		preloads: ["/assets/index-CcFLMwqp.js", "/assets/jsx-runtime-bzQ4Vb5N.js"],
+		preloads: ["/assets/index-BUja3pse.js", "/assets/jsx-runtime-bzQ4Vb5N.js"],
 		scripts: [{ attrs: {
 			type: "module",
 			async: !0,
-			src: "/assets/index-CcFLMwqp.js"
+			src: "/assets/index-BUja3pse.js"
 		} }]
 	},
 	"/": {
@@ -34,21 +35,21 @@ var tsrStartManifest = () => ({ routes: {
 	"/0i9876r7s7ygs89grt7r9s8rbg9rdb": {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/0i9876r7s7ygs89grt7r9s8rbg9rdb.tsx",
 		children: void 0,
-		preloads: ["/assets/0i9876r7s7ygs89grt7r9s8rbg9rdb-D-fd37gY.js", "/assets/api-BqTivC2K.js"]
+		preloads: ["/assets/0i9876r7s7ygs89grt7r9s8rbg9rdb-yMDuZBMJ.js", "/assets/api-BnV50MCt.js"]
 	},
 	"/blog": {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/blog.tsx",
-		children: ["/blog/$slug"],
+		children: void 0,
 		preloads: [
-			"/assets/blog-DH2vsPHh.js",
-			"/assets/api-BqTivC2K.js",
-			"/assets/page-shell-DW3jjpdR.js"
+			"/assets/blog-BjcX9t3S.js",
+			"/assets/api-BnV50MCt.js",
+			"/assets/page-shell-CgiL4ueM.js"
 		]
 	},
 	"/process": {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/process.tsx",
 		children: void 0,
-		preloads: ["/assets/process-DC15J8-b.js", "/assets/page-shell-DW3jjpdR.js"]
+		preloads: ["/assets/process-ByqXovJn.js", "/assets/page-shell-CgiL4ueM.js"]
 	},
 	"/services": {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/services.tsx",
@@ -61,8 +62,8 @@ var tsrStartManifest = () => ({ routes: {
 			"/services/printing"
 		],
 		preloads: [
-			"/assets/services-CVmBYdYt.js",
-			"/assets/page-shell-DW3jjpdR.js",
+			"/assets/services-dNU7e2Kl.js",
+			"/assets/page-shell-CgiL4ueM.js",
 			"/assets/fab-modular-B-qR0Upu.js",
 			"/assets/fab-venue-XmBKesxM.js",
 			"/assets/events-Cy_LV1OX.js",
@@ -75,58 +76,62 @@ var tsrStartManifest = () => ({ routes: {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/studio.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/studio-C7ELHksa.js",
-			"/assets/api-BqTivC2K.js",
-			"/assets/page-shell-DW3jjpdR.js"
+			"/assets/studio-BZb0ernu.js",
+			"/assets/api-BnV50MCt.js",
+			"/assets/page-shell-CgiL4ueM.js"
 		]
 	},
 	"/work": {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/work.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/work-jHKaUZtI.js",
-			"/assets/api-BqTivC2K.js",
-			"/assets/page-shell-DW3jjpdR.js",
+			"/assets/work-B--G2Roo.js",
+			"/assets/api-BnV50MCt.js",
+			"/assets/page-shell-CgiL4ueM.js",
 			"/assets/project-monolith-DLw5JUvl.js",
 			"/assets/events-Cy_LV1OX.js",
 			"/assets/installation-9iM2b2YP.js",
 			"/assets/printing-C5jDn7Hw.js"
 		]
 	},
-	"/blog/$slug": {
-		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/blog.$slug.tsx",
+	"/blog_/$slug": {
+		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/blog_.$slug.tsx",
 		children: void 0,
-		preloads: ["/assets/blog._slug-jNXdr920.js"]
+		preloads: [
+			"/assets/blog_._slug-DKql_O7i.js",
+			"/assets/api-BnV50MCt.js",
+			"/assets/page-shell-CgiL4ueM.js"
+		]
 	},
 	"/services/creative-design": {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/services.creative-design.tsx",
 		children: void 0,
-		preloads: ["/assets/services.creative-design-CLe5TOAS.js", "/assets/ServicePage-BdgfBSPr.js"]
+		preloads: ["/assets/services.creative-design-DH5v0MXr.js", "/assets/ServicePage-s3e7da1S.js"]
 	},
 	"/services/events": {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/services.events.tsx",
 		children: void 0,
-		preloads: ["/assets/services.events-DcCRmiTH.js", "/assets/ServicePage-BdgfBSPr.js"]
+		preloads: ["/assets/services.events-BJ78oSMd.js", "/assets/ServicePage-s3e7da1S.js"]
 	},
 	"/services/fabrication": {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/services.fabrication.tsx",
 		children: void 0,
-		preloads: ["/assets/services.fabrication-D3R__iMU.js", "/assets/ServicePage-BdgfBSPr.js"]
+		preloads: ["/assets/services.fabrication-COX7dXZA.js", "/assets/ServicePage-s3e7da1S.js"]
 	},
 	"/services/installation": {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/services.installation.tsx",
 		children: void 0,
-		preloads: ["/assets/services.installation-CPjEL8Sw.js", "/assets/ServicePage-BdgfBSPr.js"]
+		preloads: ["/assets/services.installation-DuFYcXKC.js", "/assets/ServicePage-s3e7da1S.js"]
 	},
 	"/services/outdoor-advertising": {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/services.outdoor-advertising.tsx",
 		children: void 0,
-		preloads: ["/assets/services.outdoor-advertising-CjFIN4-B.js", "/assets/ServicePage-BdgfBSPr.js"]
+		preloads: ["/assets/services.outdoor-advertising-DjZk2e7e.js", "/assets/ServicePage-s3e7da1S.js"]
 	},
 	"/services/printing": {
 		filePath: "C:/Users/senio/OneDrive/Desktop/ADS DOT COM EDDITION 3/src/routes/services.printing.tsx",
 		children: void 0,
-		preloads: ["/assets/services.printing-Cnem8uFF.js", "/assets/ServicePage-BdgfBSPr.js"]
+		preloads: ["/assets/services.printing-FqGmxMg9.js", "/assets/ServicePage-s3e7da1S.js"]
 	}
 } });
 //#endregion
