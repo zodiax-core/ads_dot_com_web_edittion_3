@@ -3,6 +3,18 @@ import { useState } from "react";
 import { PageShell } from "@/components/page-shell";
 
 export const Route = createFileRoute("/process")({
+  head: () => ({
+    meta: [
+      { title: "Our Process — Listen, Draft, Prototype, Produce | ADS DOT COM" },
+      { name: "description", content: "Four-stage production process: site survey & brief, 3D concept & engineering, material prototyping, then fabrication and on-site installation by our own crew." },
+      { property: "og:title", content: "Our Process | ADS DOT COM" },
+      { property: "og:description", content: "Four scenes, one continuous take. No subcontractors, no handoffs — just a rigorous four-stage process from brief to build." },
+      { property: "og:url", content: "https://adsed3.netlify.app/process" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://adsed3.netlify.app/process" },
+    ],
+  }),
   component: ProcessPage,
 });
 

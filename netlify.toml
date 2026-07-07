@@ -11,13 +11,57 @@
   directory = ".netlify/functions-internal"
   node_bundler = "esbuild"
 
+# ── Redirects ────────────────────────────────────────────────────────────────
+# WWW → non-www canonical redirect
+[[redirects]]
+  from = "https://www.adsed3.netlify.app/*"
+  to   = "https://adsed3.netlify.app/:splat"
+  status = 301
+  force  = true
+
+# Hide admin route from direct navigation (only accessible via keyboard shortcut)
+[[redirects]]
+  from   = "/admin"
+  to     = "/"
+  status = 301
+
+# ── Headers ──────────────────────────────────────────────────────────────────
+# Immutable cache for hashed assets
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Cache fonts aggressively
+[[headers]]
+  for = "*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Short cache for HTML (SSR pages)
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Static files in public — moderate cache
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Security + performance headers for all pages
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
+    X-Frame-Options            = "DENY"
+    X-Content-Type-Options     = "nosniff"
+    X-XSS-Protection           = "1; mode=block"
+    Referrer-Policy            = "strict-origin-when-cross-origin"
+    Permissions-Policy         = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security  = "max-age=31536000; includeSubDomains; preload"

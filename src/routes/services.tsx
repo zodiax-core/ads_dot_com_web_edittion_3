@@ -10,6 +10,18 @@ import installation from "@/assets/installation.jpg";
 import creative from "@/assets/creative.jpg";
 
 export const Route = createFileRoute("/services")({
+  head: () => ({
+    meta: [
+      { title: "Services — Outdoor Advertising, Printing, Fabrication & Events | ADS DOT COM" },
+      { name: "description", content: "Six integrated services: outdoor advertising, precision printing, spatial fabrication, rigging & installation, event production and creative design. All in-house, Lahore Pakistan." },
+      { property: "og:title", content: "Services | ADS DOT COM" },
+      { property: "og:description", content: "Six integrated services built in-house since 2006. Outdoor, print, fabrication, installation, events and creative direction." },
+      { property: "og:url", content: "https://adsed3.netlify.app/services" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://adsed3.netlify.app/services" },
+    ],
+  }),
   component: ServicesPage,
 });
 

@@ -3,7 +3,7 @@ import { c as require_react, s as require_jsx_runtime } from "../_libs/@convex-d
 import { n as installation_default, r as printing_default, t as events_default } from "./installation-BJHzc0qs.mjs";
 import { n as fab_modular_default, r as fab_venue_default, t as creative_default } from "./creative-F96rBVr_.mjs";
 import { n as project_lumos_default, r as project_monolith_default, t as fab_kinetic_default } from "./project-monolith-Dw1qaPyq.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-BHt5-sPi.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CmY0G4WU.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var hero_scene_default = "/assets/hero-scene-BGaI1hJ8.jpg";
@@ -174,6 +174,8 @@ function Hero({ ready = true }) {
 					alt: "",
 					width: 1600,
 					height: 1200,
+					fetchPriority: "high",
+					decoding: "sync",
 					className: "w-full h-full object-cover opacity-70 scale-110 animate-drift"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-canvas/40 via-canvas/20 to-canvas" })]
 			}),

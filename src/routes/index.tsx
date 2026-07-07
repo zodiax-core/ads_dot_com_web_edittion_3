@@ -14,6 +14,18 @@ import projectMonolith from "@/assets/project-monolith.jpg";
 import { CinematicIntro } from "@/components/cinematic-intro";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "ADS DOT COM — Integrated Creative Agency | Lahore, Pakistan" },
+      { name: "description", content: "Lahore's leading integrated creative agency since 2006. Outdoor advertising, precision printing, fabrication, installation, event production and brand design — all in-house, zero subcontractors." },
+      { property: "og:title", content: "ADS DOT COM — Integrated Creative Agency | Lahore, Pakistan" },
+      { property: "og:description", content: "Outdoor advertising, printing, fabrication, installation, events and creative direction. Pakistan's most integrated physical branding studio since 2006." },
+      { property: "og:url", content: "https://adsed3.netlify.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://adsed3.netlify.app/" },
+    ],
+  }),
   component: Home,
 });
 
@@ -101,6 +113,8 @@ function Hero({ ready = true }: { ready?: boolean }) {
           alt=""
           width={1600}
           height={1200}
+          fetchPriority="high"
+          decoding="sync"
           className="w-full h-full object-cover opacity-70 scale-110 animate-drift"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-canvas/40 via-canvas/20 to-canvas" />

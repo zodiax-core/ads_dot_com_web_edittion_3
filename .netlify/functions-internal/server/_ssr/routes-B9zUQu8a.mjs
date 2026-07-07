@@ -1,11 +1,38 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { c as require_react, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { f as lazyRouteComponent, p as createFileRoute } from "../_libs/@tanstack/react-router+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DMbmB-9-.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-B9zUQu8a.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var $$splitComponentImporter = () => import("./routes-BHt5-sPi.mjs");
-var Route = createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
+var $$splitComponentImporter = () => import("./routes-CmY0G4WU.mjs");
+var Route = createFileRoute("/")({
+	head: () => ({
+		meta: [
+			{ title: "ADS DOT COM — Integrated Creative Agency | Lahore, Pakistan" },
+			{
+				name: "description",
+				content: "Lahore's leading integrated creative agency since 2006. Outdoor advertising, precision printing, fabrication, installation, event production and brand design — all in-house, zero subcontractors."
+			},
+			{
+				property: "og:title",
+				content: "ADS DOT COM — Integrated Creative Agency | Lahore, Pakistan"
+			},
+			{
+				property: "og:description",
+				content: "Outdoor advertising, printing, fabrication, installation, events and creative direction. Pakistan's most integrated physical branding studio since 2006."
+			},
+			{
+				property: "og:url",
+				content: "https://adsed3.netlify.app/"
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: "https://adsed3.netlify.app/"
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter, "component")
+});
 function Nav({ ready = true }) {
 	const [isOpen, setIsOpen] = (0, import_react.useState)(false);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {

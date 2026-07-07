@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /0i9876r7s7ygs89grt7r9s8rbg9rdb
+
+Sitemap: https://adsed3.netlify.app/sitemap.xml

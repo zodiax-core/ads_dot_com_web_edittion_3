@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { a as useMutation, c as require_react, n as useAuthActions, o as useQuery, r as useConvexAuth, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as api } from "./api-DSJLF2wo.mjs";
 import { M as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/0i9876r7s7ygs89grt7r9s8rbg9rdb-yUb9ML7c.js
+//#region node_modules/.nitro/vite/services/ssr/assets/0i9876r7s7ygs89grt7r9s8rbg9rdb-ohyawiQi.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function ErrorDialog({ message, onClose }) {
@@ -116,8 +116,7 @@ async function uploadFile(file, getUploadUrl) {
 		const text = await res.text().catch(() => res.statusText);
 		throw new Error(`HTTP ${res.status}: ${text}`);
 	}
-	const storageId = (await res.json()).storageId;
-	return `${"https://rosy-crow-160.convex.cloud".replace(".convex.cloud", ".convex.site")}/api/storage/${storageId}`;
+	return (await res.json()).storageId;
 }
 function ImagePicker({ value, onChange, label = "Image", onError }) {
 	const generateUploadUrl = useMutation(api.works.generateUploadUrl);
@@ -464,6 +463,7 @@ function WorksTab({ onError }) {
 function GalleryTab({ onError }) {
 	const images = useQuery(api.gallery.getGallery);
 	const addImage = useMutation(api.gallery.addImage);
+	const addImageByStorageId = useMutation(api.gallery.addImageByStorageId);
 	const deleteImage = useMutation(api.gallery.deleteImage);
 	const generateUploadUrl = useMutation(api.gallery.generateUploadUrl);
 	const [imageUrl, setImageUrl] = (0, import_react.useState)("");
@@ -475,7 +475,11 @@ function GalleryTab({ onError }) {
 		if (!file) return;
 		setUploading(true);
 		try {
-			setImageUrl(await uploadFile(file, generateUploadUrl));
+			await addImageByStorageId({
+				storageId: await uploadFile(file, generateUploadUrl),
+				caption: caption || void 0
+			});
+			setCaption("");
 		} catch (err) {
 			onError(err.message);
 		} finally {

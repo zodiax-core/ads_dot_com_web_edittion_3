@@ -6,6 +6,12 @@ import { useAuthActions } from "@convex-dev/auth/react";
 import { api } from '../../convex/_generated/api';
 
 export const Route = createFileRoute('/0i9876r7s7ygs89grt7r9s8rbg9rdb')({
+  head: () => ({
+    meta: [
+      { name: "robots", content: "noindex, nofollow" },
+      { title: "Admin" },
+    ],
+  }),
   component: HiddenAdminRoute,
 })
 
