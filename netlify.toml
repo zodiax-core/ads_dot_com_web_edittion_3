@@ -14,8 +14,8 @@
 # ── Redirects ────────────────────────────────────────────────────────────────
 # WWW → non-www canonical redirect
 [[redirects]]
-  from = "https://www.adsed3.netlify.app/*"
-  to   = "https://adsed3.netlify.app/:splat"
+  from = "https://www.adsdotcom.net/*"
+  to   = "https://adsdotcom.net/:splat"
   status = 301
   force  = true
 

@@ -16,10 +16,10 @@ export const Route = createFileRoute("/services")({
       { name: "description", content: "Six integrated services: outdoor advertising, precision printing, spatial fabrication, rigging & installation, event production and creative design. All in-house, Lahore Pakistan." },
       { property: "og:title", content: "Services | ADS DOT COM" },
       { property: "og:description", content: "Six integrated services built in-house since 2006. Outdoor, print, fabrication, installation, events and creative direction." },
-      { property: "og:url", content: "https://adsed3.netlify.app/services" },
+      { property: "og:url", content: "https://adsdotcom.net/services" },
     ],
     links: [
-      { rel: "canonical", href: "https://adsed3.netlify.app/services" },
+      { rel: "canonical", href: "https://adsdotcom.net/services" },
     ],
   }),
   component: ServicesPage,

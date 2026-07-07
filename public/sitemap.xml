@@ -2,27 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://adsed3.netlify.app/</loc>
+    <loc>https://adsdotcom.net/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://adsed3.netlify.app/services</loc>
+    <loc>https://adsdotcom.net/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://adsed3.netlify.app/work</loc>
+    <loc>https://adsdotcom.net/work</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://adsed3.netlify.app/process</loc>
+    <loc>https://adsdotcom.net/process</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://adsed3.netlify.app/studio</loc>
+    <loc>https://adsdotcom.net/studio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -20,10 +20,10 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Lahore's leading integrated creative agency since 2006. Outdoor advertising, precision printing, fabrication, installation, event production and brand design — all in-house, zero subcontractors." },
       { property: "og:title", content: "ADS DOT COM — Integrated Creative Agency | Lahore, Pakistan" },
       { property: "og:description", content: "Outdoor advertising, printing, fabrication, installation, events and creative direction. Pakistan's most integrated physical branding studio since 2006." },
-      { property: "og:url", content: "https://adsed3.netlify.app/" },
+      { property: "og:url", content: "https://adsdotcom.net/" },
     ],
     links: [
-      { rel: "canonical", href: "https://adsed3.netlify.app/" },
+      { rel: "canonical", href: "https://adsdotcom.net/" },
     ],
   }),
   component: Home,

@@ -11,10 +11,10 @@ export const Route = createFileRoute('/studio')({
       { name: "description", content: "Founded May 16, 2006. ADS DOT COM is Lahore's integrated creative studio — 20+ years reinventing how brands show up in the physical world. Contact us for your next build." },
       { property: "og:title", content: "The Studio | ADS DOT COM" },
       { property: "og:description", content: "Sparking big ideas since 2006. Data-driven insight, human creativity and ethical execution — all under one roof in Lahore." },
-      { property: "og:url", content: "https://adsed3.netlify.app/studio" },
+      { property: "og:url", content: "https://adsdotcom.net/studio" },
     ],
     links: [
-      { rel: "canonical", href: "https://adsed3.netlify.app/studio" },
+      { rel: "canonical", href: "https://adsdotcom.net/studio" },
     ],
   }),
   component: RouteComponent,

@@ -104,8 +104,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Outdoor advertising, printing, fabrication, installation, event production and creative direction. Pakistan's most integrated physical branding studio since 2006.",
       },
-      { property: "og:url", content: "https://adsed3.netlify.app/" },
-      { property: "og:image", content: "https://adsed3.netlify.app/logo.png" },
+      { property: "og:url", content: "https://adsdotcom.net/" },
+      { property: "og:image", content: "https://adsdotcom.net/logo.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "ADS DOT COM — Integrated Creative Agency" },
@@ -118,7 +118,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "twitter:description",
         content: "Outdoor advertising, printing, fabrication, installation, events and creative direction — Lahore, Pakistan since 2006.",
       },
-      { name: "twitter:image", content: "https://adsed3.netlify.app/logo.png" },
+      { name: "twitter:image", content: "https://adsdotcom.net/logo.png" },
       { name: "twitter:image:alt", content: "ADS DOT COM Logo" },
 
       // Geo
@@ -130,7 +130,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/logo.png", type: "image/png", sizes: "any" },
-      { rel: "canonical", href: "https://adsed3.netlify.app/" },
+      { rel: "canonical", href: "https://adsdotcom.net/" },
       { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
       // Preconnect for performance
       { rel: "preconnect", href: "https://www.googletagmanager.com" },
@@ -151,12 +151,12 @@ function RootShell({ children }: { children: ReactNode }) {
     "@graph": [
       {
         "@type": ["Organization", "LocalBusiness"],
-        "@id": "https://adsed3.netlify.app/#organization",
+        "@id": "https://adsdotcom.net/#organization",
         "name": "ADS DOT COM",
         "alternateName": "Ads Dot COM",
-        "url": "https://adsed3.netlify.app",
-        "logo": "https://adsed3.netlify.app/logo.png",
-        "image": "https://adsed3.netlify.app/logo.png",
+        "url": "https://adsdotcom.net",
+        "logo": "https://adsdotcom.net/logo.png",
+        "image": "https://adsdotcom.net/logo.png",
         "description": "Lahore's leading integrated creative agency — outdoor advertising, precision printing, fabrication, installation, event production and brand design since 2006.",
         "foundingDate": "2006-05-16",
         "email": "info@adsdotcom.net",
@@ -184,21 +184,21 @@ function RootShell({ children }: { children: ReactNode }) {
       },
       {
         "@type": "WebSite",
-        "@id": "https://adsed3.netlify.app/#website",
-        "url": "https://adsed3.netlify.app",
+        "@id": "https://adsdotcom.net/#website",
+        "url": "https://adsdotcom.net",
         "name": "ADS DOT COM",
-        "publisher": { "@id": "https://adsed3.netlify.app/#organization" }
+        "publisher": { "@id": "https://adsdotcom.net/#organization" }
       },
       {
         "@type": "ItemList",
         "name": "Services",
         "itemListElement": [
-          { "@type": "Service", "position": 1, "name": "Outdoor Advertising", "description": "Billboard hoarding, transit advertising, street furniture and logo sign plates across Pakistan.", "provider": { "@id": "https://adsed3.netlify.app/#organization" } },
-          { "@type": "Service", "position": 2, "name": "Precision Printing", "description": "Wide-format architectural graphics, letterpress, foil and reactive intelligent inks.", "provider": { "@id": "https://adsed3.netlify.app/#organization" } },
-          { "@type": "Service", "position": 3, "name": "Spatial Fabrication", "description": "Modular structures, kinetic signage, CNC machining and scenic venue conversion.", "provider": { "@id": "https://adsed3.netlify.app/#organization" } },
-          { "@type": "Service", "position": 4, "name": "Rigging & Installation", "description": "High-altitude rigging, facade wrapping, retail window installs and ongoing maintenance.", "provider": { "@id": "https://adsed3.netlify.app/#organization" } },
-          { "@type": "Service", "position": 5, "name": "Event Production", "description": "Custom stage builds, LED walls, lighting design and real-time media programming.", "provider": { "@id": "https://adsed3.netlify.app/#organization" } },
-          { "@type": "Service", "position": 6, "name": "Creative & Design", "description": "Brand identity systems, environmental design, packaging and material sampling.", "provider": { "@id": "https://adsed3.netlify.app/#organization" } }
+          { "@type": "Service", "position": 1, "name": "Outdoor Advertising", "description": "Billboard hoarding, transit advertising, street furniture and logo sign plates across Pakistan.", "provider": { "@id": "https://adsdotcom.net/#organization" } },
+          { "@type": "Service", "position": 2, "name": "Precision Printing", "description": "Wide-format architectural graphics, letterpress, foil and reactive intelligent inks.", "provider": { "@id": "https://adsdotcom.net/#organization" } },
+          { "@type": "Service", "position": 3, "name": "Spatial Fabrication", "description": "Modular structures, kinetic signage, CNC machining and scenic venue conversion.", "provider": { "@id": "https://adsdotcom.net/#organization" } },
+          { "@type": "Service", "position": 4, "name": "Rigging & Installation", "description": "High-altitude rigging, facade wrapping, retail window installs and ongoing maintenance.", "provider": { "@id": "https://adsdotcom.net/#organization" } },
+          { "@type": "Service", "position": 5, "name": "Event Production", "description": "Custom stage builds, LED walls, lighting design and real-time media programming.", "provider": { "@id": "https://adsdotcom.net/#organization" } },
+          { "@type": "Service", "position": 6, "name": "Creative & Design", "description": "Brand identity systems, environmental design, packaging and material sampling.", "provider": { "@id": "https://adsdotcom.net/#organization" } }
         ]
       },
       {

@@ -19,10 +19,10 @@ export const Route = createFileRoute("/work")({
       { name: "description", content: "Selected physical executions by ADS DOT COM — outdoor circuits, broadcast sets, retail fabrications, festival stages and kinetic installations. Built, not rendered." },
       { property: "og:title", content: "The Anthology | ADS DOT COM" },
       { property: "og:description", content: "Every project was measured, cut, printed, welded and stood up in the real world. No CGI, no mockups." },
-      { property: "og:url", content: "https://adsed3.netlify.app/work" },
+      { property: "og:url", content: "https://adsdotcom.net/work" },
     ],
     links: [
-      { rel: "canonical", href: "https://adsed3.netlify.app/work" },
+      { rel: "canonical", href: "https://adsdotcom.net/work" },
     ],
   }),
   component: WorkPage,
