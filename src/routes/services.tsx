@@ -45,13 +45,20 @@ function useReveal() {
   return { ref, shown };
 }
 
+const slugToPath: Record<string, string> = {
+  outdoor: "/services/outdoor-advertising",
+  printing: "/services/printing",
+  fabrication: "/services/fabrication",
+  installation: "/services/installation",
+  events: "/services/events",
+  creative: "/services/creative-design",
+};
+
 const ArrowRight = () => (
   <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
     <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
-
-/* ─── SERVICE DATA ──────────────────────────────────────────────────────── */
 const services = [
   {
     id: "01",
@@ -204,12 +211,22 @@ function ServiceBlock({ s, reverse }: { s: typeof services[0]; reverse: boolean 
             </li>
           ))}
         </ul>
-        <a
-          href="mailto:info@adsdotcom.net"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-ink text-canvas rounded-full text-sm font-semibold hover:scale-105 active:scale-95 transition-transform"
-        >
-          Get a quote <ArrowRight />
-        </a>
+        <div className="flex gap-3 flex-wrap">
+          <a
+            href={`https://wa.me/923349955475`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366] text-white rounded-full text-sm font-semibold hover:scale-105 active:scale-95 transition-transform"
+          >
+            WhatsApp Us <ArrowRight />
+          </a>
+          <a
+            href={slugToPath[s.slug]}
+            className="inline-flex items-center gap-2 px-5 py-2.5 border border-ink/15 text-ink rounded-full text-sm font-semibold hover:bg-surface transition-colors"
+          >
+            Full details <ArrowRight />
+          </a>
+        </div>
       </div>
     </div>
   );

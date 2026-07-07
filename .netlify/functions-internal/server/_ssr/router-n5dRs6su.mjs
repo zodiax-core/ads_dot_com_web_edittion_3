@@ -1,13 +1,13 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { c as require_react, i as ConvexReactClient, s as require_jsx_runtime, t as ConvexAuthProvider } from "../_libs/@convex-dev/auth+[...].mjs";
 import { M as useRouter, c as HeadContent, d as Outlet, f as lazyRouteComponent, h as Link, m as createRootRouteWithContext, p as createFileRoute, s as Scripts, u as createRouter } from "../_libs/@tanstack/react-router+[...].mjs";
-import { r as Route$6 } from "./routes-B9zUQu8a.mjs";
+import { r as Route$12 } from "./routes-DTXPq4M3.mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { t as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-BWcxbEV0.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-n5dRs6su.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-B7OleRMz.css";
+var styles_default = "/assets/styles-C0wlgKgr.css";
 function reportLovableError(error, context = {}) {
 	if (typeof window === "undefined") return;
 	window.__lovableEvents?.captureException?.(error, {
@@ -92,7 +92,7 @@ function ErrorComponent({ error, reset }) {
 		})
 	});
 }
-var Route$5 = createRootRouteWithContext()({
+var Route$11 = createRootRouteWithContext()({
 	head: () => ({
 		meta: [
 			{ charSet: "utf-8" },
@@ -135,11 +135,11 @@ var Route$5 = createRootRouteWithContext()({
 			},
 			{
 				property: "og:url",
-				content: "https://adsed3.netlify.app/"
+				content: "https://adsdotcom.net/"
 			},
 			{
 				property: "og:image",
-				content: "https://adsed3.netlify.app/logo.png"
+				content: "https://adsdotcom.net/logo.png"
 			},
 			{
 				property: "og:image:width",
@@ -171,7 +171,7 @@ var Route$5 = createRootRouteWithContext()({
 			},
 			{
 				name: "twitter:image",
-				content: "https://adsed3.netlify.app/logo.png"
+				content: "https://adsdotcom.net/logo.png"
 			},
 			{
 				name: "twitter:image:alt",
@@ -207,7 +207,7 @@ var Route$5 = createRootRouteWithContext()({
 			},
 			{
 				rel: "canonical",
-				href: "https://adsed3.netlify.app/"
+				href: "https://adsdotcom.net/"
 			},
 			{
 				rel: "sitemap",
@@ -251,12 +251,12 @@ function RootShell({ children }) {
 					"@graph": [
 						{
 							"@type": ["Organization", "LocalBusiness"],
-							"@id": "https://adsed3.netlify.app/#organization",
+							"@id": "https://adsdotcom.net/#organization",
 							"name": "ADS DOT COM",
 							"alternateName": "Ads Dot COM",
-							"url": "https://adsed3.netlify.app",
-							"logo": "https://adsed3.netlify.app/logo.png",
-							"image": "https://adsed3.netlify.app/logo.png",
+							"url": "https://adsdotcom.net",
+							"logo": "https://adsdotcom.net/logo.png",
+							"image": "https://adsdotcom.net/logo.png",
 							"description": "Lahore's leading integrated creative agency — outdoor advertising, precision printing, fabrication, installation, event production and brand design since 2006.",
 							"foundingDate": "2006-05-16",
 							"email": "info@adsdotcom.net",
@@ -290,10 +290,10 @@ function RootShell({ children }) {
 						},
 						{
 							"@type": "WebSite",
-							"@id": "https://adsed3.netlify.app/#website",
-							"url": "https://adsed3.netlify.app",
+							"@id": "https://adsdotcom.net/#website",
+							"url": "https://adsdotcom.net",
 							"name": "ADS DOT COM",
-							"publisher": { "@id": "https://adsed3.netlify.app/#organization" }
+							"publisher": { "@id": "https://adsdotcom.net/#organization" }
 						},
 						{
 							"@type": "ItemList",
@@ -304,42 +304,42 @@ function RootShell({ children }) {
 									"position": 1,
 									"name": "Outdoor Advertising",
 									"description": "Billboard hoarding, transit advertising, street furniture and logo sign plates across Pakistan.",
-									"provider": { "@id": "https://adsed3.netlify.app/#organization" }
+									"provider": { "@id": "https://adsdotcom.net/#organization" }
 								},
 								{
 									"@type": "Service",
 									"position": 2,
 									"name": "Precision Printing",
 									"description": "Wide-format architectural graphics, letterpress, foil and reactive intelligent inks.",
-									"provider": { "@id": "https://adsed3.netlify.app/#organization" }
+									"provider": { "@id": "https://adsdotcom.net/#organization" }
 								},
 								{
 									"@type": "Service",
 									"position": 3,
 									"name": "Spatial Fabrication",
 									"description": "Modular structures, kinetic signage, CNC machining and scenic venue conversion.",
-									"provider": { "@id": "https://adsed3.netlify.app/#organization" }
+									"provider": { "@id": "https://adsdotcom.net/#organization" }
 								},
 								{
 									"@type": "Service",
 									"position": 4,
 									"name": "Rigging & Installation",
 									"description": "High-altitude rigging, facade wrapping, retail window installs and ongoing maintenance.",
-									"provider": { "@id": "https://adsed3.netlify.app/#organization" }
+									"provider": { "@id": "https://adsdotcom.net/#organization" }
 								},
 								{
 									"@type": "Service",
 									"position": 5,
 									"name": "Event Production",
 									"description": "Custom stage builds, LED walls, lighting design and real-time media programming.",
-									"provider": { "@id": "https://adsed3.netlify.app/#organization" }
+									"provider": { "@id": "https://adsdotcom.net/#organization" }
 								},
 								{
 									"@type": "Service",
 									"position": 6,
 									"name": "Creative & Design",
 									"description": "Brand identity systems, environmental design, packaging and material sampling.",
-									"provider": { "@id": "https://adsed3.netlify.app/#organization" }
+									"provider": { "@id": "https://adsdotcom.net/#organization" }
 								}
 							]
 						},
@@ -410,7 +410,7 @@ function RootShell({ children }) {
 	});
 }
 function RootComponent() {
-	const { queryClient } = Route$5.useRouteContext();
+	const { queryClient } = Route$11.useRouteContext();
 	const router = useRouter();
 	(0, import_react.useEffect)(() => {
 		const handleKeyDown = (e) => {
@@ -427,8 +427,8 @@ function RootComponent() {
 		})
 	});
 }
-var $$splitComponentImporter$4 = () => import("./work-DKclfjJt.mjs");
-var Route$4 = createFileRoute("/work")({
+var $$splitComponentImporter$10 = () => import("./work-CkJuerZv.mjs");
+var Route$10 = createFileRoute("/work")({
 	head: () => ({
 		meta: [
 			{ title: "Work — The Anthology | ADS DOT COM" },
@@ -446,18 +446,18 @@ var Route$4 = createFileRoute("/work")({
 			},
 			{
 				property: "og:url",
-				content: "https://adsed3.netlify.app/work"
+				content: "https://adsdotcom.net/work"
 			}
 		],
 		links: [{
 			rel: "canonical",
-			href: "https://adsed3.netlify.app/work"
+			href: "https://adsdotcom.net/work"
 		}]
 	}),
-	component: lazyRouteComponent($$splitComponentImporter$4, "component")
+	component: lazyRouteComponent($$splitComponentImporter$10, "component")
 });
-var $$splitComponentImporter$3 = () => import("./studio-40En0dMj.mjs");
-var Route$3 = createFileRoute("/studio")({
+var $$splitComponentImporter$9 = () => import("./studio-Aqp64pEI.mjs");
+var Route$9 = createFileRoute("/studio")({
 	head: () => ({
 		meta: [
 			{ title: "The Studio — About ADS DOT COM | Lahore, Pakistan" },
@@ -475,18 +475,18 @@ var Route$3 = createFileRoute("/studio")({
 			},
 			{
 				property: "og:url",
-				content: "https://adsed3.netlify.app/studio"
+				content: "https://adsdotcom.net/studio"
 			}
 		],
 		links: [{
 			rel: "canonical",
-			href: "https://adsed3.netlify.app/studio"
+			href: "https://adsdotcom.net/studio"
 		}]
 	}),
-	component: lazyRouteComponent($$splitComponentImporter$3, "component")
+	component: lazyRouteComponent($$splitComponentImporter$9, "component")
 });
-var $$splitComponentImporter$2 = () => import("./services-DMrBOmbs.mjs");
-var Route$2 = createFileRoute("/services")({
+var $$splitComponentImporter$8 = () => import("./services-CvjV-VJz.mjs");
+var Route$8 = createFileRoute("/services")({
 	head: () => ({
 		meta: [
 			{ title: "Services — Outdoor Advertising, Printing, Fabrication & Events | ADS DOT COM" },
@@ -504,18 +504,18 @@ var Route$2 = createFileRoute("/services")({
 			},
 			{
 				property: "og:url",
-				content: "https://adsed3.netlify.app/services"
+				content: "https://adsdotcom.net/services"
 			}
 		],
 		links: [{
 			rel: "canonical",
-			href: "https://adsed3.netlify.app/services"
+			href: "https://adsdotcom.net/services"
 		}]
 	}),
-	component: lazyRouteComponent($$splitComponentImporter$2, "component")
+	component: lazyRouteComponent($$splitComponentImporter$8, "component")
 });
-var $$splitComponentImporter$1 = () => import("./process-3cMMJ1Ld.mjs");
-var Route$1 = createFileRoute("/process")({
+var $$splitComponentImporter$7 = () => import("./process-CHmxYpTh.mjs");
+var Route$7 = createFileRoute("/process")({
 	head: () => ({
 		meta: [
 			{ title: "Our Process — Listen, Draft, Prototype, Produce | ADS DOT COM" },
@@ -533,62 +533,274 @@ var Route$1 = createFileRoute("/process")({
 			},
 			{
 				property: "og:url",
-				content: "https://adsed3.netlify.app/process"
+				content: "https://adsdotcom.net/process"
 			}
 		],
 		links: [{
 			rel: "canonical",
-			href: "https://adsed3.netlify.app/process"
+			href: "https://adsdotcom.net/process"
 		}]
 	}),
-	component: lazyRouteComponent($$splitComponentImporter$1, "component")
+	component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-var $$splitComponentImporter = () => import("./0i9876r7s7ygs89grt7r9s8rbg9rdb-ohyawiQi.mjs");
-var Route = createFileRoute("/0i9876r7s7ygs89grt7r9s8rbg9rdb")({
+var $$splitComponentImporter$6 = () => import("./0i9876r7s7ygs89grt7r9s8rbg9rdb-ohyawiQi.mjs");
+var Route$6 = createFileRoute("/0i9876r7s7ygs89grt7r9s8rbg9rdb")({
 	head: () => ({ meta: [{
 		name: "robots",
 		content: "noindex, nofollow"
 	}, { title: "Admin" }] }),
+	component: lazyRouteComponent($$splitComponentImporter$6, "component")
+});
+var $$splitComponentImporter$5 = () => import("./services.printing-DPTvKLRi.mjs");
+var Route$5 = createFileRoute("/services/printing")({
+	head: () => ({
+		meta: [
+			{ title: "Printing Services in Lahore, Pakistan | ADS DOT COM" },
+			{
+				name: "description",
+				content: "Wide-format printing, architectural graphics & specialty inks in Lahore. Up to 12m continuous format. Get a quote from ADS DOT COM — 100% in-house press."
+			},
+			{
+				property: "og:title",
+				content: "Printing Services in Lahore | ADS DOT COM"
+			},
+			{
+				property: "og:description",
+				content: "Wide-format, letterpress, foil and reactive inks. Up to 12m continuous print format. In-house press. Get a quote from ADS DOT COM Lahore."
+			},
+			{
+				property: "og:url",
+				content: "https://adsdotcom.net/services/printing"
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: "https://adsdotcom.net/services/printing"
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$5, "component")
+});
+var $$splitComponentImporter$4 = () => import("./services.outdoor-advertising-Rkz3aj1k.mjs");
+var Route$4 = createFileRoute("/services/outdoor-advertising")({
+	head: () => ({
+		meta: [
+			{ title: "Outdoor Advertising in Lahore | ADS DOT COM" },
+			{
+				name: "description",
+				content: "Billboard hoarding, transit & ambient outdoor advertising in Lahore, Pakistan. Get a quote from ADS DOT COM — operating since 2006 with nationwide coverage."
+			},
+			{
+				property: "og:title",
+				content: "Outdoor Advertising in Lahore | ADS DOT COM"
+			},
+			{
+				property: "og:description",
+				content: "Billboard hoarding, transit advertising and street furniture across Pakistan. In-house production since 2006. Get a quote today."
+			},
+			{
+				property: "og:url",
+				content: "https://adsdotcom.net/services/outdoor-advertising"
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: "https://adsdotcom.net/services/outdoor-advertising"
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$4, "component")
+});
+var $$splitComponentImporter$3 = () => import("./services.installation-D-3IqIaH.mjs");
+var Route$3 = createFileRoute("/services/installation")({
+	head: () => ({
+		meta: [
+			{ title: "Signage Installation in Lahore, Pakistan | ADS DOT COM" },
+			{
+				name: "description",
+				content: "Certified rigging, facade wrapping & signage installation in Lahore. High-altitude, city-wide deployment. Get a quote from ADS DOT COM — 24/7 site support."
+			},
+			{
+				property: "og:title",
+				content: "Signage Installation in Lahore | ADS DOT COM"
+			},
+			{
+				property: "og:description",
+				content: "Certified rigging, facade wrapping, retail window installs and ongoing maintenance. City-wide deployment in Lahore. Get a quote from ADS DOT COM."
+			},
+			{
+				property: "og:url",
+				content: "https://adsdotcom.net/services/installation"
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: "https://adsdotcom.net/services/installation"
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$3, "component")
+});
+var $$splitComponentImporter$2 = () => import("./services.fabrication-C1XwDhso.mjs");
+var Route$2 = createFileRoute("/services/fabrication")({
+	head: () => ({
+		meta: [
+			{ title: "Fabrication & Signage in Lahore, Pakistan | ADS DOT COM" },
+			{
+				name: "description",
+				content: "Custom fabrication, kinetic signage & modular structures in Lahore. CNC machining, metal & acrylic. Zero subcontractors. Get a quote from ADS DOT COM."
+			},
+			{
+				property: "og:title",
+				content: "Fabrication & Signage in Lahore | ADS DOT COM"
+			},
+			{
+				property: "og:description",
+				content: "Modular structures, kinetic signage and CNC machining — all built in-house in Lahore. Zero subcontractors. Get a quote from ADS DOT COM."
+			},
+			{
+				property: "og:url",
+				content: "https://adsdotcom.net/services/fabrication"
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: "https://adsdotcom.net/services/fabrication"
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$2, "component")
+});
+var $$splitComponentImporter$1 = () => import("./services.events-DgNayTI2.mjs");
+var Route$1 = createFileRoute("/services/events")({
+	head: () => ({
+		meta: [
+			{ title: "Event Production in Lahore, Pakistan | ADS DOT COM" },
+			{
+				name: "description",
+				content: "Stage builds, LED walls, lighting design & live event production in Lahore. Turnkey delivery. Get a quote from ADS DOT COM — full-stack AV production."
+			},
+			{
+				property: "og:title",
+				content: "Event Production in Lahore | ADS DOT COM"
+			},
+			{
+				property: "og:description",
+				content: "Custom stage builds, LED walls, lighting design and real-time media programming. Turnkey event production in Lahore. Get a quote from ADS DOT COM."
+			},
+			{
+				property: "og:url",
+				content: "https://adsdotcom.net/services/events"
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: "https://adsdotcom.net/services/events"
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$1, "component")
+});
+var $$splitComponentImporter = () => import("./services.creative-design-BsP-HJYS.mjs");
+var Route = createFileRoute("/services/creative-design")({
+	head: () => ({
+		meta: [
+			{ title: "Creative & Brand Design in Lahore | ADS DOT COM" },
+			{
+				name: "description",
+				content: "Brand identity, environmental design & packaging in Lahore, Pakistan. Physical-first creative studio. Get a quote from ADS DOT COM — bespoke, no templates."
+			},
+			{
+				property: "og:title",
+				content: "Creative & Brand Design in Lahore | ADS DOT COM"
+			},
+			{
+				property: "og:description",
+				content: "Brand identity systems, environmental design, packaging and material sampling. Physical-first creative studio in Lahore. Get a quote from ADS DOT COM."
+			},
+			{
+				property: "og:url",
+				content: "https://adsdotcom.net/services/creative-design"
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: "https://adsdotcom.net/services/creative-design"
+		}]
+	}),
 	component: lazyRouteComponent($$splitComponentImporter, "component")
 });
-var WorkRoute = Route$4.update({
+var WorkRoute = Route$10.update({
 	id: "/work",
 	path: "/work",
-	getParentRoute: () => Route$5
+	getParentRoute: () => Route$11
 });
-var StudioRoute = Route$3.update({
+var StudioRoute = Route$9.update({
 	id: "/studio",
 	path: "/studio",
-	getParentRoute: () => Route$5
+	getParentRoute: () => Route$11
 });
-var ServicesRoute = Route$2.update({
+var ServicesRoute = Route$8.update({
 	id: "/services",
 	path: "/services",
-	getParentRoute: () => Route$5
+	getParentRoute: () => Route$11
 });
-var ProcessRoute = Route$1.update({
+var ProcessRoute = Route$7.update({
 	id: "/process",
 	path: "/process",
-	getParentRoute: () => Route$5
+	getParentRoute: () => Route$11
 });
-var R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute = Route.update({
+var R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute = Route$6.update({
 	id: "/0i9876r7s7ygs89grt7r9s8rbg9rdb",
 	path: "/0i9876r7s7ygs89grt7r9s8rbg9rdb",
-	getParentRoute: () => Route$5
+	getParentRoute: () => Route$11
 });
-var rootRouteChildren = {
-	IndexRoute: Route$6.update({
-		id: "/",
-		path: "/",
-		getParentRoute: () => Route$5
+var IndexRoute = Route$12.update({
+	id: "/",
+	path: "/",
+	getParentRoute: () => Route$11
+});
+var ServicesPrintingRoute = Route$5.update({
+	id: "/printing",
+	path: "/printing",
+	getParentRoute: () => ServicesRoute
+});
+var ServicesOutdoorAdvertisingRoute = Route$4.update({
+	id: "/outdoor-advertising",
+	path: "/outdoor-advertising",
+	getParentRoute: () => ServicesRoute
+});
+var ServicesInstallationRoute = Route$3.update({
+	id: "/installation",
+	path: "/installation",
+	getParentRoute: () => ServicesRoute
+});
+var ServicesFabricationRoute = Route$2.update({
+	id: "/fabrication",
+	path: "/fabrication",
+	getParentRoute: () => ServicesRoute
+});
+var ServicesEventsRoute = Route$1.update({
+	id: "/events",
+	path: "/events",
+	getParentRoute: () => ServicesRoute
+});
+var ServicesRouteChildren = {
+	ServicesCreativeDesignRoute: Route.update({
+		id: "/creative-design",
+		path: "/creative-design",
+		getParentRoute: () => ServicesRoute
 	}),
+	ServicesEventsRoute,
+	ServicesFabricationRoute,
+	ServicesInstallationRoute,
+	ServicesOutdoorAdvertisingRoute,
+	ServicesPrintingRoute
+};
+var rootRouteChildren = {
+	IndexRoute,
 	R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute,
 	ProcessRoute,
-	ServicesRoute,
+	ServicesRoute: ServicesRoute._addFileChildren(ServicesRouteChildren),
 	StudioRoute,
 	WorkRoute
 };
-var routeTree = Route$5._addFileChildren(rootRouteChildren)._addFileTypes();
+var routeTree = Route$11._addFileChildren(rootRouteChildren)._addFileTypes();
 var getRouter = () => {
 	return createRouter({
 		routeTree,

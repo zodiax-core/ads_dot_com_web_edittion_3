@@ -19,7 +19,48 @@
   status = 301
   force  = true
 
-# Hide admin route from direct navigation (only accessible via keyboard shortcut)
+# Old anchor-based service URLs → dedicated pages (301)
+[[redirects]]
+  from   = "/services#outdoor"
+  to     = "/services/outdoor-advertising"
+  status = 301
+
+[[redirects]]
+  from   = "/services#outdoor-advertising"
+  to     = "/services/outdoor-advertising"
+  status = 301
+
+[[redirects]]
+  from   = "/services#printing"
+  to     = "/services/printing"
+  status = 301
+
+[[redirects]]
+  from   = "/services#fabrication"
+  to     = "/services/fabrication"
+  status = 301
+
+[[redirects]]
+  from   = "/services#installation"
+  to     = "/services/installation"
+  status = 301
+
+[[redirects]]
+  from   = "/services#events"
+  to     = "/services/events"
+  status = 301
+
+[[redirects]]
+  from   = "/services#creative"
+  to     = "/services/creative-design"
+  status = 301
+
+[[redirects]]
+  from   = "/services#creative-design"
+  to     = "/services/creative-design"
+  status = 301
+
+# Hide admin route
 [[redirects]]
   from   = "/admin"
   to     = "/"

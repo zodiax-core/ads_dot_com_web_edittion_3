@@ -55,6 +55,17 @@ function useReveal() {
 /* ─────────────────────────────────────── NAV ────────────────────────────── */
 export function Nav({ ready = true }: { ready?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+
+  const serviceLinks = [
+    { href: "/services/outdoor-advertising", label: "Outdoor Advertising" },
+    { href: "/services/printing", label: "Precision Printing" },
+    { href: "/services/fabrication", label: "Fabrication" },
+    { href: "/services/installation", label: "Installation" },
+    { href: "/services/events", label: "Event Production" },
+    { href: "/services/creative-design", label: "Creative & Design" },
+  ];
+
   return (
     <nav className={`fixed top-4 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${ready ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6"}`}>
       <div className="relative flex items-center justify-between w-full max-w-[12rem] md:max-w-none md:w-auto md:gap-6 px-4 py-2.5 bg-canvas/75 backdrop-blur-xl rounded-full border border-ink/5 shadow-soft">
@@ -67,16 +78,38 @@ export function Nav({ ready = true }: { ready?: boolean }) {
             ADS<span className="text-accent-blue">.</span>COM
           </span>
         </a>
-        
+
         <div className="hidden md:flex items-center gap-5 text-[13px] font-medium text-ink-soft">
-          <a href="/services" className="hover:text-ink transition-colors">Services</a>
+          {/* Services with dropdown */}
+          <div className="relative" onMouseEnter={() => setServicesOpen(true)} onMouseLeave={() => setServicesOpen(false)}>
+            <a href="/services" className="hover:text-ink transition-colors flex items-center gap-1">
+              Services
+              <svg className="size-3 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+            {/* Dropdown */}
+            <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 bg-canvas/95 backdrop-blur-xl border border-ink/5 shadow-lift rounded-2xl p-2 flex flex-col gap-0.5 transition-all duration-200 ${servicesOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"}`}>
+              {serviceLinks.map((l) => (
+                <a key={l.href} href={l.href} className="px-3 py-2 text-[12px] font-medium text-ink-soft hover:text-ink hover:bg-surface rounded-xl transition-colors">
+                  {l.label}
+                </a>
+              ))}
+              <div className="h-px bg-ink/5 my-1" />
+              <a href="/services" className="px-3 py-2 text-[12px] font-semibold text-accent-blue hover:bg-surface rounded-xl transition-colors">
+                All Services →
+              </a>
+            </div>
+          </div>
           <a href="/work" className="hover:text-ink transition-colors">Work</a>
           <a href="/process" className="hover:text-ink transition-colors">Process</a>
           <a href="/studio" className="hover:text-ink transition-colors">Studio</a>
         </div>
-        
+
         <a
-          href="/studio#contact"
+          href="https://wa.me/923349955475"
+          target="_blank"
+          rel="noopener noreferrer"
           className="hidden md:flex px-3.5 py-1.5 bg-ink text-canvas text-[12px] font-semibold rounded-full hover:scale-105 active:scale-95 transition-transform"
         >
           Let's Build
@@ -91,11 +124,17 @@ export function Nav({ ready = true }: { ready?: boolean }) {
 
         {/* Mobile Dropdown */}
         <div className={`absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-xl border border-ink/5 shadow-soft rounded-2xl p-2 flex flex-col gap-1 md:hidden overflow-hidden transition-all duration-300 origin-top ${isOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-95 pointer-events-none"}`}>
-          <a href="/services" className="px-4 py-2.5 text-sm font-medium hover:bg-surface rounded-xl">Services</a>
+          <a href="/services" className="px-4 py-2.5 text-sm font-semibold hover:bg-surface rounded-xl">Services</a>
+          {serviceLinks.map((l) => (
+            <a key={l.href} href={l.href} className="px-6 py-2 text-xs font-medium text-ink-soft hover:text-ink hover:bg-surface rounded-xl">
+              {l.label}
+            </a>
+          ))}
+          <div className="h-px bg-ink/5 mx-4" />
           <a href="/work" className="px-4 py-2.5 text-sm font-medium hover:bg-surface rounded-xl">Work</a>
           <a href="/process" className="px-4 py-2.5 text-sm font-medium hover:bg-surface rounded-xl">Process</a>
           <a href="/studio" className="px-4 py-2.5 text-sm font-medium hover:bg-surface rounded-xl">Studio</a>
-          <a href="/studio#contact" className="px-4 py-2.5 text-sm font-medium bg-ink text-canvas rounded-xl text-center mt-1">Let's Build</a>
+          <a href="https://wa.me/923349955475" target="_blank" rel="noopener noreferrer" className="px-4 py-2.5 text-sm font-medium bg-ink text-canvas rounded-xl text-center mt-1">Let's Build</a>
         </div>
       </div>
     </nav>

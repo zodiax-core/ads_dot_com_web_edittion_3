@@ -15,6 +15,12 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as R0i9876r7s7ygs89grt7r9s8rbg9rdbRouteImport } from './routes/0i9876r7s7ygs89grt7r9s8rbg9rdb'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesPrintingRouteImport } from './routes/services.printing'
+import { Route as ServicesOutdoorAdvertisingRouteImport } from './routes/services.outdoor-advertising'
+import { Route as ServicesInstallationRouteImport } from './routes/services.installation'
+import { Route as ServicesFabricationRouteImport } from './routes/services.fabrication'
+import { Route as ServicesEventsRouteImport } from './routes/services.events'
+import { Route as ServicesCreativeDesignRouteImport } from './routes/services.creative-design'
 
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
@@ -47,31 +53,80 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesPrintingRoute = ServicesPrintingRouteImport.update({
+  id: '/printing',
+  path: '/printing',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesOutdoorAdvertisingRoute =
+  ServicesOutdoorAdvertisingRouteImport.update({
+    id: '/outdoor-advertising',
+    path: '/outdoor-advertising',
+    getParentRoute: () => ServicesRoute,
+  } as any)
+const ServicesInstallationRoute = ServicesInstallationRouteImport.update({
+  id: '/installation',
+  path: '/installation',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesFabricationRoute = ServicesFabricationRouteImport.update({
+  id: '/fabrication',
+  path: '/fabrication',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesEventsRoute = ServicesEventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesCreativeDesignRoute = ServicesCreativeDesignRouteImport.update({
+  id: '/creative-design',
+  path: '/creative-design',
+  getParentRoute: () => ServicesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/process': typeof ProcessRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
+  '/services/creative-design': typeof ServicesCreativeDesignRoute
+  '/services/events': typeof ServicesEventsRoute
+  '/services/fabrication': typeof ServicesFabricationRoute
+  '/services/installation': typeof ServicesInstallationRoute
+  '/services/outdoor-advertising': typeof ServicesOutdoorAdvertisingRoute
+  '/services/printing': typeof ServicesPrintingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/process': typeof ProcessRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
+  '/services/creative-design': typeof ServicesCreativeDesignRoute
+  '/services/events': typeof ServicesEventsRoute
+  '/services/fabrication': typeof ServicesFabricationRoute
+  '/services/installation': typeof ServicesInstallationRoute
+  '/services/outdoor-advertising': typeof ServicesOutdoorAdvertisingRoute
+  '/services/printing': typeof ServicesPrintingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/process': typeof ProcessRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
+  '/services/creative-design': typeof ServicesCreativeDesignRoute
+  '/services/events': typeof ServicesEventsRoute
+  '/services/fabrication': typeof ServicesFabricationRoute
+  '/services/installation': typeof ServicesInstallationRoute
+  '/services/outdoor-advertising': typeof ServicesOutdoorAdvertisingRoute
+  '/services/printing': typeof ServicesPrintingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -82,6 +137,12 @@ export interface FileRouteTypes {
     | '/services'
     | '/studio'
     | '/work'
+    | '/services/creative-design'
+    | '/services/events'
+    | '/services/fabrication'
+    | '/services/installation'
+    | '/services/outdoor-advertising'
+    | '/services/printing'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -90,6 +151,12 @@ export interface FileRouteTypes {
     | '/services'
     | '/studio'
     | '/work'
+    | '/services/creative-design'
+    | '/services/events'
+    | '/services/fabrication'
+    | '/services/installation'
+    | '/services/outdoor-advertising'
+    | '/services/printing'
   id:
     | '__root__'
     | '/'
@@ -98,13 +165,19 @@ export interface FileRouteTypes {
     | '/services'
     | '/studio'
     | '/work'
+    | '/services/creative-design'
+    | '/services/events'
+    | '/services/fabrication'
+    | '/services/installation'
+    | '/services/outdoor-advertising'
+    | '/services/printing'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   ProcessRoute: typeof ProcessRoute
-  ServicesRoute: typeof ServicesRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
   StudioRoute: typeof StudioRoute
   WorkRoute: typeof WorkRoute
 }
@@ -153,14 +226,78 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/printing': {
+      id: '/services/printing'
+      path: '/printing'
+      fullPath: '/services/printing'
+      preLoaderRoute: typeof ServicesPrintingRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/outdoor-advertising': {
+      id: '/services/outdoor-advertising'
+      path: '/outdoor-advertising'
+      fullPath: '/services/outdoor-advertising'
+      preLoaderRoute: typeof ServicesOutdoorAdvertisingRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/installation': {
+      id: '/services/installation'
+      path: '/installation'
+      fullPath: '/services/installation'
+      preLoaderRoute: typeof ServicesInstallationRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/fabrication': {
+      id: '/services/fabrication'
+      path: '/fabrication'
+      fullPath: '/services/fabrication'
+      preLoaderRoute: typeof ServicesFabricationRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/events': {
+      id: '/services/events'
+      path: '/events'
+      fullPath: '/services/events'
+      preLoaderRoute: typeof ServicesEventsRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/creative-design': {
+      id: '/services/creative-design'
+      path: '/creative-design'
+      fullPath: '/services/creative-design'
+      preLoaderRoute: typeof ServicesCreativeDesignRouteImport
+      parentRoute: typeof ServicesRoute
+    }
   }
 }
+
+interface ServicesRouteChildren {
+  ServicesCreativeDesignRoute: typeof ServicesCreativeDesignRoute
+  ServicesEventsRoute: typeof ServicesEventsRoute
+  ServicesFabricationRoute: typeof ServicesFabricationRoute
+  ServicesInstallationRoute: typeof ServicesInstallationRoute
+  ServicesOutdoorAdvertisingRoute: typeof ServicesOutdoorAdvertisingRoute
+  ServicesPrintingRoute: typeof ServicesPrintingRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesCreativeDesignRoute: ServicesCreativeDesignRoute,
+  ServicesEventsRoute: ServicesEventsRoute,
+  ServicesFabricationRoute: ServicesFabricationRoute,
+  ServicesInstallationRoute: ServicesInstallationRoute,
+  ServicesOutdoorAdvertisingRoute: ServicesOutdoorAdvertisingRoute,
+  ServicesPrintingRoute: ServicesPrintingRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute,
   ProcessRoute: ProcessRoute,
-  ServicesRoute: ServicesRoute,
+  ServicesRoute: ServicesRouteWithChildren,
   StudioRoute: StudioRoute,
   WorkRoute: WorkRoute,
 }

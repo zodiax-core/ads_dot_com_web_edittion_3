@@ -1,9 +1,13 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { c as require_react, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
-import { t as PageShell } from "./page-shell-DKJUlXa0.mjs";
-import { n as installation_default, r as printing_default, t as events_default } from "./installation-BJHzc0qs.mjs";
-import { n as fab_modular_default, r as fab_venue_default, t as creative_default } from "./creative-F96rBVr_.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/services-DMrBOmbs.js
+import { t as PageShell } from "./page-shell-BrFxj4Cu.mjs";
+import { t as printing_default } from "./printing-DClTnR89.mjs";
+import { t as fab_modular_default } from "./fab-modular-CDCi1mWv.mjs";
+import { t as fab_venue_default } from "./fab-venue-BY2Wfmwq.mjs";
+import { t as events_default } from "./events-DquBENrG.mjs";
+import { t as installation_default } from "./installation-CsIg_OGt.mjs";
+import { t as creative_default } from "./creative-CelXEnY0.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/services-CvjV-VJz.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function useReveal() {
@@ -28,6 +32,14 @@ function useReveal() {
 		shown
 	};
 }
+var slugToPath = {
+	outdoor: "/services/outdoor-advertising",
+	printing: "/services/printing",
+	fabrication: "/services/fabrication",
+	installation: "/services/installation",
+	events: "/services/events",
+	creative: "/services/creative-design"
+};
 var ArrowRight = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
 	className: "size-3.5",
 	viewBox: "0 0 24 24",
@@ -381,10 +393,19 @@ function ServiceBlock({ s, reverse }) {
 						]
 					}, c.name))
 				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-					href: "mailto:info@adsdotcom.net",
-					className: "inline-flex items-center gap-2 px-5 py-2.5 bg-ink text-canvas rounded-full text-sm font-semibold hover:scale-105 active:scale-95 transition-transform",
-					children: ["Get a quote ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {})]
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex gap-3 flex-wrap",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+						href: `https://wa.me/923349955475`,
+						target: "_blank",
+						rel: "noopener noreferrer",
+						className: "inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366] text-white rounded-full text-sm font-semibold hover:scale-105 active:scale-95 transition-transform",
+						children: ["WhatsApp Us ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+						href: slugToPath[s.slug],
+						className: "inline-flex items-center gap-2 px-5 py-2.5 border border-ink/15 text-ink rounded-full text-sm font-semibold hover:bg-surface transition-colors",
+						children: ["Full details ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {})]
+					})]
 				})
 			]
 		})]

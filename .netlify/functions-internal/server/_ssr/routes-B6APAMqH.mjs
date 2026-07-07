@@ -1,9 +1,13 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { c as require_react, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
-import { n as installation_default, r as printing_default, t as events_default } from "./installation-BJHzc0qs.mjs";
-import { n as fab_modular_default, r as fab_venue_default, t as creative_default } from "./creative-F96rBVr_.mjs";
+import { t as printing_default } from "./printing-DClTnR89.mjs";
+import { t as fab_modular_default } from "./fab-modular-CDCi1mWv.mjs";
 import { n as project_lumos_default, r as project_monolith_default, t as fab_kinetic_default } from "./project-monolith-Dw1qaPyq.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-CmY0G4WU.js
+import { t as fab_venue_default } from "./fab-venue-BY2Wfmwq.mjs";
+import { t as events_default } from "./events-DquBENrG.mjs";
+import { t as installation_default } from "./installation-CsIg_OGt.mjs";
+import { t as creative_default } from "./creative-CelXEnY0.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-B6APAMqH.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var hero_scene_default = "/assets/hero-scene-BGaI1hJ8.jpg";
@@ -66,6 +70,33 @@ function useReveal() {
 }
 function Nav({ ready = true }) {
 	const [isOpen, setIsOpen] = (0, import_react.useState)(false);
+	const [servicesOpen, setServicesOpen] = (0, import_react.useState)(false);
+	const serviceLinks = [
+		{
+			href: "/services/outdoor-advertising",
+			label: "Outdoor Advertising"
+		},
+		{
+			href: "/services/printing",
+			label: "Precision Printing"
+		},
+		{
+			href: "/services/fabrication",
+			label: "Fabrication"
+		},
+		{
+			href: "/services/installation",
+			label: "Installation"
+		},
+		{
+			href: "/services/events",
+			label: "Event Production"
+		},
+		{
+			href: "/services/creative-design",
+			label: "Creative & Design"
+		}
+	];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
 		className: `fixed top-4 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${ready ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6"}`,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -92,10 +123,41 @@ function Nav({ ready = true }) {
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "hidden md:flex items-center gap-5 text-[13px] font-medium text-ink-soft",
 					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-							href: "/services",
-							className: "hover:text-ink transition-colors",
-							children: "Services"
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "relative",
+							onMouseEnter: () => setServicesOpen(true),
+							onMouseLeave: () => setServicesOpen(false),
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+								href: "/services",
+								className: "hover:text-ink transition-colors flex items-center gap-1",
+								children: ["Services", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+									className: "size-3 opacity-50",
+									viewBox: "0 0 24 24",
+									fill: "none",
+									stroke: "currentColor",
+									strokeWidth: 2,
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+										d: "M6 9l6 6 6-6",
+										strokeLinecap: "round",
+										strokeLinejoin: "round"
+									})
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: `absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 bg-canvas/95 backdrop-blur-xl border border-ink/5 shadow-lift rounded-2xl p-2 flex flex-col gap-0.5 transition-all duration-200 ${servicesOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"}`,
+								children: [
+									serviceLinks.map((l) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+										href: l.href,
+										className: "px-3 py-2 text-[12px] font-medium text-ink-soft hover:text-ink hover:bg-surface rounded-xl transition-colors",
+										children: l.label
+									}, l.href)),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-px bg-ink/5 my-1" }),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+										href: "/services",
+										className: "px-3 py-2 text-[12px] font-semibold text-accent-blue hover:bg-surface rounded-xl transition-colors",
+										children: "All Services →"
+									})
+								]
+							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
 							href: "/work",
@@ -115,7 +177,9 @@ function Nav({ ready = true }) {
 					]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-					href: "/studio#contact",
+					href: "https://wa.me/923349955475",
+					target: "_blank",
+					rel: "noopener noreferrer",
 					className: "hidden md:flex px-3.5 py-1.5 bg-ink text-canvas text-[12px] font-semibold rounded-full hover:scale-105 active:scale-95 transition-transform",
 					children: "Let's Build"
 				}),
@@ -133,9 +197,15 @@ function Nav({ ready = true }) {
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
 							href: "/services",
-							className: "px-4 py-2.5 text-sm font-medium hover:bg-surface rounded-xl",
+							className: "px-4 py-2.5 text-sm font-semibold hover:bg-surface rounded-xl",
 							children: "Services"
 						}),
+						serviceLinks.map((l) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: l.href,
+							className: "px-6 py-2 text-xs font-medium text-ink-soft hover:text-ink hover:bg-surface rounded-xl",
+							children: l.label
+						}, l.href)),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-px bg-ink/5 mx-4" }),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
 							href: "/work",
 							className: "px-4 py-2.5 text-sm font-medium hover:bg-surface rounded-xl",
@@ -152,7 +222,9 @@ function Nav({ ready = true }) {
 							children: "Studio"
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-							href: "/studio#contact",
+							href: "https://wa.me/923349955475",
+							target: "_blank",
+							rel: "noopener noreferrer",
 							className: "px-4 py-2.5 text-sm font-medium bg-ink text-canvas rounded-xl text-center mt-1",
 							children: "Let's Build"
 						})

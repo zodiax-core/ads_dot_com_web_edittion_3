@@ -1,8 +1,8 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { a as useMutation, c as require_react, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as api } from "./api-DSJLF2wo.mjs";
-import { t as PageShell } from "./page-shell-DKJUlXa0.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/studio-40En0dMj.js
+import { t as PageShell } from "./page-shell-BrFxj4Cu.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/studio-Aqp64pEI.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function RouteComponent() {
