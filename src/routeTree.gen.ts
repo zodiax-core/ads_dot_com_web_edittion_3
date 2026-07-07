@@ -13,6 +13,7 @@ import { Route as WorkRouteImport } from './routes/work'
 import { Route as StudioRouteImport } from './routes/studio'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProcessRouteImport } from './routes/process'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as R0i9876r7s7ygs89grt7r9s8rbg9rdbRouteImport } from './routes/0i9876r7s7ygs89grt7r9s8rbg9rdb'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesPrintingRouteImport } from './routes/services.printing'
@@ -21,6 +22,7 @@ import { Route as ServicesInstallationRouteImport } from './routes/services.inst
 import { Route as ServicesFabricationRouteImport } from './routes/services.fabrication'
 import { Route as ServicesEventsRouteImport } from './routes/services.events'
 import { Route as ServicesCreativeDesignRouteImport } from './routes/services.creative-design'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
@@ -40,6 +42,11 @@ const ServicesRoute = ServicesRouteImport.update({
 const ProcessRoute = ProcessRouteImport.update({
   id: '/process',
   path: '/process',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute =
@@ -84,14 +91,21 @@ const ServicesCreativeDesignRoute = ServicesCreativeDesignRouteImport.update({
   path: '/creative-design',
   getParentRoute: () => ServicesRoute,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
+  '/blog': typeof BlogRouteWithChildren
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/services/creative-design': typeof ServicesCreativeDesignRoute
   '/services/events': typeof ServicesEventsRoute
   '/services/fabrication': typeof ServicesFabricationRoute
@@ -102,10 +116,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
+  '/blog': typeof BlogRouteWithChildren
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/services/creative-design': typeof ServicesCreativeDesignRoute
   '/services/events': typeof ServicesEventsRoute
   '/services/fabrication': typeof ServicesFabricationRoute
@@ -117,10 +133,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
+  '/blog': typeof BlogRouteWithChildren
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/services/creative-design': typeof ServicesCreativeDesignRoute
   '/services/events': typeof ServicesEventsRoute
   '/services/fabrication': typeof ServicesFabricationRoute
@@ -133,10 +151,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
+    | '/blog'
     | '/process'
     | '/services'
     | '/studio'
     | '/work'
+    | '/blog/$slug'
     | '/services/creative-design'
     | '/services/events'
     | '/services/fabrication'
@@ -147,10 +167,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
+    | '/blog'
     | '/process'
     | '/services'
     | '/studio'
     | '/work'
+    | '/blog/$slug'
     | '/services/creative-design'
     | '/services/events'
     | '/services/fabrication'
@@ -161,10 +183,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
+    | '/blog'
     | '/process'
     | '/services'
     | '/studio'
     | '/work'
+    | '/blog/$slug'
     | '/services/creative-design'
     | '/services/events'
     | '/services/fabrication'
@@ -176,6 +200,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
+  BlogRoute: typeof BlogRouteWithChildren
   ProcessRoute: typeof ProcessRoute
   ServicesRoute: typeof ServicesRouteWithChildren
   StudioRoute: typeof StudioRoute
@@ -210,6 +235,13 @@ declare module '@tanstack/react-router' {
       path: '/process'
       fullPath: '/process'
       preLoaderRoute: typeof ProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/0i9876r7s7ygs89grt7r9s8rbg9rdb': {
@@ -268,8 +300,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCreativeDesignRouteImport
       parentRoute: typeof ServicesRoute
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 interface ServicesRouteChildren {
   ServicesCreativeDesignRoute: typeof ServicesCreativeDesignRoute
@@ -296,6 +345,7 @@ const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute,
+  BlogRoute: BlogRouteWithChildren,
   ProcessRoute: ProcessRoute,
   ServicesRoute: ServicesRouteWithChildren,
   StudioRoute: StudioRoute,

@@ -1,13 +1,14 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { c as require_react, i as ConvexReactClient, s as require_jsx_runtime, t as ConvexAuthProvider } from "../_libs/@convex-dev/auth+[...].mjs";
 import { M as useRouter, c as HeadContent, d as Outlet, f as lazyRouteComponent, h as Link, m as createRootRouteWithContext, p as createFileRoute, s as Scripts, u as createRouter } from "../_libs/@tanstack/react-router+[...].mjs";
-import { r as Route$12 } from "./routes-DTXPq4M3.mjs";
+import { r as Route$13 } from "./routes-Dh__B6iw.mjs";
+import { t as Route$14 } from "./blog._slug-Dg-G9Cfx.mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { t as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-n5dRs6su.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-CaR7BnNP.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-C0wlgKgr.css";
+var styles_default = "/assets/styles-Borm3GBc.css";
 function reportLovableError(error, context = {}) {
 	if (typeof window === "undefined") return;
 	window.__lovableEvents?.captureException?.(error, {
@@ -92,7 +93,7 @@ function ErrorComponent({ error, reset }) {
 		})
 	});
 }
-var Route$11 = createRootRouteWithContext()({
+var Route$12 = createRootRouteWithContext()({
 	head: () => ({
 		meta: [
 			{ charSet: "utf-8" },
@@ -410,7 +411,7 @@ function RootShell({ children }) {
 	});
 }
 function RootComponent() {
-	const { queryClient } = Route$11.useRouteContext();
+	const { queryClient } = Route$12.useRouteContext();
 	const router = useRouter();
 	(0, import_react.useEffect)(() => {
 		const handleKeyDown = (e) => {
@@ -427,8 +428,8 @@ function RootComponent() {
 		})
 	});
 }
-var $$splitComponentImporter$10 = () => import("./work-CkJuerZv.mjs");
-var Route$10 = createFileRoute("/work")({
+var $$splitComponentImporter$11 = () => import("./work-CvnJoq5O.mjs");
+var Route$11 = createFileRoute("/work")({
 	head: () => ({
 		meta: [
 			{ title: "Work — The Anthology | ADS DOT COM" },
@@ -454,10 +455,10 @@ var Route$10 = createFileRoute("/work")({
 			href: "https://adsdotcom.net/work"
 		}]
 	}),
-	component: lazyRouteComponent($$splitComponentImporter$10, "component")
+	component: lazyRouteComponent($$splitComponentImporter$11, "component")
 });
-var $$splitComponentImporter$9 = () => import("./studio-Aqp64pEI.mjs");
-var Route$9 = createFileRoute("/studio")({
+var $$splitComponentImporter$10 = () => import("./studio-DqW54FWY.mjs");
+var Route$10 = createFileRoute("/studio")({
 	head: () => ({
 		meta: [
 			{ title: "The Studio — About ADS DOT COM | Lahore, Pakistan" },
@@ -483,10 +484,10 @@ var Route$9 = createFileRoute("/studio")({
 			href: "https://adsdotcom.net/studio"
 		}]
 	}),
-	component: lazyRouteComponent($$splitComponentImporter$9, "component")
+	component: lazyRouteComponent($$splitComponentImporter$10, "component")
 });
-var $$splitComponentImporter$8 = () => import("./services-CvjV-VJz.mjs");
-var Route$8 = createFileRoute("/services")({
+var $$splitComponentImporter$9 = () => import("./services-BZqH9cuu.mjs");
+var Route$9 = createFileRoute("/services")({
 	head: () => ({
 		meta: [
 			{ title: "Services — Outdoor Advertising, Printing, Fabrication & Events | ADS DOT COM" },
@@ -512,10 +513,10 @@ var Route$8 = createFileRoute("/services")({
 			href: "https://adsdotcom.net/services"
 		}]
 	}),
-	component: lazyRouteComponent($$splitComponentImporter$8, "component")
+	component: lazyRouteComponent($$splitComponentImporter$9, "component")
 });
-var $$splitComponentImporter$7 = () => import("./process-CHmxYpTh.mjs");
-var Route$7 = createFileRoute("/process")({
+var $$splitComponentImporter$8 = () => import("./process-teeG7sLY.mjs");
+var Route$8 = createFileRoute("/process")({
 	head: () => ({
 		meta: [
 			{ title: "Our Process — Listen, Draft, Prototype, Produce | ADS DOT COM" },
@@ -541,9 +542,34 @@ var Route$7 = createFileRoute("/process")({
 			href: "https://adsdotcom.net/process"
 		}]
 	}),
+	component: lazyRouteComponent($$splitComponentImporter$8, "component")
+});
+var $$splitComponentImporter$7 = () => import("./blog-CY0dYJh9.mjs");
+var Route$7 = createFileRoute("/blog")({
+	head: () => ({
+		meta: [
+			{ title: "Blog — Advertising & Production Insights | ADS DOT COM" },
+			{
+				name: "description",
+				content: "Expert insights on outdoor advertising, printing, fabrication, event production and creative design from ADS DOT COM, Lahore's integrated creative agency since 2006."
+			},
+			{
+				property: "og:title",
+				content: "Blog | ADS DOT COM"
+			},
+			{
+				property: "og:url",
+				content: "https://adsdotcom.net/blog"
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: "https://adsdotcom.net/blog"
+		}]
+	}),
 	component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-var $$splitComponentImporter$6 = () => import("./0i9876r7s7ygs89grt7r9s8rbg9rdb-ohyawiQi.mjs");
+var $$splitComponentImporter$6 = () => import("./0i9876r7s7ygs89grt7r9s8rbg9rdb-DFBinbKn.mjs");
 var Route$6 = createFileRoute("/0i9876r7s7ygs89grt7r9s8rbg9rdb")({
 	head: () => ({ meta: [{
 		name: "robots",
@@ -551,7 +577,7 @@ var Route$6 = createFileRoute("/0i9876r7s7ygs89grt7r9s8rbg9rdb")({
 	}, { title: "Admin" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$6, "component")
 });
-var $$splitComponentImporter$5 = () => import("./services.printing-DPTvKLRi.mjs");
+var $$splitComponentImporter$5 = () => import("./services.printing-oLU6ymsp.mjs");
 var Route$5 = createFileRoute("/services/printing")({
 	head: () => ({
 		meta: [
@@ -580,7 +606,7 @@ var Route$5 = createFileRoute("/services/printing")({
 	}),
 	component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-var $$splitComponentImporter$4 = () => import("./services.outdoor-advertising-Rkz3aj1k.mjs");
+var $$splitComponentImporter$4 = () => import("./services.outdoor-advertising-D5vNSSlo.mjs");
 var Route$4 = createFileRoute("/services/outdoor-advertising")({
 	head: () => ({
 		meta: [
@@ -609,7 +635,7 @@ var Route$4 = createFileRoute("/services/outdoor-advertising")({
 	}),
 	component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-var $$splitComponentImporter$3 = () => import("./services.installation-D-3IqIaH.mjs");
+var $$splitComponentImporter$3 = () => import("./services.installation-C_ag6_uQ.mjs");
 var Route$3 = createFileRoute("/services/installation")({
 	head: () => ({
 		meta: [
@@ -638,7 +664,7 @@ var Route$3 = createFileRoute("/services/installation")({
 	}),
 	component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-var $$splitComponentImporter$2 = () => import("./services.fabrication-C1XwDhso.mjs");
+var $$splitComponentImporter$2 = () => import("./services.fabrication-BKUlbayT.mjs");
 var Route$2 = createFileRoute("/services/fabrication")({
 	head: () => ({
 		meta: [
@@ -667,7 +693,7 @@ var Route$2 = createFileRoute("/services/fabrication")({
 	}),
 	component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-var $$splitComponentImporter$1 = () => import("./services.events-DgNayTI2.mjs");
+var $$splitComponentImporter$1 = () => import("./services.events-Tqan7YqF.mjs");
 var Route$1 = createFileRoute("/services/events")({
 	head: () => ({
 		meta: [
@@ -696,7 +722,7 @@ var Route$1 = createFileRoute("/services/events")({
 	}),
 	component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-var $$splitComponentImporter = () => import("./services.creative-design-BsP-HJYS.mjs");
+var $$splitComponentImporter = () => import("./services.creative-design-R5AoHKI1.mjs");
 var Route = createFileRoute("/services/creative-design")({
 	head: () => ({
 		meta: [
@@ -725,35 +751,40 @@ var Route = createFileRoute("/services/creative-design")({
 	}),
 	component: lazyRouteComponent($$splitComponentImporter, "component")
 });
-var WorkRoute = Route$10.update({
+var WorkRoute = Route$11.update({
 	id: "/work",
 	path: "/work",
-	getParentRoute: () => Route$11
+	getParentRoute: () => Route$12
 });
-var StudioRoute = Route$9.update({
+var StudioRoute = Route$10.update({
 	id: "/studio",
 	path: "/studio",
-	getParentRoute: () => Route$11
+	getParentRoute: () => Route$12
 });
-var ServicesRoute = Route$8.update({
+var ServicesRoute = Route$9.update({
 	id: "/services",
 	path: "/services",
-	getParentRoute: () => Route$11
+	getParentRoute: () => Route$12
 });
-var ProcessRoute = Route$7.update({
+var ProcessRoute = Route$8.update({
 	id: "/process",
 	path: "/process",
-	getParentRoute: () => Route$11
+	getParentRoute: () => Route$12
+});
+var BlogRoute = Route$7.update({
+	id: "/blog",
+	path: "/blog",
+	getParentRoute: () => Route$12
 });
 var R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute = Route$6.update({
 	id: "/0i9876r7s7ygs89grt7r9s8rbg9rdb",
 	path: "/0i9876r7s7ygs89grt7r9s8rbg9rdb",
-	getParentRoute: () => Route$11
+	getParentRoute: () => Route$12
 });
-var IndexRoute = Route$12.update({
+var IndexRoute = Route$13.update({
 	id: "/",
 	path: "/",
-	getParentRoute: () => Route$11
+	getParentRoute: () => Route$12
 });
 var ServicesPrintingRoute = Route$5.update({
 	id: "/printing",
@@ -780,12 +811,19 @@ var ServicesEventsRoute = Route$1.update({
 	path: "/events",
 	getParentRoute: () => ServicesRoute
 });
+var ServicesCreativeDesignRoute = Route.update({
+	id: "/creative-design",
+	path: "/creative-design",
+	getParentRoute: () => ServicesRoute
+});
+var BlogRouteChildren = { BlogSlugRoute: Route$14.update({
+	id: "/$slug",
+	path: "/$slug",
+	getParentRoute: () => BlogRoute
+}) };
+var BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren);
 var ServicesRouteChildren = {
-	ServicesCreativeDesignRoute: Route.update({
-		id: "/creative-design",
-		path: "/creative-design",
-		getParentRoute: () => ServicesRoute
-	}),
+	ServicesCreativeDesignRoute,
 	ServicesEventsRoute,
 	ServicesFabricationRoute,
 	ServicesInstallationRoute,
@@ -795,12 +833,13 @@ var ServicesRouteChildren = {
 var rootRouteChildren = {
 	IndexRoute,
 	R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute,
+	BlogRoute: BlogRouteWithChildren,
 	ProcessRoute,
 	ServicesRoute: ServicesRoute._addFileChildren(ServicesRouteChildren),
 	StudioRoute,
 	WorkRoute
 };
-var routeTree = Route$11._addFileChildren(rootRouteChildren)._addFileTypes();
+var routeTree = Route$12._addFileChildren(rootRouteChildren)._addFileTypes();
 var getRouter = () => {
 	return createRouter({
 		routeTree,

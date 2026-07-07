@@ -1,7 +1,7 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { c as require_react, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
-import { t as PageShell } from "./page-shell-BrFxj4Cu.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/process-CHmxYpTh.js
+import { t as PageShell } from "./page-shell-DZ0Y3aO0.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/process-teeG7sLY.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var ArrowRight = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {

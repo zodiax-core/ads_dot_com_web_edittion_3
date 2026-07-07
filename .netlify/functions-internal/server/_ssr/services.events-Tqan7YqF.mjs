@@ -1,7 +1,7 @@
 import { s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as events_default } from "./events-DquBENrG.mjs";
-import { t as ServicePage } from "./ServicePage-Y_zx3nCM.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/services.events-DgNayTI2.js
+import { t as ServicePage } from "./ServicePage-BxTx2lvF.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/services.events-Tqan7YqF.js
 var import_jsx_runtime = require_jsx_runtime();
 function EventsPage() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ServicePage, { data: {

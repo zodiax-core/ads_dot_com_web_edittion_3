@@ -2,7 +2,7 @@ import { r as __toESM } from "../_runtime.mjs";
 import { a as useMutation, c as require_react, n as useAuthActions, o as useQuery, r as useConvexAuth, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as api } from "./api-DSJLF2wo.mjs";
 import { M as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/0i9876r7s7ygs89grt7r9s8rbg9rdb-ohyawiQi.js
+//#region node_modules/.nitro/vite/services/ssr/assets/0i9876r7s7ygs89grt7r9s8rbg9rdb-DFBinbKn.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function ErrorDialog({ message, onClose }) {
@@ -205,6 +205,7 @@ function AdminPanel() {
 						className: "flex-1 p-4 flex flex-col gap-2",
 						children: [
 							"works",
+							"blog",
 							"gallery",
 							"messages"
 						].map((tab) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
@@ -227,6 +228,7 @@ function AdminPanel() {
 				className: "flex-1 overflow-y-auto p-8",
 				children: [
 					activeTab === "works" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(WorksTab, { onError: setErrorMsg }),
+					activeTab === "blog" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BlogTab, { onError: setErrorMsg }),
 					activeTab === "gallery" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GalleryTab, { onError: setErrorMsg }),
 					activeTab === "messages" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessagesTab, {})
 				]
@@ -643,6 +645,373 @@ function MessagesTab() {
 					children: msg.message
 				})]
 			}, msg._id))
+		})]
+	});
+}
+var SERVICE_OPTIONS = [
+	{
+		slug: "outdoor-advertising",
+		title: "Outdoor Advertising"
+	},
+	{
+		slug: "printing",
+		title: "Precision Printing"
+	},
+	{
+		slug: "fabrication",
+		title: "Fabrication"
+	},
+	{
+		slug: "installation",
+		title: "Installation"
+	},
+	{
+		slug: "events",
+		title: "Event Production"
+	},
+	{
+		slug: "creative-design",
+		title: "Creative & Design"
+	}
+];
+var BLOG_CATEGORIES = [
+	"Outdoor Advertising",
+	"Printing",
+	"Events",
+	"Fabrication",
+	"Creative Design",
+	"Industry News"
+];
+function BlogTab({ onError }) {
+	const posts = useQuery(api.blog.getAllPosts);
+	const createPost = useMutation(api.blog.createPost);
+	const updatePost = useMutation(api.blog.updatePost);
+	const deletePost = useMutation(api.blog.deletePost);
+	const generateUploadUrl = useMutation(api.blog.generateUploadUrl);
+	const [editingId, setEditingId] = (0, import_react.useState)(null);
+	const [uploading, setUploading] = (0, import_react.useState)(false);
+	const fileRef = (0, import_react.useRef)(null);
+	const emptyForm = {
+		title: "",
+		slug: "",
+		excerpt: "",
+		body: "",
+		category: "Industry News",
+		featuredImage: "",
+		featuredImageAlt: "",
+		authorName: "ADS DOT COM Editorial",
+		publishedDate: (/* @__PURE__ */ new Date()).toISOString().slice(0, 10),
+		updatedDate: (/* @__PURE__ */ new Date()).toISOString().slice(0, 10),
+		readTimeMinutes: 5,
+		relatedServiceSlug: "",
+		relatedServiceTitle: "",
+		published: false
+	};
+	const [form, setForm] = (0, import_react.useState)(emptyForm);
+	const set = (k, v) => setForm((f) => ({
+		...f,
+		[k]: v
+	}));
+	const autoSlug = (title) => title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+	const handleImageUpload = async (e) => {
+		const file = e.target.files?.[0];
+		if (!file) return;
+		setUploading(true);
+		try {
+			const uploadUrl = await generateUploadUrl();
+			const res = await fetch(uploadUrl, {
+				method: "POST",
+				headers: { "Content-Type": file.type },
+				body: file
+			});
+			if (!res.ok) throw new Error(`Upload failed: ${res.statusText}`);
+			const { storageId } = await res.json();
+			set("featuredImage", storageId);
+		} catch (err) {
+			onError(err.message);
+		} finally {
+			setUploading(false);
+			if (fileRef.current) fileRef.current.value = "";
+		}
+	};
+	const handleEdit = (post) => {
+		setEditingId(post._id);
+		setForm({
+			title: post.title,
+			slug: post.slug,
+			excerpt: post.excerpt,
+			body: post.body,
+			category: post.category,
+			featuredImage: post.featuredImage,
+			featuredImageAlt: post.featuredImageAlt,
+			authorName: post.authorName,
+			publishedDate: post.publishedDate,
+			updatedDate: post.updatedDate,
+			readTimeMinutes: post.readTimeMinutes,
+			relatedServiceSlug: post.relatedServiceSlug ?? "",
+			relatedServiceTitle: post.relatedServiceTitle ?? "",
+			published: post.published
+		});
+	};
+	const handleCancel = () => {
+		setEditingId(null);
+		setForm(emptyForm);
+	};
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const payload = {
+			...form,
+			updatedDate: (/* @__PURE__ */ new Date()).toISOString().slice(0, 10),
+			relatedServiceSlug: form.relatedServiceSlug || void 0,
+			relatedServiceTitle: form.relatedServiceTitle || void 0
+		};
+		try {
+			if (editingId) await updatePost({
+				id: editingId,
+				...payload
+			});
+			else await createPost(payload);
+			handleCancel();
+		} catch (err) {
+			onError(err.message);
+		}
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "flex flex-col gap-8",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+			className: "text-2xl font-serif",
+			children: "Manage Blog"
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "grid grid-cols-1 xl:grid-cols-2 gap-8",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "bg-surface p-6 rounded-lg border border-ink/10",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+					className: "text-xl font-medium mb-4",
+					children: editingId ? "Edit Post" : "New Post"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+					onSubmit: handleSubmit,
+					className: "flex flex-col gap-3",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+							placeholder: "Title",
+							value: form.title,
+							onChange: (e) => {
+								set("title", e.target.value);
+								if (!editingId) set("slug", autoSlug(e.target.value));
+							},
+							className: "px-4 py-2 border rounded bg-canvas text-sm",
+							required: true
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+							placeholder: "Slug (auto-filled)",
+							value: form.slug,
+							onChange: (e) => set("slug", e.target.value),
+							className: "px-4 py-2 border rounded bg-canvas text-sm font-mono",
+							required: true
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
+							placeholder: "Excerpt (1-2 sentences)",
+							value: form.excerpt,
+							onChange: (e) => set("excerpt", e.target.value),
+							className: "px-4 py-2 border rounded bg-canvas text-sm h-16",
+							required: true
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
+							placeholder: "Body (HTML supported — use <h2>, <p>, <ul>, <blockquote>, <img> tags)",
+							value: form.body,
+							onChange: (e) => set("body", e.target.value),
+							className: "px-4 py-2 border rounded bg-canvas text-sm h-48 font-mono",
+							required: true
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "grid grid-cols-2 gap-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+								className: "text-xs text-ink-soft mb-1 block",
+								children: "Category"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("select", {
+								value: form.category,
+								onChange: (e) => set("category", e.target.value),
+								className: "w-full px-3 py-2 border rounded bg-canvas text-sm",
+								children: BLOG_CATEGORIES.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", { children: c }, c))
+							})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+								className: "text-xs text-ink-soft mb-1 block",
+								children: "Read Time (min)"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+								type: "number",
+								min: 1,
+								value: form.readTimeMinutes,
+								onChange: (e) => set("readTimeMinutes", Number(e.target.value)),
+								className: "w-full px-3 py-2 border rounded bg-canvas text-sm"
+							})] })]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "grid grid-cols-2 gap-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+								className: "text-xs text-ink-soft mb-1 block",
+								children: "Published Date"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+								type: "date",
+								value: form.publishedDate,
+								onChange: (e) => set("publishedDate", e.target.value),
+								className: "w-full px-3 py-2 border rounded bg-canvas text-sm"
+							})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+								className: "text-xs text-ink-soft mb-1 block",
+								children: "Author Name"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+								value: form.authorName,
+								onChange: (e) => set("authorName", e.target.value),
+								className: "w-full px-3 py-2 border rounded bg-canvas text-sm"
+							})] })]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex flex-col gap-1.5",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+									className: "text-xs text-ink-soft",
+									children: "Featured Image"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex gap-2",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											placeholder: "Storage ID or URL",
+											value: form.featuredImage,
+											onChange: (e) => set("featuredImage", e.target.value),
+											className: "flex-1 px-3 py-2 border rounded bg-canvas text-sm"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+											type: "button",
+											disabled: uploading,
+											onClick: () => fileRef.current?.click(),
+											className: "px-3 py-2 bg-ink/10 rounded hover:bg-ink/20 text-xs font-medium shrink-0",
+											children: uploading ? "…" : "Upload"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											ref: fileRef,
+											type: "file",
+											accept: "image/*",
+											className: "hidden",
+											onChange: handleImageUpload
+										})
+									]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+									placeholder: "Alt text (describe the image)",
+									value: form.featuredImageAlt,
+									onChange: (e) => set("featuredImageAlt", e.target.value),
+									className: "px-3 py-2 border rounded bg-canvas text-sm"
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+							className: "text-xs text-ink-soft mb-1 block",
+							children: "Related Service (optional)"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
+							value: form.relatedServiceSlug,
+							onChange: (e) => {
+								const s = SERVICE_OPTIONS.find((o) => o.slug === e.target.value);
+								set("relatedServiceSlug", e.target.value);
+								set("relatedServiceTitle", s?.title ?? "");
+							},
+							className: "w-full px-3 py-2 border rounded bg-canvas text-sm",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+								value: "",
+								children: "— None —"
+							}), SERVICE_OPTIONS.map((o) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+								value: o.slug,
+								children: o.title
+							}, o.slug))]
+						})] }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+							className: "flex items-center gap-2 cursor-pointer",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+								type: "checkbox",
+								checked: form.published,
+								onChange: (e) => set("published", e.target.checked),
+								className: "size-4 rounded"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-sm font-medium text-ink",
+								children: "Published (visible on site)"
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex gap-2 mt-2",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "submit",
+								className: "px-4 py-2 bg-ink text-canvas rounded hover:bg-ink/90 flex-1 text-sm",
+								children: editingId ? "Update Post" : "Create Post"
+							}), editingId && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "button",
+								onClick: handleCancel,
+								className: "px-4 py-2 border border-ink text-ink rounded hover:bg-ink/10 flex-1 text-sm",
+								children: "Cancel"
+							})]
+						})
+					]
+				})]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "bg-surface p-6 rounded-lg border border-ink/10",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
+					className: "text-xl font-medium mb-4",
+					children: [
+						"All Posts (",
+						posts?.length ?? 0,
+						")"
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "flex flex-col gap-3 max-h-[70vh] overflow-y-auto pr-1",
+					children: !posts ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "text-sm text-ink-soft",
+						children: "Loading…"
+					}) : posts.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "text-sm text-ink-soft",
+						children: "No posts yet. Create one!"
+					}) : posts.map((post) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "border border-ink/10 p-4 rounded-lg flex gap-3 items-start",
+						children: [
+							post.featuredImage && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: post.featuredImage,
+								alt: "",
+								className: "size-12 rounded object-cover shrink-0 border border-ink/10"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "min-w-0 flex-1",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center gap-2 mb-0.5",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+										className: "font-medium text-sm truncate",
+										children: post.title
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: `px-1.5 py-0.5 rounded text-[9px] font-bold uppercase shrink-0 ${post.published ? "bg-green-100 text-green-700" : "bg-ink/10 text-ink-mute"}`,
+										children: post.published ? "Live" : "Draft"
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+									className: "text-[11px] text-ink-mute",
+									children: [
+										post.category,
+										" · ",
+										post.publishedDate
+									]
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex gap-1.5 shrink-0",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+									onClick: () => handleEdit(post),
+									className: "px-2 py-1 bg-ink/10 rounded hover:bg-ink/20 text-xs font-medium",
+									children: "Edit"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+									onClick: () => {
+										if (confirm("Delete this post?")) deletePost({ id: post._id });
+									},
+									className: "px-2 py-1 bg-red-500/10 text-red-600 rounded hover:bg-red-500/20 text-xs font-medium",
+									children: "Del"
+								})]
+							})
+						]
+					}, post._id))
+				})]
+			})]
 		})]
 	});
 }

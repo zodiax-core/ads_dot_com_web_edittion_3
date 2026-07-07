@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import heroScene from "@/assets/hero-scene.jpg";
-import printing from "@/assets/printing.jpg";
 import fabModular from "@/assets/fab-modular.jpg";
 import fabKinetic from "@/assets/fab-kinetic.jpg";
 import fabVenue from "@/assets/fab-venue.jpg";
@@ -102,6 +101,7 @@ export function Nav({ ready = true }: { ready?: boolean }) {
             </div>
           </div>
           <a href="/work" className="hover:text-ink transition-colors">Work</a>
+          <a href="/blog" className="hover:text-ink transition-colors">Blog</a>
           <a href="/process" className="hover:text-ink transition-colors">Process</a>
           <a href="/studio" className="hover:text-ink transition-colors">Studio</a>
         </div>
@@ -132,6 +132,7 @@ export function Nav({ ready = true }: { ready?: boolean }) {
           ))}
           <div className="h-px bg-ink/5 mx-4" />
           <a href="/work" className="px-4 py-2.5 text-sm font-medium hover:bg-surface rounded-xl">Work</a>
+          <a href="/blog" className="px-4 py-2.5 text-sm font-medium hover:bg-surface rounded-xl">Blog</a>
           <a href="/process" className="px-4 py-2.5 text-sm font-medium hover:bg-surface rounded-xl">Process</a>
           <a href="/studio" className="px-4 py-2.5 text-sm font-medium hover:bg-surface rounded-xl">Studio</a>
           <a href="https://wa.me/923349955475" target="_blank" rel="noopener noreferrer" className="px-4 py-2.5 text-sm font-medium bg-ink text-canvas rounded-xl text-center mt-1">Let's Build</a>
@@ -264,7 +265,14 @@ function Printing() {
         <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className={`relative transition-all duration-1000 ${shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
             <div className="relative aspect-[4/5] bg-white rounded-[2rem] shadow-lift overflow-hidden border border-ink/5">
-              <img src={printing} alt="Stylized printing machine outputting warm paper" width={1024} height={1280} loading="lazy" className="w-full h-full object-cover" />
+              <img
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1024&q=85&fit=crop&crop=center"
+                alt="Wide-format flex printing machine outputting large vinyl roll in a print shop"
+                width={1024}
+                height={1280}
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
               {/* Overlay caption */}
               <div className="absolute bottom-6 left-6 right-6 p-5 bg-white/60 backdrop-blur-xl rounded-2xl border border-white/40">
                 <div className="flex items-start justify-between gap-4">
@@ -619,95 +627,120 @@ export function Footer() {
   return (
     <footer id="studio" className="py-16 md:py-20 px-4 border-t border-ink/5 bg-canvas">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10 md:gap-12">
-          <div className="space-y-5">
+        <div className="grid grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] gap-10 md:gap-8">
+
+          {/* Brand column */}
+          <div className="col-span-2 md:col-span-1 space-y-5">
             <div className="flex items-center gap-2">
-              <img src="/logo.png" alt="ADS.COM Logo" className="h-10 w-auto" />
+              <img src="/logo.png" alt="ADS DOT COM Logo" className="h-10 w-auto" />
             </div>
             <p className="text-ink-soft text-sm max-w-xs leading-relaxed">
               E-193/ii, Bank Stop<br />
               Main Walton Road Cantt.<br />
               Lahore, Pakistan
             </p>
-            <p className="text-ink-soft text-sm max-w-xs leading-relaxed">
-              +92 334 9955475<br />
-              info@adsdotcom.net<br />
-              sales@adsdotcom.net
-            </p>
+            <div className="text-ink-soft text-sm space-y-1">
+              <a href="tel:+923349955475" className="block hover:text-accent-blue transition-colors">+92 334 9955475</a>
+              <a href="mailto:info@adsdotcom.net" className="block hover:text-accent-blue transition-colors">info@adsdotcom.net</a>
+              <a href="mailto:sales@adsdotcom.net" className="block hover:text-accent-blue transition-colors">sales@adsdotcom.net</a>
+            </div>
             <div className="flex gap-2 pt-1">
-              <a
-                href="https://www.instagram.com/adsdot_com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="size-9 rounded-full border border-ink/10 flex items-center justify-center text-ink hover:bg-ink hover:text-canvas hover:border-ink transition-colors"
-              >
+              <a href="https://www.instagram.com/adsdot_com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                className="size-9 rounded-full border border-ink/10 flex items-center justify-center text-ink hover:bg-ink hover:text-canvas hover:border-ink transition-colors">
                 <svg className="size-4" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
               </a>
-              <a
-                href="https://www.facebook.com/share/18V8bkSGXG/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="size-9 rounded-full border border-ink/10 flex items-center justify-center text-ink hover:bg-ink hover:text-canvas hover:border-ink transition-colors"
-              >
+              <a href="https://www.facebook.com/share/18V8bkSGXG/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+                className="size-9 rounded-full border border-ink/10 flex items-center justify-center text-ink hover:bg-ink hover:text-canvas hover:border-ink transition-colors">
                 <svg className="size-4" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a href="https://wa.me/923349955475" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+                className="size-9 rounded-full border border-ink/10 flex items-center justify-center text-ink hover:bg-[#25D366] hover:text-white hover:border-[#25D366] transition-colors">
+                <svg className="size-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.81 11.81 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413z"/>
                 </svg>
               </a>
             </div>
           </div>
 
-          {[
-            {
-              title: "Inquiries",
-              links: [
-                { name: "New Business", href: "/studio#contact" },
-                { name: "Press & Media", href: "#" },
-                { name: "Partnerships", href: "#" },
-                { name: "Careers", href: "#" },
-              ],
-            },
-            {
-              title: "Explore",
-              links: [
+          {/* Services column */}
+          <div className="space-y-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink-mute">Services</p>
+            <ul className="space-y-2.5 text-sm">
+              {[
+                { name: "Outdoor Advertising", href: "/services/outdoor-advertising" },
+                { name: "Precision Printing", href: "/services/printing" },
+                { name: "Fabrication", href: "/services/fabrication" },
+                { name: "Installation", href: "/services/installation" },
+                { name: "Event Production", href: "/services/events" },
+                { name: "Creative & Design", href: "/services/creative-design" },
+              ].map((l) => (
+                <li key={l.name}>
+                  <a href={l.href} className="text-ink-soft hover:text-accent-blue transition-colors">{l.name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Explore column */}
+          <div className="space-y-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink-mute">Explore</p>
+            <ul className="space-y-2.5 text-sm">
+              {[
                 { name: "Our Work", href: "/work" },
-                { name: "Services", href: "/services" },
-                { name: "Process", href: "/process" },
-                { name: "Journal", href: "#" },
-              ],
-            },
-            {
-              title: "Studio",
-              links: [
-                { name: "About", href: "/studio" },
+                { name: "All Services", href: "/services" },
+                { name: "Our Process", href: "/process" },
+                { name: "Journal / Blog", href: "/blog" },
+              ].map((l) => (
+                <li key={l.name}>
+                  <a href={l.href} className="text-ink-soft hover:text-accent-blue transition-colors">{l.name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Inquiries column */}
+          <div className="space-y-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink-mute">Inquiries</p>
+            <ul className="space-y-2.5 text-sm">
+              {[
+                { name: "New Business", href: "/studio#contact" },
+                { name: "Get a Quote", href: "https://wa.me/923349955475" },
+                { name: "Press & Media", href: "mailto:info@adsdotcom.net" },
+                { name: "Partnerships", href: "mailto:sales@adsdotcom.net" },
+                { name: "Careers", href: "mailto:info@adsdotcom.net" },
+              ].map((l) => (
+                <li key={l.name}>
+                  <a href={l.href} className="text-ink-soft hover:text-accent-blue transition-colors">{l.name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Studio column */}
+          <div className="space-y-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink-mute">Studio</p>
+            <ul className="space-y-2.5 text-sm">
+              {[
+                { name: "About Us", href: "/studio" },
+                { name: "Contact", href: "/studio#contact" },
                 { name: "Sustainability", href: "#" },
                 { name: "Suppliers", href: "#" },
-                { name: "Contact", href: "/studio#contact" },
-              ],
-            },
-          ].map((col) => (
-            <div key={col.title} className="space-y-4">
-              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink-mute">
-                {col.title}
-              </p>
-              <ul className="space-y-2.5 text-sm font-medium">
-                {col.links.map((l) => (
-                  <li key={l.name}>
-                    <a href={l.href} className="text-ink hover:text-accent-blue transition-colors">
-                      {l.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+              ].map((l) => (
+                <li key={l.name}>
+                  <a href={l.href} className="text-ink-soft hover:text-accent-blue transition-colors">{l.name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </div>
 
         <div className="mt-14 pt-6 border-t border-ink/5 flex flex-col md:flex-row justify-between items-center gap-3 text-[10px] uppercase tracking-[0.15em] text-ink-mute font-semibold">
-          <p>© 2026 ADS DOT COM. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} ADS DOT COM. All rights reserved.</p>
           <p className="font-serif italic normal-case tracking-normal text-ink-soft">
             Crafted with intent in Lahore, Pakistan.
           </p>

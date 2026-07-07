@@ -1,12 +1,12 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { c as require_react, o as useQuery, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as api } from "./api-DSJLF2wo.mjs";
-import { t as PageShell } from "./page-shell-BrFxj4Cu.mjs";
-import { t as printing_default } from "./printing-DClTnR89.mjs";
+import { t as PageShell } from "./page-shell-DZ0Y3aO0.mjs";
 import { n as project_lumos_default, r as project_monolith_default, t as fab_kinetic_default } from "./project-monolith-Dw1qaPyq.mjs";
 import { t as events_default } from "./events-DquBENrG.mjs";
 import { t as installation_default } from "./installation-CsIg_OGt.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/work-CkJuerZv.js
+import { t as printing_default } from "./printing-DClTnR89.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/work-CvnJoq5O.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var ArrowRight = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {

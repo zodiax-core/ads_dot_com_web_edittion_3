@@ -1,7 +1,7 @@
 import { s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as fab_venue_default } from "./fab-venue-BY2Wfmwq.mjs";
-import { t as ServicePage } from "./ServicePage-Y_zx3nCM.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/services.outdoor-advertising-Rkz3aj1k.js
+import { t as ServicePage } from "./ServicePage-BxTx2lvF.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/services.outdoor-advertising-D5vNSSlo.js
 var import_jsx_runtime = require_jsx_runtime();
 function OutdoorAdvertisingPage() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ServicePage, { data: {

@@ -26,4 +26,22 @@ export default defineSchema({
     message: v.string(),
     read: v.boolean(),
   }),
+  blogPosts: defineTable({
+    title: v.string(),
+    slug: v.string(),
+    excerpt: v.string(),
+    body: v.string(), // HTML/Markdown string
+    category: v.string(),
+    featuredImage: v.string(),
+    featuredImageAlt: v.string(),
+    authorName: v.string(),
+    publishedDate: v.string(), // ISO date string
+    updatedDate: v.string(),
+    readTimeMinutes: v.number(),
+    relatedServiceSlug: v.optional(v.string()),
+    relatedServiceTitle: v.optional(v.string()),
+    published: v.boolean(),
+  }).index("by_slug", ["slug"])
+    .index("by_published", ["published"])
+    .index("by_category", ["category"]),
 });
