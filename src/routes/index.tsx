@@ -266,7 +266,7 @@ function Printing() {
           <div className={`relative transition-all duration-1000 ${shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
             <div className="relative aspect-[4/5] bg-white rounded-[2rem] shadow-lift overflow-hidden border border-ink/5">
               <img
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1024&q=85&fit=crop&crop=center"
+                src="https://images.unsplash.com/photo-1676474506722-4bf98059b74a?auto=format&fit=crop&w=1920"
                 alt="Wide-format flex printing machine outputting large vinyl roll in a print shop"
                 width={1024}
                 height={1280}
