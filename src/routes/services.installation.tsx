@@ -25,7 +25,7 @@ function InstallationPage() {
         color: "accent-purple",
         h1: "Signage Installation in Lahore",
         tagline: "On-site craft. Structural confidence.",
-        desc: "From a single storefront sign to a citywide activation, our certified rigging team manages transport, structural anchoring, safety compliance and ongoing maintenance — all under one roof.",
+        desc: "A brilliantly designed sign or large-format graphic is only as effective as its physical deployment. Our dedicated signage installation division ensures that every asset we produce is mounted securely, accurately, and safely, regardless of the architectural challenges. Based in Lahore but operating across Pakistan, our certified rigging team manages the complete lifecycle of on-site deployment. We handle logistics, transport, structural anchoring, and comprehensive safety compliance, ensuring that every project meets exacting engineering standards. From high-altitude rooftop billboard erections and complex full-building facade wraps to time-sensitive overnight retail window installations, our crews operate with minimal disruption to your daily operations. Because we control the entire process from fabrication to final installation, there are no hand-offs and no accountability gaps. Furthermore, we provide ongoing scheduled maintenance and rapid-response repair services to ensure your brand's physical assets remain pristine and structurally sound long after the initial installation is complete.",
         image: installation,
         imageAlt: "ADS DOT COM installation crew mounting wayfinding signage system on building facade in Lahore",
         capabilities: [

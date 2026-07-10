@@ -11,11 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as StudioRouteImport } from './routes/studio'
-import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as R0i9876r7s7ygs89grt7r9s8rbg9rdbRouteImport } from './routes/0i9876r7s7ygs89grt7r9s8rbg9rdb'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesPrintingServicesRouteImport } from './routes/services_.printing-services'
+import { Route as ServicesFabricationInstallationRouteImport } from './routes/services_.fabrication-installation'
+import { Route as ServicesEventManagementRouteImport } from './routes/services_.event-management'
+import { Route as ServicesCreativeDevelopmentRouteImport } from './routes/services_.creative-development'
+import { Route as ServicesWebsiteDevelopmentRouteImport } from './routes/services.website-development'
 import { Route as ServicesPrintingRouteImport } from './routes/services.printing'
 import { Route as ServicesOutdoorAdvertisingRouteImport } from './routes/services.outdoor-advertising'
 import { Route as ServicesInstallationRouteImport } from './routes/services.installation'
@@ -32,11 +37,6 @@ const WorkRoute = WorkRouteImport.update({
 const StudioRoute = StudioRouteImport.update({
   id: '/studio',
   path: '/studio',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProcessRoute = ProcessRouteImport.update({
@@ -60,36 +60,70 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesPrintingServicesRoute =
+  ServicesPrintingServicesRouteImport.update({
+    id: '/services_/printing-services',
+    path: '/services/printing-services',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesFabricationInstallationRoute =
+  ServicesFabricationInstallationRouteImport.update({
+    id: '/services_/fabrication-installation',
+    path: '/services/fabrication-installation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesEventManagementRoute = ServicesEventManagementRouteImport.update({
+  id: '/services_/event-management',
+  path: '/services/event-management',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesCreativeDevelopmentRoute =
+  ServicesCreativeDevelopmentRouteImport.update({
+    id: '/services_/creative-development',
+    path: '/services/creative-development',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesWebsiteDevelopmentRoute =
+  ServicesWebsiteDevelopmentRouteImport.update({
+    id: '/services/website-development',
+    path: '/services/website-development',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicesPrintingRoute = ServicesPrintingRouteImport.update({
-  id: '/printing',
-  path: '/printing',
-  getParentRoute: () => ServicesRoute,
+  id: '/services/printing',
+  path: '/services/printing',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesOutdoorAdvertisingRoute =
   ServicesOutdoorAdvertisingRouteImport.update({
-    id: '/outdoor-advertising',
-    path: '/outdoor-advertising',
-    getParentRoute: () => ServicesRoute,
+    id: '/services/outdoor-advertising',
+    path: '/services/outdoor-advertising',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const ServicesInstallationRoute = ServicesInstallationRouteImport.update({
-  id: '/installation',
-  path: '/installation',
-  getParentRoute: () => ServicesRoute,
+  id: '/services/installation',
+  path: '/services/installation',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesFabricationRoute = ServicesFabricationRouteImport.update({
-  id: '/fabrication',
-  path: '/fabrication',
-  getParentRoute: () => ServicesRoute,
+  id: '/services/fabrication',
+  path: '/services/fabrication',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesEventsRoute = ServicesEventsRouteImport.update({
-  id: '/events',
-  path: '/events',
-  getParentRoute: () => ServicesRoute,
+  id: '/services/events',
+  path: '/services/events',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesCreativeDesignRoute = ServicesCreativeDesignRouteImport.update({
-  id: '/creative-design',
-  path: '/creative-design',
-  getParentRoute: () => ServicesRoute,
+  id: '/services/creative-design',
+  path: '/services/creative-design',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog_/$slug',
@@ -102,7 +136,6 @@ export interface FileRoutesByFullPath {
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/blog': typeof BlogRoute
   '/process': typeof ProcessRoute
-  '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -112,13 +145,18 @@ export interface FileRoutesByFullPath {
   '/services/installation': typeof ServicesInstallationRoute
   '/services/outdoor-advertising': typeof ServicesOutdoorAdvertisingRoute
   '/services/printing': typeof ServicesPrintingRoute
+  '/services/website-development': typeof ServicesWebsiteDevelopmentRoute
+  '/services/creative-development': typeof ServicesCreativeDevelopmentRoute
+  '/services/event-management': typeof ServicesEventManagementRoute
+  '/services/fabrication-installation': typeof ServicesFabricationInstallationRoute
+  '/services/printing-services': typeof ServicesPrintingServicesRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/blog': typeof BlogRoute
   '/process': typeof ProcessRoute
-  '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -128,6 +166,12 @@ export interface FileRoutesByTo {
   '/services/installation': typeof ServicesInstallationRoute
   '/services/outdoor-advertising': typeof ServicesOutdoorAdvertisingRoute
   '/services/printing': typeof ServicesPrintingRoute
+  '/services/website-development': typeof ServicesWebsiteDevelopmentRoute
+  '/services/creative-development': typeof ServicesCreativeDevelopmentRoute
+  '/services/event-management': typeof ServicesEventManagementRoute
+  '/services/fabrication-installation': typeof ServicesFabricationInstallationRoute
+  '/services/printing-services': typeof ServicesPrintingServicesRoute
+  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -135,7 +179,6 @@ export interface FileRoutesById {
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/blog': typeof BlogRoute
   '/process': typeof ProcessRoute
-  '/services': typeof ServicesRouteWithChildren
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
   '/blog_/$slug': typeof BlogSlugRoute
@@ -145,6 +188,12 @@ export interface FileRoutesById {
   '/services/installation': typeof ServicesInstallationRoute
   '/services/outdoor-advertising': typeof ServicesOutdoorAdvertisingRoute
   '/services/printing': typeof ServicesPrintingRoute
+  '/services/website-development': typeof ServicesWebsiteDevelopmentRoute
+  '/services_/creative-development': typeof ServicesCreativeDevelopmentRoute
+  '/services_/event-management': typeof ServicesEventManagementRoute
+  '/services_/fabrication-installation': typeof ServicesFabricationInstallationRoute
+  '/services_/printing-services': typeof ServicesPrintingServicesRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -153,7 +202,6 @@ export interface FileRouteTypes {
     | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
     | '/blog'
     | '/process'
-    | '/services'
     | '/studio'
     | '/work'
     | '/blog/$slug'
@@ -163,13 +211,18 @@ export interface FileRouteTypes {
     | '/services/installation'
     | '/services/outdoor-advertising'
     | '/services/printing'
+    | '/services/website-development'
+    | '/services/creative-development'
+    | '/services/event-management'
+    | '/services/fabrication-installation'
+    | '/services/printing-services'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
     | '/blog'
     | '/process'
-    | '/services'
     | '/studio'
     | '/work'
     | '/blog/$slug'
@@ -179,13 +232,18 @@ export interface FileRouteTypes {
     | '/services/installation'
     | '/services/outdoor-advertising'
     | '/services/printing'
+    | '/services/website-development'
+    | '/services/creative-development'
+    | '/services/event-management'
+    | '/services/fabrication-installation'
+    | '/services/printing-services'
+    | '/services'
   id:
     | '__root__'
     | '/'
     | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
     | '/blog'
     | '/process'
-    | '/services'
     | '/studio'
     | '/work'
     | '/blog_/$slug'
@@ -195,6 +253,12 @@ export interface FileRouteTypes {
     | '/services/installation'
     | '/services/outdoor-advertising'
     | '/services/printing'
+    | '/services/website-development'
+    | '/services_/creative-development'
+    | '/services_/event-management'
+    | '/services_/fabrication-installation'
+    | '/services_/printing-services'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -202,10 +266,21 @@ export interface RootRouteChildren {
   R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   BlogRoute: typeof BlogRoute
   ProcessRoute: typeof ProcessRoute
-  ServicesRoute: typeof ServicesRouteWithChildren
   StudioRoute: typeof StudioRoute
   WorkRoute: typeof WorkRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  ServicesCreativeDesignRoute: typeof ServicesCreativeDesignRoute
+  ServicesEventsRoute: typeof ServicesEventsRoute
+  ServicesFabricationRoute: typeof ServicesFabricationRoute
+  ServicesInstallationRoute: typeof ServicesInstallationRoute
+  ServicesOutdoorAdvertisingRoute: typeof ServicesOutdoorAdvertisingRoute
+  ServicesPrintingRoute: typeof ServicesPrintingRoute
+  ServicesWebsiteDevelopmentRoute: typeof ServicesWebsiteDevelopmentRoute
+  ServicesCreativeDevelopmentRoute: typeof ServicesCreativeDevelopmentRoute
+  ServicesEventManagementRoute: typeof ServicesEventManagementRoute
+  ServicesFabricationInstallationRoute: typeof ServicesFabricationInstallationRoute
+  ServicesPrintingServicesRoute: typeof ServicesPrintingServicesRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -222,13 +297,6 @@ declare module '@tanstack/react-router' {
       path: '/studio'
       fullPath: '/studio'
       preLoaderRoute: typeof StudioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/process': {
@@ -259,47 +327,89 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services_/printing-services': {
+      id: '/services_/printing-services'
+      path: '/services/printing-services'
+      fullPath: '/services/printing-services'
+      preLoaderRoute: typeof ServicesPrintingServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services_/fabrication-installation': {
+      id: '/services_/fabrication-installation'
+      path: '/services/fabrication-installation'
+      fullPath: '/services/fabrication-installation'
+      preLoaderRoute: typeof ServicesFabricationInstallationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services_/event-management': {
+      id: '/services_/event-management'
+      path: '/services/event-management'
+      fullPath: '/services/event-management'
+      preLoaderRoute: typeof ServicesEventManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services_/creative-development': {
+      id: '/services_/creative-development'
+      path: '/services/creative-development'
+      fullPath: '/services/creative-development'
+      preLoaderRoute: typeof ServicesCreativeDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/website-development': {
+      id: '/services/website-development'
+      path: '/services/website-development'
+      fullPath: '/services/website-development'
+      preLoaderRoute: typeof ServicesWebsiteDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/printing': {
       id: '/services/printing'
-      path: '/printing'
+      path: '/services/printing'
       fullPath: '/services/printing'
       preLoaderRoute: typeof ServicesPrintingRouteImport
-      parentRoute: typeof ServicesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/services/outdoor-advertising': {
       id: '/services/outdoor-advertising'
-      path: '/outdoor-advertising'
+      path: '/services/outdoor-advertising'
       fullPath: '/services/outdoor-advertising'
       preLoaderRoute: typeof ServicesOutdoorAdvertisingRouteImport
-      parentRoute: typeof ServicesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/services/installation': {
       id: '/services/installation'
-      path: '/installation'
+      path: '/services/installation'
       fullPath: '/services/installation'
       preLoaderRoute: typeof ServicesInstallationRouteImport
-      parentRoute: typeof ServicesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/services/fabrication': {
       id: '/services/fabrication'
-      path: '/fabrication'
+      path: '/services/fabrication'
       fullPath: '/services/fabrication'
       preLoaderRoute: typeof ServicesFabricationRouteImport
-      parentRoute: typeof ServicesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/services/events': {
       id: '/services/events'
-      path: '/events'
+      path: '/services/events'
       fullPath: '/services/events'
       preLoaderRoute: typeof ServicesEventsRouteImport
-      parentRoute: typeof ServicesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/services/creative-design': {
       id: '/services/creative-design'
-      path: '/creative-design'
+      path: '/services/creative-design'
       fullPath: '/services/creative-design'
       preLoaderRoute: typeof ServicesCreativeDesignRouteImport
-      parentRoute: typeof ServicesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/blog_/$slug': {
       id: '/blog_/$slug'
@@ -311,37 +421,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface ServicesRouteChildren {
-  ServicesCreativeDesignRoute: typeof ServicesCreativeDesignRoute
-  ServicesEventsRoute: typeof ServicesEventsRoute
-  ServicesFabricationRoute: typeof ServicesFabricationRoute
-  ServicesInstallationRoute: typeof ServicesInstallationRoute
-  ServicesOutdoorAdvertisingRoute: typeof ServicesOutdoorAdvertisingRoute
-  ServicesPrintingRoute: typeof ServicesPrintingRoute
-}
-
-const ServicesRouteChildren: ServicesRouteChildren = {
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute,
+  BlogRoute: BlogRoute,
+  ProcessRoute: ProcessRoute,
+  StudioRoute: StudioRoute,
+  WorkRoute: WorkRoute,
+  BlogSlugRoute: BlogSlugRoute,
   ServicesCreativeDesignRoute: ServicesCreativeDesignRoute,
   ServicesEventsRoute: ServicesEventsRoute,
   ServicesFabricationRoute: ServicesFabricationRoute,
   ServicesInstallationRoute: ServicesInstallationRoute,
   ServicesOutdoorAdvertisingRoute: ServicesOutdoorAdvertisingRoute,
   ServicesPrintingRoute: ServicesPrintingRoute,
-}
-
-const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
-  ServicesRouteChildren,
-)
-
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute,
-  BlogRoute: BlogRoute,
-  ProcessRoute: ProcessRoute,
-  ServicesRoute: ServicesRouteWithChildren,
-  StudioRoute: StudioRoute,
-  WorkRoute: WorkRoute,
-  BlogSlugRoute: BlogSlugRoute,
+  ServicesWebsiteDevelopmentRoute: ServicesWebsiteDevelopmentRoute,
+  ServicesCreativeDevelopmentRoute: ServicesCreativeDevelopmentRoute,
+  ServicesEventManagementRoute: ServicesEventManagementRoute,
+  ServicesFabricationInstallationRoute: ServicesFabricationInstallationRoute,
+  ServicesPrintingServicesRoute: ServicesPrintingServicesRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

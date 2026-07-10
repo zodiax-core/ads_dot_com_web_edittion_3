@@ -162,6 +162,38 @@ function RouteComponent() {
           </div>
         </section>
 
+        {/* Leadership / Team Section */}
+        <section className="px-4 max-w-5xl mx-auto mb-28">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-accent-mint">Leadership</span>
+            <h2 className="text-3xl font-medium tracking-tight mt-2 mb-4">
+              The team behind the build.
+            </h2>
+            <p className="text-ink-soft text-sm leading-relaxed">
+              We are a collective of structural engineers, designers, and production specialists.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[1, 2].map((i) => (
+              <div key={i} className="flex flex-col sm:flex-row gap-6 bg-surface p-6 rounded-[2rem] border border-ink/5">
+                <div className="size-24 rounded-full bg-canvas border border-ink/10 flex-shrink-0 overflow-hidden">
+                  <div className="w-full h-full bg-canvas/50 flex items-center justify-center text-ink-mute/30">
+                    <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium text-ink">[Team Member Name]</h3>
+                  <p className="text-[11px] uppercase tracking-wider text-accent-blue font-bold mb-3">[Role / Title]</p>
+                  <p className="text-xs text-ink-soft leading-relaxed">
+                    [Placeholder for bio. Please provide the actual team member name, role, and short bio text. We do not fabricate employee data.]
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Contact Form Section */}
         <section id="contact" className="px-4 max-w-4xl mx-auto">
           <div className="text-center mb-12">

@@ -3,14 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { PageShell } from "@/components/page-shell";
 import printing from "@/assets/printing.jpg";
 import fabModular from "@/assets/fab-modular.jpg";
-import fabKinetic from "@/assets/fab-kinetic.jpg";
 import fabVenue from "@/assets/fab-venue.jpg";
 import events from "@/assets/events.jpg";
-import installation from "@/assets/installation.jpg";
 import creative from "@/assets/creative.jpg";
 
-export const Route = createFileRoute("/services")({
-  head: () => ({
+export const Route = createFileRoute("/services/")({
+  head: ()  => ({
     meta: [
       { title: "Services — Outdoor Advertising, Printing, Fabrication & Events | ADS DOT COM" },
       { name: "description", content: "Six integrated services: outdoor advertising, precision printing, spatial fabrication, rigging & installation, event production and creative design. All in-house, Lahore Pakistan." },
@@ -47,11 +45,12 @@ function useReveal() {
 
 const slugToPath: Record<string, string> = {
   outdoor: "/services/outdoor-advertising",
-  printing: "/services/printing",
-  fabrication: "/services/fabrication",
-  installation: "/services/installation",
-  events: "/services/events",
-  creative: "/services/creative-design",
+  printing: "/services/printing-services",
+  fabrication: "/services/fabrication-installation",
+  installation: "/services/fabrication-installation",
+  events: "/services/event-management",
+  creative: "/services/creative-development",
+  website: "/services/website-development",
 };
 
 const ArrowRight = () => (
@@ -80,81 +79,81 @@ const services = [
     id: "02",
     slug: "printing",
     color: "accent-yellow",
-    title: "Precision Printing",
-    tagline: "Ink and paper, engineered. Every fibre matters.",
-    desc: "Our printing division operates at the intersection of traditional craftsmanship and modern press technology — bespoke ink formulations and large-format outputs creating depth that digital screens cannot replicate.",
+    title: "Printing Services",
+    tagline: "UV, DTF, Flex, Roland & Offset — every format in-house.",
+    desc: "UV Roll-to-Roll, UV DTF, UV Flatbed, Digital Flex, Roland and Offset printing — all produced in our own print facility. Every substrate, every format, every size.",
     image: printing,
     capabilities: [
-      { name: "Bespoke Letterpress & Foil", note: "Cotton, cork and reclaimed pulp" },
-      { name: "Large-Scale Architectural Graphics", note: "Up to 12m continuous format" },
-      { name: "Reactive Intelligent Inks", note: "Thermochromic and photochromic" },
-      { name: "Sustainable Substrates", note: "Fully closed-loop material chain" },
+      { name: "UV Roll-to-Roll & DTF", note: "Flexible media & transfers" },
+      { name: "UV Flatbed", note: "Direct on rigid boards & panels" },
+      { name: "Digital Flex & Roland", note: "Large-format banners & graphics" },
+      { name: "Offset Printing", note: "Brochures, catalogues, packaging" },
     ],
-    stats: [{ v: "12m", l: "Max Continuous Format" }, { v: "4", l: "Ink Technologies" }, { v: "100%", l: "In-house Press" }],
+    stats: [{ v: "12m", l: "Max Format Width" }, { v: "6", l: "Print Technologies" }, { v: "100%", l: "In-house Press" }],
   },
   {
     id: "03",
     slug: "fabrication",
     color: "accent-coral",
-    title: "Spatial Fabrication",
-    tagline: "Where geometry meets the physical plane.",
-    desc: "Modular assemblies, precision machining and hand-finished detail — all built in-house. Our fabrication team translates architectural drawings into physical structures that are delivered and erected by our own crew.",
+    title: "Fabrication & Installation",
+    tagline: "Billboards, signage, 3D letters — built and installed.",
+    desc: "Billboard fabrication, custom signage, 3D sign boards and stainless steel letters — all designed, fabricated and installed in-house by our certified crew. Zero subcontractors.",
     image: fabModular,
     capabilities: [
-      { name: "Modular Structural Systems", note: "Rapidly deployable event frames" },
-      { name: "Kinetic Signage", note: "Animated, mechanical brand displays" },
-      { name: "CNC & Robotic Machining", note: "Precision-cut metal, wood & acrylic" },
-      { name: "Scenic Venue Conversion", note: "Industrial space transformation" },
+      { name: "Billboard Structures", note: "Single, double & tri-vision" },
+      { name: "Custom Signage", note: "Illuminated & architectural" },
+      { name: "3D Sign Boards", note: "Acrylic, foam & composite" },
+      { name: "Stainless Steel Letters", note: "Brushed, polished & backlit" },
     ],
     stats: [{ v: "In-house", l: "Full Workshop" }, { v: "Custom", l: "Every Build" }, { v: "Zero", l: "Subcontractors" }],
   },
   {
     id: "04",
-    slug: "installation",
+    slug: "events",
     color: "accent-purple",
-    title: "Rigging & Installation",
-    tagline: "On-site craft. Structural confidence.",
-    desc: "From a single storefront sign to a citywide activation, our certified rigging team manages transport, structural anchoring, safety compliance and ongoing maintenance — all under one roof.",
-    image: installation,
+    title: "Event Management",
+    tagline: "Weddings, birthdays, corporate & exhibitions.",
+    desc: "Complete event management from brief to breakdown — weddings, shadi events, birthdays, corporate dinners, product launches and exhibition stalls. Full décor, stage setup and branded environments.",
+    image: events,
     capabilities: [
-      { name: "High-Altitude Rigging", note: "Certified crew & equipment" },
-      { name: "Facade & Glass Wrapping", note: "Full building surface application" },
-      { name: "Retail Window Installs", note: "Fast-turnaround POS displays" },
-      { name: "Ongoing Maintenance", note: "Scheduled site visits & repairs" },
+      { name: "Weddings & Shadi Events", note: "Complete décor & stage" },
+      { name: "Birthday Celebrations", note: "Themed setups & backdrops" },
+      { name: "Corporate Events", note: "Branded environments & stages" },
+      { name: "Exhibition Stalls", note: "Custom booths & displays" },
     ],
-    stats: [{ v: "City-wide", l: "Deployment Reach" }, { v: "Certified", l: "Safety Standards" }, { v: "24/7", l: "Site Support" }],
+    stats: [{ v: "Turnkey", l: "Delivery" }, { v: "All Venues", l: "Coverage" }, { v: "Custom", l: "Every Event" }],
   },
   {
     id: "05",
-    slug: "events",
+    slug: "creative",
     color: "accent-mint",
-    title: "Event Production",
-    tagline: "Live experiences, engineered from blank space.",
-    desc: "We transform empty venues into immersive branded environments. From stage construction to LED wall integration and real-time media programming — our event team handles every technical layer of your live activation.",
-    image: events,
+    title: "Creative Design",
+    tagline: "Brand identity, graphic design and UI/UX.",
+    desc: "Brand identity systems, graphic design, UI/UX, environmental design — a physical-first creative studio that designs for production, not just screens.",
+    image: creative,
     capabilities: [
-      { name: "Custom Stage Design & Build", note: "Structural scenic sets" },
-      { name: "LED & Screen Integration", note: "Walls, floors & ceilings" },
-      { name: "Lighting Design", note: "Architectural & dynamic systems" },
-      { name: "Media Server Control", note: "Real-time content programming" },
+      { name: "Brand Identity & Logos", note: "Physical visual language" },
+      { name: "Graphic Design", note: "Print-ready marketing materials" },
+      { name: "UI/UX Design", note: "Websites & app interfaces" },
+      { name: "Environmental Design", note: "Spatial graphics & wayfinding" },
     ],
-    stats: [{ v: "Full-stack", l: "AV Production" }, { v: "Live", l: "Event Direction" }, { v: "Turnkey", l: "Delivery" }],
+    stats: [{ v: "End-to-end", l: "Studio Direction" }, { v: "Physical", l: "Every Output" }, { v: "Bespoke", l: "No Templates" }],
   },
   {
     id: "06",
-    slug: "creative",
+    slug: "website",
     color: "accent-blue",
-    title: "Creative & Design",
-    tagline: "Sketches evolve into complete brand systems.",
-    desc: "Our studio guides each project from initial concept all the way to physical execution. Identity systems, spatial graphics, packaging, and environmental design — every output has a material reality.",
-    image: creative,
+    title: "Website Development",
+    tagline: "Fast, modern websites that work for your business.",
+    desc: "Business websites, e-commerce stores, landing pages and web apps — built with modern technology, optimised for search engines and designed to convert visitors into leads.",
+    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&q=80",
     capabilities: [
-      { name: "Brand Identity Systems", note: "Physical visual language" },
-      { name: "Environmental Design", note: "Spatial graphics & wayfinding" },
-      { name: "Packaging & Unboxing", note: "Tactile luxury experiences" },
-      { name: "Material Sampling", note: "Prototype proofing before print" },
+      { name: "Business Websites", note: "5–15 pages, mobile responsive" },
+      { name: "E-commerce Stores", note: "Product catalogue & payments" },
+      { name: "Landing Pages", note: "High-conversion, fast load" },
+      { name: "Web Applications", note: "Custom functionality & dashboards" },
     ],
-    stats: [{ v: "End-to-end", l: "Studio Direction" }, { v: "Physical", l: "Every Output" }, { v: "Bespoke", l: "No Templates" }],
+    stats: [{ v: "SEO", l: "Optimised" }, { v: "Mobile", l: "First" }, { v: "Fast", l: "Load Time" }],
   },
 ];
 

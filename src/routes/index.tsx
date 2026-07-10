@@ -3,12 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import heroScene from "@/assets/hero-scene.jpg";
 import fabModular from "@/assets/fab-modular.jpg";
 import fabKinetic from "@/assets/fab-kinetic.jpg";
-import fabVenue from "@/assets/fab-venue.jpg";
 import events from "@/assets/events.jpg";
-import installation from "@/assets/installation.jpg";
 import creative from "@/assets/creative.jpg";
-import projectLumos from "@/assets/project-lumos.jpg";
-import projectMonolith from "@/assets/project-monolith.jpg";
+import installation from "@/assets/installation.jpg";
+import printing from "@/assets/printing.jpg";
 
 import { CinematicIntro } from "@/components/cinematic-intro";
 
@@ -58,11 +56,11 @@ export function Nav({ ready = true }: { ready?: boolean }) {
 
   const serviceLinks = [
     { href: "/services/outdoor-advertising", label: "Outdoor Advertising" },
-    { href: "/services/printing", label: "Precision Printing" },
-    { href: "/services/fabrication", label: "Fabrication" },
-    { href: "/services/installation", label: "Installation" },
-    { href: "/services/events", label: "Event Production" },
-    { href: "/services/creative-design", label: "Creative & Design" },
+    { href: "/services/printing-services", label: "Printing Services" },
+    { href: "/services/fabrication-installation", label: "Fabrication & Installation" },
+    { href: "/services/event-management", label: "Event Management" },
+    { href: "/services/creative-development", label: "Creative Design" },
+    { href: "/services/website-development", label: "Website Development" },
   ];
 
   return (
@@ -188,13 +186,14 @@ function Hero({ ready = true }: { ready?: boolean }) {
         {/* Heading */}
         <div className={`overflow-hidden transition-all duration-700 delay-[350ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${ready ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <h1 className="text-4xl md:text-[3.25rem] leading-[1.05] font-medium tracking-tight text-balance">
-            Spark big ideas for the <span className="font-serif italic text-accent-blue">real</span> world.
+            Integrated Advertising Agency in <span className="font-serif italic text-accent-blue">Lahore, Pakistan.</span>
           </h1>
         </div>
 
         {/* Subtext */}
         <div className={`transition-all duration-700 delay-[500ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${ready ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           <p className="mt-5 text-ink-soft text-base md:text-lg leading-relaxed max-w-lg mx-auto">
+            <span className="font-medium text-ink block mb-2 text-xl">Spark big ideas for the real world.</span>
             Ads Dot COM merges marketing science with strategic thinking and highly creative executions—so your brand
             grows with measurable intent and human craft.
           </p>
@@ -246,209 +245,100 @@ function Marquee() {
   );
 }
 
-/* ────────────────────────────────── PRINTING ────────────────────────────── */
-function Printing() {
-  const { ref, shown } = useReveal();
-  return (
-    <section id="services" className="py-24 md:py-32 px-4 bg-surface relative">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-16 max-w-2xl">
-          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent-blue mb-3">
-            Service 01 · Printing
-          </div>
-          <h2 className="text-3xl md:text-4xl font-medium tracking-tight leading-tight">
-            Ink and paper, engineered.{" "}
-            <span className="font-serif italic text-ink-soft">Every fibre matters.</span>
-          </h2>
-        </div>
-
-        <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className={`relative transition-all duration-1000 ${shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
-            <div className="relative aspect-[4/5] bg-white rounded-[2rem] shadow-lift overflow-hidden border border-ink/5">
-              <img
-                src="https://images.unsplash.com/photo-1676474506722-4bf98059b74a?auto=format&fit=crop&w=1920"
-                alt="Wide-format flex printing machine outputting large vinyl roll in a print shop"
-                width={1024}
-                height={1280}
-                loading="lazy"
-                className="w-full h-full object-cover"
-              />
-              {/* Overlay caption */}
-              <div className="absolute bottom-6 left-6 right-6 p-5 bg-white/60 backdrop-blur-xl rounded-2xl border border-white/40">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink-mute mb-1">Process 01</p>
-                    <p className="text-sm font-medium font-serif italic text-ink leading-snug">
-                      The weight of a thought, rendered on paper.
-                    </p>
-                  </div>
-                  <div className="chrome-shimmer size-10 rounded-full border border-ink/5 shrink-0" />
-                </div>
-              </div>
-              {/* Corner tag */}
-              <div className="absolute top-5 left-5 px-2.5 py-1 rounded-full bg-accent-yellow text-ink text-[10px] font-bold uppercase tracking-wider">
-                Live
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-7">
-            <p className="text-ink-soft leading-relaxed text-lg">
-              Our printing division operates at the intersection of traditional
-              craftsmanship and robotics — bespoke ink formulations that react to light,
-              creating depth digital screens cannot replicate.
-            </p>
-            <ul className="space-y-3">
-              {[
-                { c: "bg-accent-blue", t: "Bespoke Letterpress & Foil", d: "Cotton, cork and reclaimed pulp" },
-                { c: "bg-accent-coral", t: "Large-Scale Architectural Graphics", d: "Up to 12m continuous format" },
-                { c: "bg-accent-mint", t: "Reactive Intelligent Inks", d: "Thermochromic and photochromic" },
-                { c: "bg-accent-purple", t: "Sustainable Substrates", d: "Fully closed-loop material chain" },
-              ].map((f) => (
-                <li key={f.t} className="flex items-center gap-4 group p-3 rounded-2xl hover:bg-white transition-colors">
-                  <div className="size-11 rounded-2xl bg-white flex items-center justify-center shadow-soft group-hover:rotate-6 transition-transform shrink-0">
-                    <div className={`size-2 rounded-full ${f.c}`} />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-sm font-medium text-ink">{f.t}</div>
-                    <div className="text-xs text-ink-mute">{f.d}</div>
-                  </div>
-                  <svg className="ml-auto size-4 text-ink-mute opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                    <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ───────────────────────────────── FABRICATION ──────────────────────────── */
-function Fabrication() {
-  const cards = [
-    { img: fabModular, title: "Modular Systems", desc: "Rapidly deployable structures for events and temporary installations.", tag: "01", offset: "" },
-    { img: fabKinetic, title: "Kinetic Signage", desc: "Environmental branding that moves, reacts and breathes with its surroundings.", tag: "02", offset: "md:mt-16" },
-    { img: fabVenue, title: "Venue Alchemy", desc: "Transforming industrial spaces into immersive branded ecosystems overnight.", tag: "03", offset: "" },
+/* ────────────────────────────────── SERVICES ────────────────────────────── */
+function Services() {
+  const services = [
+    {
+      id: "01",
+      title: "Printing Services",
+      tag: "Print",
+      color: "accent-blue",
+      image: "/gallery/printing-service-images/Flex-printing-1.jpg",
+      imageAlt: "Wide format printing in Lahore",
+      desc: "Our printing division operates at the intersection of traditional craftsmanship and robotics. UV Roll-to-Roll, DTF, Flatbed, and Offset.",
+      href: "/services/printing",
+    },
+    {
+      id: "02",
+      title: "Fabrication & Installation",
+      tag: "Build",
+      color: "accent-coral",
+      image: "/gallery/fabrication-images/birdboard-1.webp",
+      imageAlt: "Custom fabricated modular structure and billboard installation in Lahore",
+      desc: "Billboards, 3D sign boards, stainless steel letters, custom signage — all designed, fabricated and installed in-house by our own crew.",
+      href: "/services/fabrication",
+    },
+    {
+      id: "03",
+      title: "Event Management",
+      tag: "Live",
+      color: "accent-purple",
+      image: "/gallery/event-management-images/Marriage-1.avif",
+      imageAlt: "Branded event setup with stage and lighting in Lahore",
+      desc: "Weddings (shadi), corporate events, exhibitions and branded stalls — full décor, stage setup and event management from brief to breakdown.",
+      href: "/services/events",
+    },
+    {
+      id: "04",
+      title: "Creative Design",
+      tag: "Studio",
+      color: "accent-mint",
+      image: "/gallery/creative-design-images/design-1.jpeg",
+      imageAlt: "Brand identity design and creative development studio in Lahore",
+      desc: "Brand identity, graphic design, UI/UX and environmental design — physical-first creative studio that designs for production, not just screens.",
+      href: "/services/creative-design",
+    },
+    {
+      id: "05",
+      title: "Website Development",
+      tag: "Digital",
+      color: "accent-yellow",
+      image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=1400&q=80",
+      imageAlt: "Professional website design and development workspace with code on screen",
+      desc: "Business websites, e-commerce stores, landing pages and web apps — fast, SEO-optimised and built with modern technology.",
+      href: "/services/website-development",
+    },
   ];
+
   return (
-    <section className="py-24 md:py-32 px-4 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <section id="services" className="py-24 md:py-32 px-4 bg-surface">
+      <div className="max-w-6xl mx-auto space-y-12">
         <div className="text-center mb-16">
-          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent-coral mb-3">
-            Service 02 · Fabrication
+          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent-blue mb-3">
+            Capabilities
           </div>
           <h2 className="text-3xl md:text-4xl font-medium tracking-tight">
-            Where <span className="font-serif italic">geometry</span> meets the physical plane.
+            Our <span className="font-serif italic text-accent-blue">Services.</span>
           </h2>
-          <p className="mt-4 text-ink-soft max-w-lg mx-auto">
-            Modular assemblies, robotic machining and hand-finished detail — built in-house.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {cards.map((c) => (
-            <article key={c.title} className={`group p-5 bg-canvas border border-ink/5 rounded-[2rem] shadow-soft hover:shadow-lift hover:-translate-y-1.5 transition-all duration-500 ${c.offset}`}>
-              <div className="relative w-full aspect-square rounded-[1.4rem] overflow-hidden mb-5 bg-surface">
-                <img src={c.img} alt={c.title} width={900} height={900} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-                <div className="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-white/90 backdrop-blur text-[10px] font-bold text-ink">
-                  {c.tag}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((s) => (
+            <article
+              key={s.title}
+              className="group flex flex-col p-5 bg-canvas rounded-[2rem] border border-ink/5 shadow-soft hover:shadow-lift transition-shadow duration-500"
+            >
+              <div className="relative w-full h-56 rounded-[1.4rem] overflow-hidden bg-surface mb-6">
+                <img src={s.image} alt={s.imageAlt} loading="lazy" className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-1000" />
+                <div className="absolute top-4 left-4 flex gap-2">
+                  <span className="px-2.5 py-1 rounded-full bg-white/90 backdrop-blur text-[10px] font-bold text-ink">{s.id}</span>
+                  <span className={`px-2.5 py-1 rounded-full bg-${s.color} text-white text-[10px] font-bold uppercase tracking-wider`}>{s.tag}</span>
                 </div>
               </div>
-              <div className="px-2 pb-3">
-                <h3 className="text-lg font-medium mb-1.5 text-ink">{c.title}</h3>
-                <p className="text-sm text-ink-soft leading-relaxed">{c.desc}</p>
+
+              <div className="flex flex-col flex-1">
+                <h3 className="text-xl md:text-2xl font-medium tracking-tight text-ink mb-3">{s.title}</h3>
+                <p className="text-ink-soft leading-relaxed text-sm mb-6 flex-1">{s.desc}</p>
+                <a href={s.href} className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-ink text-canvas rounded-xl text-sm font-semibold hover:scale-[1.02] active:scale-[0.98] transition-transform w-full">
+                  View Service
+                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
               </div>
             </article>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* ──────────────────────────── SERVICE STRIP ─────────────────────────────── */
-function ServiceStrip() {
-  const rows = [
-    {
-      idx: "03",
-      title: "Installation",
-      tag: "On-Site",
-      color: "accent-coral",
-      image: installation,
-      desc: "Rigging, crane placement and architectural wrapping — from a single storefront to a citywide activation.",
-      chips: ["Signage", "Facade wrap", "Structural"],
-    },
-    {
-      idx: "04",
-      title: "Event Management",
-      tag: "Live",
-      color: "accent-purple",
-      image: events,
-      desc: "Empty venues transformed into immersive experiences with stage, lighting and LED programmed in real time.",
-      chips: ["Stage build", "Lighting", "LED walls"],
-      reverse: true,
-    },
-    {
-      idx: "05",
-      title: "Creative & Design",
-      tag: "Studio",
-      color: "accent-mint",
-      image: creative,
-      desc: "Sketches evolve into complete brand systems — physical identities, environmental design and packaging.",
-      chips: ["Identity", "Environmental", "Packaging"],
-    },
-  ];
-
-  return (
-    <section className="py-24 md:py-32 px-4 bg-surface">
-      <div className="max-w-6xl mx-auto space-y-6">
-        {rows.map((r) => (
-          <article
-            key={r.title}
-            className={`group grid grid-cols-1 md:grid-cols-2 items-stretch gap-6 md:gap-8 p-5 md:p-6 bg-canvas rounded-[2rem] border border-ink/5 shadow-soft hover:shadow-lift transition-shadow duration-500`}
-          >
-            <div className={`relative w-full h-64 md:h-80 rounded-[1.4rem] overflow-hidden bg-surface ${r.reverse ? "md:order-2" : ""}`}>
-              <img src={r.image} alt={r.title} width={1400} height={900} loading="lazy" className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-1000" />
-              <div className="absolute top-4 left-4 flex gap-2">
-                <span className="px-2.5 py-1 rounded-full bg-white/90 backdrop-blur text-[10px] font-bold text-ink">
-                  {r.idx}
-                </span>
-                <span className={`px-2.5 py-1 rounded-full bg-${r.color} text-white text-[10px] font-bold uppercase tracking-wider`}>
-                  {r.tag}
-                </span>
-              </div>
-            </div>
-
-            <div className="flex flex-col justify-between p-2 md:p-6">
-              <div>
-                <h3 className="text-2xl md:text-3xl font-medium tracking-tight text-ink mb-3">
-                  {r.title}
-                </h3>
-                <p className="text-ink-soft leading-relaxed max-w-md">{r.desc}</p>
-              </div>
-              <div className="mt-6 flex items-center justify-between flex-wrap gap-4">
-                <div className="flex flex-wrap gap-2">
-                  {r.chips.map((chip) => (
-                    <span key={chip} className="px-3 py-1 rounded-full bg-surface border border-ink/5 text-[11px] font-medium text-ink-soft">
-                      {chip}
-                    </span>
-                  ))}
-                </div>
-                <a href="/work" className="text-[12px] font-semibold text-ink flex items-center gap-1.5 group/link">
-                  See work
-                  <span className="size-6 rounded-full bg-ink text-canvas flex items-center justify-center group-hover/link:translate-x-0.5 transition-transform">
-                    <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
-                      <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </article>
-        ))}
       </div>
     </section>
   );
@@ -505,22 +395,31 @@ function Process() {
 function Work() {
   const projects = [
     {
-      img: projectLumos,
-      tag: "Retail Identity",
-      tagColor: "bg-accent-blue",
-      title: "Project Lumos",
-      client: "LOEWE",
-      year: "2025",
-      desc: "Installation for Paris Fashion Week, featuring light-reactive fabric panels and CNC-milled chrome signage.",
+      img: installation,
+      tag: "Outdoor Campaign",
+      tagColor: "bg-accent-purple",
+      title: "Cantt. Billboard Circuit",
+      client: "Samsung / Wakgroup",
+      year: "2024",
+      desc: "A series of high-altitude double-sided billboard structures deployed at primary intersections.",
     },
     {
-      img: projectMonolith,
-      tag: "Event Space",
-      tagColor: "bg-accent-coral",
-      title: "The Monolith",
-      client: "Geneva Motor Show",
-      year: "2024",
-      desc: "A 40-foot temporary pavilion with neon-wrapped brushed aluminum stands and a rotating debut floor.",
+      img: events,
+      tag: "Live Production",
+      tagColor: "bg-accent-mint",
+      title: "ARY News Studio Set",
+      client: "ARY Network",
+      year: "2023",
+      desc: "Scenic custom broadcast television set with integrated LED wall mounts and architectural wood cladding.",
+    },
+    {
+      img: printing,
+      tag: "Print & Graphics",
+      tagColor: "bg-accent-yellow",
+      title: "HQ Facade Wrap",
+      client: "Pak Arab Housing",
+      year: "2023",
+      desc: "Weatherproof 12-meter continuous graphic applied to structural glass siding.",
     },
   ];
   return (
@@ -727,8 +626,6 @@ export function Footer() {
               {[
                 { name: "About Us", href: "/studio" },
                 { name: "Contact", href: "/studio#contact" },
-                { name: "Sustainability", href: "#" },
-                { name: "Suppliers", href: "#" },
               ].map((l) => (
                 <li key={l.name}>
                   <a href={l.href} className="text-ink-soft hover:text-accent-blue transition-colors">{l.name}</a>
@@ -778,13 +675,14 @@ function Home() {
         <CinematicIntro onComplete={handleIntroComplete} />
       )}
 
-      <main className={`min-h-screen bg-canvas text-ink font-sans relative transition-opacity duration-700 ${heroReady ? "opacity-100" : "opacity-0"}`}>
+      <main className={`transition-all duration-[1200ms] ${heroReady ? "opacity-100 blur-0" : "opacity-0 blur-sm"}`}>
         <Nav ready={heroReady} />
         <Hero ready={heroReady} />
         <Marquee />
-        <Printing />
-        <Fabrication />
-        <ServiceStrip />
+        
+        {/* Simplified Services Section */}
+        <Services />
+        
         <Process />
         <Work />
         <Contact />

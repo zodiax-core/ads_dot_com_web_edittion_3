@@ -23,9 +23,9 @@ function OutdoorAdvertisingPage() {
         id: "01",
         slug: "outdoor-advertising",
         color: "accent-blue",
-        h1: "Billboard Advertising in Lahore",
+        h1: "Outdoor Advertising in Lahore",
         tagline: "Billboards, transit & ambient — commanding presence at scale.",
-        desc: "Our founding division since 2006. We design, produce, place, and maintain outdoor advertising installations across Pakistan. From single-site billboards to multi-city corridor campaigns.",
+        desc: "Outdoor advertising remains the most undeniable form of brand communication. Since our founding in 2006, ADS DOT COM has built a reputation for dominating the physical landscape of Lahore and across Pakistan. We specialize in identifying, acquiring, and constructing high-impact outdoor media placements that capture consumer attention where it matters most. From sprawling double-sided hoardings at key traffic intersections to highly targeted transit and ambient media, our outdoor division operates with precision. We don't just lease space; we design, fabricate, install, and maintain the structures ourselves, ensuring your brand is displayed safely and immaculately. By combining granular location data with robust engineering, we ensure that every outdoor campaign delivers maximum visibility, deep brand recall, and measurable dominance in the real world. Whether you are launching a new product or sustaining market leadership, our outdoor network provides the scale and authority your brand deserves.",
         image: fabVenue,
         imageAlt: "Large-format billboard hoarding structure on Walton Road, Lahore cantonment area",
         capabilities: [

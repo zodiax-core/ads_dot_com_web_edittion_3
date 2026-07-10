@@ -14,6 +14,7 @@ import type * as files from "../files.js";
 import type * as gallery from "../gallery.js";
 import type * as http from "../http.js";
 import type * as messages from "../messages.js";
+import type * as seed from "../seed.js";
 import type * as users from "../users.js";
 import type * as works from "../works.js";
 
@@ -30,6 +31,7 @@ declare const fullApi: ApiFromModules<{
   gallery: typeof gallery;
   http: typeof http;
   messages: typeof messages;
+  seed: typeof seed;
   users: typeof users;
   works: typeof works;
 }>;

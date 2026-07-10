@@ -105,10 +105,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Outdoor advertising, printing, fabrication, installation, event production and creative direction. Pakistan's most integrated physical branding studio since 2006.",
       },
       { property: "og:url", content: "https://adsdotcom.net/" },
-      { property: "og:image", content: "https://adsdotcom.net/logo.png" },
+      { property: "og:image", content: "https://adsdotcom.net/og-image.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "ADS DOT COM — Integrated Creative Agency" },
+      { property: "og:image:alt", content: "ADS DOT COM — Integrated Creative Agency Lahore" },
       { property: "og:locale", content: "en_PK" },
 
       // Twitter / X
@@ -118,7 +118,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "twitter:description",
         content: "Outdoor advertising, printing, fabrication, installation, events and creative direction — Lahore, Pakistan since 2006.",
       },
-      { name: "twitter:image", content: "https://adsdotcom.net/logo.png" },
+      { name: "twitter:image", content: "https://adsdotcom.net/og-image.png" },
       { name: "twitter:image:alt", content: "ADS DOT COM Logo" },
 
       // Geo
@@ -130,9 +130,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/logo.png", type: "image/png", sizes: "any" },
+      { rel: "apple-touch-icon", href: "/logo.png" },
+      { rel: "manifest", href: "/manifest.json" },
       { rel: "canonical", href: "https://adsdotcom.net/" },
       { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
-      // Preconnect for performance
       { rel: "preconnect", href: "https://www.googletagmanager.com" },
       { rel: "preconnect", href: "https://rosy-crow-160.convex.cloud" },
       { rel: "dns-prefetch", href: "https://www.googletagmanager.com" },
@@ -155,8 +156,13 @@ function RootShell({ children }: { children: ReactNode }) {
         "name": "ADS DOT COM",
         "alternateName": "Ads Dot COM",
         "url": "https://adsdotcom.net",
-        "logo": "https://adsdotcom.net/logo.png",
-        "image": "https://adsdotcom.net/logo.png",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://adsdotcom.net/logo.png",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://adsdotcom.net/og-image.png",
         "description": "Lahore's leading integrated creative agency — outdoor advertising, precision printing, fabrication, installation, event production and brand design since 2006.",
         "foundingDate": "2006-05-16",
         "email": "info@adsdotcom.net",

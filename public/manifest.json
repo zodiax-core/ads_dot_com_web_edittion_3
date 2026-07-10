@@ -1,0 +1,23 @@
+{
+  "name": "ADS DOT COM",
+  "short_name": "ADS DOT COM",
+  "description": "Lahore's integrated creative agency — outdoor advertising, printing, fabrication, events and design since 2006.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f0eb",
+  "theme_color": "#1a1a1a",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
