@@ -1,19 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { PageShell } from "@/components/page-shell";
-import printing from "@/assets/printing.jpg";
-import fabModular from "@/assets/fab-modular.jpg";
-import fabVenue from "@/assets/fab-venue.jpg";
-import events from "@/assets/events.jpg";
-import creative from "@/assets/creative.jpg";
+import printHero from "@/assets/printing-service-images/Flex-printing-1.jpg";
+import fabHero from "@/assets/fabrication-images/birdboard-1.webp";
+import eventHero from "@/assets/event-management-images/Marriage-1.avif";
+import designHero from "@/assets/creative-design-images/design-1.jpeg";
 
 export const Route = createFileRoute("/services/")({
   head: ()  => ({
     meta: [
-      { title: "Services — Outdoor Advertising, Printing, Fabrication & Events | ADS DOT COM" },
-      { name: "description", content: "Six integrated services: outdoor advertising, precision printing, spatial fabrication, rigging & installation, event production and creative design. All in-house, Lahore Pakistan." },
+      { title: "Services — Printing, Fabrication & Events | ADS DOT COM" },
+      { name: "description", content: "Four integrated services: precision printing, spatial fabrication, event production and creative design. All in-house, Lahore Pakistan." },
       { property: "og:title", content: "Services | ADS DOT COM" },
-      { property: "og:description", content: "Six integrated services built in-house since 2006. Outdoor, print, fabrication, installation, events and creative direction." },
+      { property: "og:description", content: "Four integrated services built in-house since 2006. Print, fabrication, events and creative direction." },
       { property: "og:url", content: "https://adsdotcom.net/services" },
     ],
     links: [
@@ -44,13 +43,10 @@ function useReveal() {
 }
 
 const slugToPath: Record<string, string> = {
-  outdoor: "/services/outdoor-advertising",
-  printing: "/services/printing-services",
-  fabrication: "/services/fabrication-installation",
-  installation: "/services/fabrication-installation",
-  events: "/services/event-management",
-  creative: "/services/creative-development",
-  website: "/services/website-development",
+  printing: "/services/printing",
+  fabrication: "/services/fabrication",
+  events: "/services/events",
+  creative: "/services/creative-design",
 };
 
 const ArrowRight = () => (
@@ -61,28 +57,12 @@ const ArrowRight = () => (
 const services = [
   {
     id: "01",
-    slug: "outdoor",
-    color: "accent-blue",
-    title: "Outdoor Advertising",
-    tagline: "Billboards, transit & ambient — commanding presence at scale.",
-    desc: "Our founding division since 2006. We design, produce, place, and maintain outdoor advertising installations across Pakistan. From single-site billboards to multi-city corridor campaigns.",
-    image: fabVenue,
-    capabilities: [
-      { name: "Billboard Hoarding", note: "Single, double & tri-vision formats" },
-      { name: "Transit Advertising", note: "Buses, bus stops & shelters" },
-      { name: "Street Furniture", note: "Benches, kiosks & pedestrian signage" },
-      { name: "Logo Sign Plates", note: "Branded municipal & directional" },
-    ],
-    stats: [{ v: "20+", l: "Years Operating" }, { v: "100s", l: "Sites Managed" }, { v: "Nationwide", l: "Coverage" }],
-  },
-  {
-    id: "02",
     slug: "printing",
     color: "accent-yellow",
     title: "Printing Services",
     tagline: "UV, DTF, Flex, Roland & Offset — every format in-house.",
     desc: "UV Roll-to-Roll, UV DTF, UV Flatbed, Digital Flex, Roland and Offset printing — all produced in our own print facility. Every substrate, every format, every size.",
-    image: printing,
+    image: printHero,
     capabilities: [
       { name: "UV Roll-to-Roll & DTF", note: "Flexible media & transfers" },
       { name: "UV Flatbed", note: "Direct on rigid boards & panels" },
@@ -92,13 +72,13 @@ const services = [
     stats: [{ v: "12m", l: "Max Format Width" }, { v: "6", l: "Print Technologies" }, { v: "100%", l: "In-house Press" }],
   },
   {
-    id: "03",
+    id: "02",
     slug: "fabrication",
     color: "accent-coral",
     title: "Fabrication & Installation",
     tagline: "Billboards, signage, 3D letters — built and installed.",
     desc: "Billboard fabrication, custom signage, 3D sign boards and stainless steel letters — all designed, fabricated and installed in-house by our certified crew. Zero subcontractors.",
-    image: fabModular,
+    image: fabHero,
     capabilities: [
       { name: "Billboard Structures", note: "Single, double & tri-vision" },
       { name: "Custom Signage", note: "Illuminated & architectural" },
@@ -108,13 +88,13 @@ const services = [
     stats: [{ v: "In-house", l: "Full Workshop" }, { v: "Custom", l: "Every Build" }, { v: "Zero", l: "Subcontractors" }],
   },
   {
-    id: "04",
+    id: "03",
     slug: "events",
     color: "accent-purple",
     title: "Event Management",
     tagline: "Weddings, birthdays, corporate & exhibitions.",
     desc: "Complete event management from brief to breakdown — weddings, shadi events, birthdays, corporate dinners, product launches and exhibition stalls. Full décor, stage setup and branded environments.",
-    image: events,
+    image: eventHero,
     capabilities: [
       { name: "Weddings & Shadi Events", note: "Complete décor & stage" },
       { name: "Birthday Celebrations", note: "Themed setups & backdrops" },
@@ -124,13 +104,13 @@ const services = [
     stats: [{ v: "Turnkey", l: "Delivery" }, { v: "All Venues", l: "Coverage" }, { v: "Custom", l: "Every Event" }],
   },
   {
-    id: "05",
+    id: "04",
     slug: "creative",
     color: "accent-mint",
     title: "Creative Design",
     tagline: "Brand identity, graphic design and UI/UX.",
     desc: "Brand identity systems, graphic design, UI/UX, environmental design — a physical-first creative studio that designs for production, not just screens.",
-    image: creative,
+    image: designHero,
     capabilities: [
       { name: "Brand Identity & Logos", note: "Physical visual language" },
       { name: "Graphic Design", note: "Print-ready marketing materials" },
@@ -138,22 +118,6 @@ const services = [
       { name: "Environmental Design", note: "Spatial graphics & wayfinding" },
     ],
     stats: [{ v: "End-to-end", l: "Studio Direction" }, { v: "Physical", l: "Every Output" }, { v: "Bespoke", l: "No Templates" }],
-  },
-  {
-    id: "06",
-    slug: "website",
-    color: "accent-blue",
-    title: "Website Development",
-    tagline: "Fast, modern websites that work for your business.",
-    desc: "Business websites, e-commerce stores, landing pages and web apps — built with modern technology, optimised for search engines and designed to convert visitors into leads.",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&q=80",
-    capabilities: [
-      { name: "Business Websites", note: "5–15 pages, mobile responsive" },
-      { name: "E-commerce Stores", note: "Product catalogue & payments" },
-      { name: "Landing Pages", note: "High-conversion, fast load" },
-      { name: "Web Applications", note: "Custom functionality & dashboards" },
-    ],
-    stats: [{ v: "SEO", l: "Optimised" }, { v: "Mobile", l: "First" }, { v: "Fast", l: "Load Time" }],
   },
 ];
 
@@ -247,7 +211,7 @@ function ServicesPage() {
             <span className="size-1 rounded-full bg-accent-blue" /> What We Do
           </div>
           <h1 className="text-4xl md:text-[3.5rem] leading-[1.05] font-medium tracking-tight text-balance animate-reveal-up" style={{ animationDelay: "80ms" }}>
-            Six divisions. <span className="font-serif italic text-accent-blue">One integrated</span> studio.
+            Four divisions. <span className="font-serif italic text-accent-blue">One integrated</span> studio.
           </h1>
           <p className="mt-5 text-ink-soft text-base md:text-lg max-w-xl mx-auto leading-relaxed animate-reveal-up" style={{ animationDelay: "160ms" }}>
             From the first billboard we ever hung in 2006 to complex multi-city brand activations today — every service we offer is produced in-house, with zero subcontractors.

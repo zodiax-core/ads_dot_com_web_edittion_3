@@ -193,18 +193,64 @@ function RootShell({ children }: { children: ReactNode }) {
         "@id": "https://adsdotcom.net/#website",
         "url": "https://adsdotcom.net",
         "name": "ADS DOT COM",
-        "publisher": { "@id": "https://adsdotcom.net/#organization" }
+        "description": "Outdoor advertising, printing, fabrication, event management and creative design in Lahore, Pakistan.",
+        "publisher": { "@id": "https://adsdotcom.net/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://adsdotcom.net/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
       },
       {
         "@type": "ItemList",
-        "name": "Services",
+        "name": "ADS DOT COM Services",
+        "description": "Core services offered by ADS DOT COM in Lahore, Pakistan.",
         "itemListElement": [
-          { "@type": "Service", "position": 1, "name": "Outdoor Advertising", "description": "Billboard hoarding, transit advertising, street furniture and logo sign plates across Pakistan.", "provider": { "@id": "https://adsdotcom.net/#organization" } },
-          { "@type": "Service", "position": 2, "name": "Precision Printing", "description": "Wide-format architectural graphics, letterpress, foil and reactive intelligent inks.", "provider": { "@id": "https://adsdotcom.net/#organization" } },
-          { "@type": "Service", "position": 3, "name": "Spatial Fabrication", "description": "Modular structures, kinetic signage, CNC machining and scenic venue conversion.", "provider": { "@id": "https://adsdotcom.net/#organization" } },
-          { "@type": "Service", "position": 4, "name": "Rigging & Installation", "description": "High-altitude rigging, facade wrapping, retail window installs and ongoing maintenance.", "provider": { "@id": "https://adsdotcom.net/#organization" } },
-          { "@type": "Service", "position": 5, "name": "Event Production", "description": "Custom stage builds, LED walls, lighting design and real-time media programming.", "provider": { "@id": "https://adsdotcom.net/#organization" } },
-          { "@type": "Service", "position": 6, "name": "Creative & Design", "description": "Brand identity systems, environmental design, packaging and material sampling.", "provider": { "@id": "https://adsdotcom.net/#organization" } }
+          {
+            "@type": "SiteLinksAction",
+            "name": "Outdoor Advertising",
+            "url": "https://adsdotcom.net/services/outdoor-advertising",
+            "description": "Billboard hoarding, transit advertising & street furniture across Pakistan."
+          },
+          {
+            "@type": "SiteLinksAction",
+            "name": "Printing Services",
+            "url": "https://adsdotcom.net/services/printing",
+            "description": "UV Roll-to-Roll, UV DTF, UV Flatbed, Digital Flex, Roland & Offset printing in Lahore."
+          },
+          {
+            "@type": "SiteLinksAction",
+            "name": "Fabrication & Installation",
+            "url": "https://adsdotcom.net/services/fabrication",
+            "description": "Billboard fabrication, custom signage, 3D sign boards & stainless steel letters."
+          },
+          {
+            "@type": "SiteLinksAction",
+            "name": "Event Management",
+            "url": "https://adsdotcom.net/services/events",
+            "description": "Weddings, corporate events, birthdays & exhibition stalls in Lahore."
+          },
+          {
+            "@type": "SiteLinksAction",
+            "name": "Creative Design",
+            "url": "https://adsdotcom.net/services/creative-design",
+            "description": "Brand identity, UI/UX, print & environmental design in Lahore."
+          },
+          {
+            "@type": "SiteLinksAction",
+            "name": "Our Work",
+            "url": "https://adsdotcom.net/work",
+            "description": "Portfolio of completed advertising, fabrication and event projects."
+          },
+          {
+            "@type": "SiteLinksAction",
+            "name": "Get a Quote",
+            "url": "https://wa.me/923349955475",
+            "description": "Contact ADS DOT COM on WhatsApp for a project quote."
+          }
         ]
       },
       {
@@ -214,7 +260,8 @@ function RootShell({ children }: { children: ReactNode }) {
           { "@type": "Question", "name": "How long has ADS DOT COM been operating?", "acceptedAnswer": { "@type": "Answer", "text": "ADS DOT COM was incorporated on May 16, 2006. We have over 20 years of experience in the advertising and creative production industry." } },
           { "@type": "Question", "name": "Does ADS DOT COM handle outdoor advertising permits?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We manage municipal and cantonment permit applications on your behalf for all outdoor installations." } },
           { "@type": "Question", "name": "What is the fastest turnaround for print jobs?", "acceptedAnswer": { "@type": "Answer", "text": "For wide-format print jobs with approved artwork, we can deliver within 48 hours." } },
-          { "@type": "Question", "name": "How can I contact ADS DOT COM?", "acceptedAnswer": { "@type": "Answer", "text": "Email info@adsdotcom.net or sales@adsdotcom.net, or call +92 334 9955475." } }
+          { "@type": "Question", "name": "How can I contact ADS DOT COM?", "acceptedAnswer": { "@type": "Answer", "text": "WhatsApp us at +92 334 9955475, email info@adsdotcom.net or sales@adsdotcom.net." } },
+          { "@type": "Question", "name": "Do you do weddings and shadi events?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — our Event Management division handles full décor, stage setup and logistics for weddings, shadi events, birthdays and corporate functions across Lahore." } }
         ]
       }
     ]

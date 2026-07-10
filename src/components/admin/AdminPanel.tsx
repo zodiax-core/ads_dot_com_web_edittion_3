@@ -181,7 +181,7 @@ function WorksTab({ onError }: { onError: (msg: string) => void }) {
       <div className="flex justify-between items-center flex-wrap gap-3">
         <h2 className="text-2xl font-serif">Manage Works</h2>
         <div className="flex gap-2 flex-wrap">
-          <button onClick={() => fixBrokenImages().then(r => r?.message && onError ? alert(r.message) : alert(r?.message))}
+          <button onClick={() => fixBrokenImages().then(r => r?.message && alert(r.message))}
             className="px-3 py-2 bg-amber-500 text-white rounded hover:bg-amber-600 text-xs font-semibold">
             🔧 Fix Image URLs
           </button>
@@ -297,7 +297,7 @@ function GalleryTab({ onError }: { onError: (msg: string) => void }) {
         {imageUrl && <img src={imageUrl} alt="Preview" className="h-24 w-auto rounded object-cover border border-ink/10" />}
       </form>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {!images ? <p className="text-sm text-ink-soft">Loading…</p> : images.map(img => (
+        {!images ? <p className="text-sm text-ink-soft">Loading…</p> : images.map(img => img ? (
           <div key={img._id} className="relative group rounded overflow-hidden aspect-square bg-surface border border-ink/10">
             <img src={img.imageUrl} alt={img.caption || 'Gallery image'} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-ink/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-3">
@@ -305,7 +305,7 @@ function GalleryTab({ onError }: { onError: (msg: string) => void }) {
               <button onClick={() => deleteImage({ id: img._id })} className="self-end px-3 py-1 bg-red-500 text-white rounded text-xs hover:bg-red-600">Delete</button>
             </div>
           </div>
-        ))}
+        ) : null)}
       </div>
     </div>
   );

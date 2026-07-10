@@ -53,6 +53,7 @@ function useReveal() {
 export function Nav({ ready = true }: { ready?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const closeTimer = useRef<number | null>(null);
 
   const serviceLinks = [
     { href: "/services/outdoor-advertising", label: "Outdoor Advertising" },
@@ -77,8 +78,17 @@ export function Nav({ ready = true }: { ready?: boolean }) {
         </a>
 
         <div className="hidden md:flex items-center gap-5 text-[13px] font-medium text-ink-soft">
-          {/* Services with dropdown */}
-          <div className="relative" onMouseEnter={() => setServicesOpen(true)} onMouseLeave={() => setServicesOpen(false)}>
+          {/* Services with dropdown — delayed close so user has time to move to options */}
+          <div
+            className="relative"
+            onMouseEnter={() => {
+              if (closeTimer.current) clearTimeout(closeTimer.current);
+              setServicesOpen(true);
+            }}
+            onMouseLeave={() => {
+              closeTimer.current = window.setTimeout(() => setServicesOpen(false), 220);
+            }}
+          >
             <a href="/services" className="hover:text-ink transition-colors flex items-center gap-1">
               Services
               <svg className="size-3 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
@@ -245,7 +255,11 @@ function Marquee() {
   );
 }
 
-/* ────────────────────────────────── SERVICES ────────────────────────────── */
+import printHero from "@/assets/printing-service-images/Flex-printing-1.jpg";
+import fabHero from "@/assets/fabrication-images/birdboard-1.webp";
+import eventHero from "@/assets/event-management-images/Marriage-1.avif";
+import designHero from "@/assets/creative-design-images/design-1.jpeg";
+
 function Services() {
   const services = [
     {
@@ -253,7 +267,7 @@ function Services() {
       title: "Printing Services",
       tag: "Print",
       color: "accent-blue",
-      image: "/gallery/printing-service-images/Flex-printing-1.jpg",
+      image: printHero,
       imageAlt: "Wide format printing in Lahore",
       desc: "Our printing division operates at the intersection of traditional craftsmanship and robotics. UV Roll-to-Roll, DTF, Flatbed, and Offset.",
       href: "/services/printing",
@@ -263,7 +277,7 @@ function Services() {
       title: "Fabrication & Installation",
       tag: "Build",
       color: "accent-coral",
-      image: "/gallery/fabrication-images/birdboard-1.webp",
+      image: fabHero,
       imageAlt: "Custom fabricated modular structure and billboard installation in Lahore",
       desc: "Billboards, 3D sign boards, stainless steel letters, custom signage — all designed, fabricated and installed in-house by our own crew.",
       href: "/services/fabrication",
@@ -273,7 +287,7 @@ function Services() {
       title: "Event Management",
       tag: "Live",
       color: "accent-purple",
-      image: "/gallery/event-management-images/Marriage-1.avif",
+      image: eventHero,
       imageAlt: "Branded event setup with stage and lighting in Lahore",
       desc: "Weddings (shadi), corporate events, exhibitions and branded stalls — full décor, stage setup and event management from brief to breakdown.",
       href: "/services/events",
@@ -283,7 +297,7 @@ function Services() {
       title: "Creative Design",
       tag: "Studio",
       color: "accent-mint",
-      image: "/gallery/creative-design-images/design-1.jpeg",
+      image: designHero,
       imageAlt: "Brand identity design and creative development studio in Lahore",
       desc: "Brand identity, graphic design, UI/UX and environmental design — physical-first creative studio that designs for production, not just screens.",
       href: "/services/creative-design",
@@ -395,7 +409,7 @@ function Process() {
 function Work() {
   const projects = [
     {
-      img: installation,
+      img: fabHero,
       tag: "Outdoor Campaign",
       tagColor: "bg-accent-purple",
       title: "Cantt. Billboard Circuit",
@@ -404,22 +418,13 @@ function Work() {
       desc: "A series of high-altitude double-sided billboard structures deployed at primary intersections.",
     },
     {
-      img: events,
+      img: eventHero,
       tag: "Live Production",
       tagColor: "bg-accent-mint",
       title: "ARY News Studio Set",
       client: "ARY Network",
       year: "2023",
       desc: "Scenic custom broadcast television set with integrated LED wall mounts and architectural wood cladding.",
-    },
-    {
-      img: printing,
-      tag: "Print & Graphics",
-      tagColor: "bg-accent-yellow",
-      title: "HQ Facade Wrap",
-      client: "Pak Arab Housing",
-      year: "2023",
-      desc: "Weatherproof 12-meter continuous graphic applied to structural glass siding.",
     },
   ];
   return (

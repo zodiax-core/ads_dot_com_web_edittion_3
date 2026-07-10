@@ -2,17 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageShell } from "@/components/page-shell";
 
-import d1 from "@/assets/Creative Design & Website development Images/design-1.jpeg";
-import d2 from "@/assets/Creative Design & Website development Images/design-2.jpeg";
-import d3 from "@/assets/Creative Design & Website development Images/design-3.png";
-import d4 from "@/assets/Creative Design & Website development Images/design-4.jpg";
-import d5 from "@/assets/Creative Design & Website development Images/design-5.jpg";
-import d6 from "@/assets/Creative Design & Website development Images/design-6.jpg";
-import d7 from "@/assets/Creative Design & Website development Images/design-7.jpeg";
-import d8 from "@/assets/Creative Design & Website development Images/design-8.jpeg";
-import d9 from "@/assets/Creative Design & Website development Images/design-9.jpeg";
-import d10 from "@/assets/Creative Design & Website development Images/design-10.jpg";
-import d11 from "@/assets/Creative Design & Website development Images/design-11.jpg";
+import d1 from "@/assets/creative-design-images/design-1.jpeg";
+import d2 from "@/assets/creative-design-images/design-2.jpeg";
+import d3 from "@/assets/creative-design-images/design-3.png";
+import d4 from "@/assets/creative-design-images/design-4.jpg";
+import d5 from "@/assets/creative-design-images/design-5.jpg";
+import d6 from "@/assets/creative-design-images/design-6.jpg";
+import d7 from "@/assets/creative-design-images/design-7.jpeg";
+import d8 from "@/assets/creative-design-images/design-8.jpeg";
+import d9 from "@/assets/creative-design-images/design-9.jpeg";
+import d10 from "@/assets/creative-design-images/design-10.jpg";
+import d11 from "@/assets/creative-design-images/design-11.jpg";
 
 export const Route = createFileRoute("/services_/creative-development")({
   head: () => ({

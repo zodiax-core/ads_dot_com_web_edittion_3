@@ -73,7 +73,6 @@ export const deleteImage = mutation({
 });
 
 
-import { mutation } from './_generated/server';
 export const seedGalleryManual = mutation(async (ctx) => {
   const images = [
   {

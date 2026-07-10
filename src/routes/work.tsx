@@ -411,7 +411,7 @@ function GlobalGallery() {
     <>
       {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />}
       <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-        {images.map((img) => (
+        {images.map((img) => img ? (
           <div
             key={img._id}
             className="break-inside-avoid relative group rounded-xl overflow-hidden bg-canvas/5 border border-canvas/10 cursor-zoom-in"
@@ -424,7 +424,7 @@ function GlobalGallery() {
               </div>
             )}
           </div>
-        ))}
+        ) : null)}
       </div>
     </>
   );
