@@ -159,8 +159,8 @@ function RootShell({ children }: { children: ReactNode }) {
         "logo": {
           "@type": "ImageObject",
           "url": "https://adsdotcom.net/logo.png",
-          "width": 512,
-          "height": 512
+          "width": 1080,
+          "height": 1080
         },
         "image": "https://adsdotcom.net/og-image.png",
         "description": "Lahore's leading integrated creative agency — outdoor advertising, precision printing, fabrication, installation, event production and brand design since 2006.",

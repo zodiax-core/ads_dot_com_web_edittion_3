@@ -12,6 +12,20 @@
   node_bundler = "esbuild"
 
 # ── Redirects ────────────────────────────────────────────────────────────────
+# Static XML / txt files — must be served BEFORE the catch-all SSR function
+# so Googlebot can fetch them directly as plain files.
+[[redirects]]
+  from   = "/sitemap.xml"
+  to     = "/sitemap.xml"
+  status = 200
+  force  = false
+
+[[redirects]]
+  from   = "/robots.txt"
+  to     = "/robots.txt"
+  status = 200
+  force  = false
+
 # WWW → non-www canonical redirect
 [[redirects]]
   from = "https://www.adsdotcom.net/*"
@@ -89,12 +103,15 @@
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    Cache-Control = "public, max-age=3600, must-revalidate"
+    Content-Type  = "application/xml; charset=UTF-8"
+    X-Robots-Tag  = "noindex"
 
 [[headers]]
   for = "/robots.txt"
   [headers.values]
     Cache-Control = "public, max-age=86400"
+    Content-Type  = "text/plain; charset=UTF-8"
 
 # Security + performance headers for all pages
 [[headers]]
