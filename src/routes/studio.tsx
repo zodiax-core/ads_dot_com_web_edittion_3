@@ -219,8 +219,11 @@ function RouteComponent() {
                 </div>
                 <div>
                   <h4 className="text-[10px] uppercase font-bold tracking-widest text-ink-mute mb-1">Direct Call</h4>
-                  <a href="tel:+923349955475" className="text-xs text-ink-soft hover:text-accent-blue transition-colors">
+                  <a href="tel:+923349955475" className="text-xs text-ink-soft hover:text-accent-blue transition-colors block mb-1">
                     +92 334 9955475
+                  </a>
+                  <a href="tel:+923030449955" className="text-xs text-ink-soft hover:text-accent-blue transition-colors block">
+                    +92 303 0449955
                   </a>
                 </div>
                 <div>

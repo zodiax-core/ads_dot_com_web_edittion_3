@@ -545,6 +545,7 @@ export function Footer() {
             </p>
             <div className="text-ink-soft text-sm space-y-1">
               <a href="tel:+923349955475" className="block hover:text-accent-blue transition-colors">+92 334 9955475</a>
+              <a href="tel:+923030449955" className="block hover:text-accent-blue transition-colors">+92 303 0449955</a>
               <a href="mailto:info@adsdotcom.net" className="block hover:text-accent-blue transition-colors">info@adsdotcom.net</a>
               <a href="mailto:sales@adsdotcom.net" className="block hover:text-accent-blue transition-colors">sales@adsdotcom.net</a>
             </div>

@@ -282,6 +282,10 @@ function ProcessPage() {
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-ink/10 text-ink rounded-full text-sm font-semibold hover:bg-surface transition-colors">
               +92 334 9955475
             </a>
+            <a href="tel:+923030449955"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-ink/10 text-ink rounded-full text-sm font-semibold hover:bg-surface transition-colors">
+              +92 303 0449955
+            </a>
           </div>
         </div>
       </section>

@@ -166,7 +166,7 @@ function RootShell({ children }: { children: ReactNode }) {
         "description": "Lahore's leading integrated creative agency — outdoor advertising, precision printing, fabrication, installation, event production and brand design since 2006.",
         "foundingDate": "2006-05-16",
         "email": "info@adsdotcom.net",
-        "telephone": "+923349955475",
+        "telephone": ["+923349955475", "+923030449955"],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "E-193/ii, Bank Stop, Main Walton Road Cantt.",
@@ -260,7 +260,7 @@ function RootShell({ children }: { children: ReactNode }) {
           { "@type": "Question", "name": "How long has ADS DOT COM been operating?", "acceptedAnswer": { "@type": "Answer", "text": "ADS DOT COM was incorporated on May 16, 2006. We have over 20 years of experience in the advertising and creative production industry." } },
           { "@type": "Question", "name": "Does ADS DOT COM handle outdoor advertising permits?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We manage municipal and cantonment permit applications on your behalf for all outdoor installations." } },
           { "@type": "Question", "name": "What is the fastest turnaround for print jobs?", "acceptedAnswer": { "@type": "Answer", "text": "For wide-format print jobs with approved artwork, we can deliver within 48 hours." } },
-          { "@type": "Question", "name": "How can I contact ADS DOT COM?", "acceptedAnswer": { "@type": "Answer", "text": "WhatsApp us at +92 334 9955475, email info@adsdotcom.net or sales@adsdotcom.net." } },
+          { "@type": "Question", "name": "How can I contact ADS DOT COM?", "acceptedAnswer": { "@type": "Answer", "text": "Call us at +92 303 0449955, WhatsApp at +92 334 9955475, or email info@adsdotcom.net / sales@adsdotcom.net." } },
           { "@type": "Question", "name": "Do you do weddings and shadi events?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — our Event Management division handles full décor, stage setup and logistics for weddings, shadi events, birthdays and corporate functions across Lahore." } }
         ]
       }

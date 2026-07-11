@@ -206,6 +206,10 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-canvas/20 text-canvas rounded-full text-sm font-semibold hover:bg-canvas/10 transition-colors">
               +92 334 9955475
             </a>
+            <a href="tel:+923030449955"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-canvas/20 text-canvas rounded-full text-sm font-semibold hover:bg-canvas/10 transition-colors">
+              +92 303 0449955
+            </a>
           </div>
         </div>
       </section>
