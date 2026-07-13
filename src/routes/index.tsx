@@ -17,7 +17,38 @@ import vid6 from "@/assets/Hero-vids/7744205-uhd_4096_2160_25fps.mp4";
 import vid7 from "@/assets/Hero-vids/8125999-hd_1920_1080_25fps.mp4";
 import vid8 from "@/assets/Hero-vids/9594354-uhd_4096_2160_25fps.mp4";
 
-const HERO_VIDEOS = [vid1, vid2, vid3, vid4, vid5, vid6, vid7, vid8];
+// Ordered: smallest 1080p files first so slow connections load quickest
+const HERO_VIDEOS = [vid1, vid2, vid4, vid7, vid3, vid5, vid6, vid8];
+
+// ── Connection quality detection ────────────────────────────────────────────
+type ConnectionType = "fast" | "slow" | "unknown";
+function getConnectionType(): ConnectionType {
+  const nav = navigator as Navigator & {
+    connection?: { effectiveType?: string; saveData?: boolean };
+  };
+  const conn = nav.connection;
+  if (!conn) return "unknown";
+  if (conn.saveData) return "slow";
+  const et = conn.effectiveType ?? "";
+  if (et === "slow-2g" || et === "2g") return "slow";
+  if (et === "3g") return "slow"; // still throttle on 3G for heavy UHD files
+  return "fast";
+}
+
+// ── Eager hidden preload of a single video src (browser cache) ──────────────
+const preloadedSrcs = new Set<string>();
+function preloadVideoSrc(src: string) {
+  if (preloadedSrcs.has(src)) return;
+  preloadedSrcs.add(src);
+  const vid = document.createElement("video");
+  vid.preload = "auto";
+  vid.muted = true;
+  vid.src = src;
+  // Kick off at most ~10s of buffering then discard the element
+  const cleanup = () => vid.remove();
+  vid.addEventListener("canplaythrough", cleanup, { once: true });
+  setTimeout(cleanup, 10_000);
+}
 
 import { CinematicIntro } from "@/components/cinematic-intro";
 
@@ -164,6 +195,35 @@ export function Nav({ ready = true }: { ready?: boolean }) {
 /* ─────────────────────────────────────── HERO ───────────────────────────── */
 function Hero({ ready = true }: { ready?: boolean }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [slowConnection, setSlowConnection] = useState(false);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  // Detect connection quality once on mount
+  useEffect(() => {
+    const ct = getConnectionType();
+    if (ct === "slow") setSlowConnection(true);
+  }, []);
+
+  // Sequential preload: once a video is active, preload the next one
+  useEffect(() => {
+    if (slowConnection) return;
+    const nextIdx = (currentIndex + 1) % HERO_VIDEOS.length;
+    preloadVideoSrc(HERO_VIDEOS[nextIdx]);
+  }, [currentIndex, slowConnection]);
+
+  // Imperatively play/pause the correct video when index or ready changes.
+  // Changing the `autoPlay` attribute dynamically after mount is ignored by
+  // browsers — we must call .play()/.pause() directly.
+  useEffect(() => {
+    videoRefs.current.forEach((el, idx) => {
+      if (!el) return;
+      if (idx === currentIndex && ready) {
+        el.play().catch(() => {/* autoplay blocked — silently ignore */});
+      } else {
+        el.pause();
+      }
+    });
+  }, [currentIndex, ready]);
 
   // Auto-advance every 6 seconds
   useEffect(() => {
@@ -172,7 +232,7 @@ function Hero({ ready = true }: { ready?: boolean }) {
       setCurrentIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, [ready, currentIndex]); // Reset timer when index changes manually
+  }, [ready, currentIndex]);
 
   const nextVideo = () => setCurrentIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
   const prevVideo = () => setCurrentIndex((prev) => (prev - 1 + HERO_VIDEOS.length) % HERO_VIDEOS.length);
@@ -181,46 +241,42 @@ function Hero({ ready = true }: { ready?: boolean }) {
     <section id="top" className="relative min-h-[100svh] flex flex-col items-center justify-center pt-24 pb-16 px-4 overflow-hidden bg-ink">
       {/* Video Carousel Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {HERO_VIDEOS.map((vid, idx) => {
+        {/* Static poster fallback — shown on slow connections */}
+        {slowConnection && (
+          <img
+            src={heroScene}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover opacity-70"
+          />
+        )}
+
+        {/* Video carousel — skipped entirely on slow connections */}
+        {!slowConnection && HERO_VIDEOS.map((vid, idx) => {
           const isActive = idx === currentIndex;
+          const nextIdx = (currentIndex + 1) % HERO_VIDEOS.length;
+          // Active: auto-buffer | next in queue: fetch metadata | rest: nothing
+          const preloadAttr = isActive ? "auto" : idx === nextIdx ? "metadata" : "none";
           return (
             <video
               key={vid}
+              ref={(el) => { videoRefs.current[idx] = el; }}
               src={vid}
-              autoPlay={isActive}
               muted
               playsInline
               loop
-              preload={isActive ? "auto" : "none"}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${isActive ? "opacity-70 z-10" : "opacity-0 z-0"
-                }`}
+              preload={preloadAttr}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                isActive ? "opacity-70 z-10" : "opacity-0 z-0"
+              }`}
             />
           );
         })}
-        <div className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/0 to-transparent z-20" />
+
+
+
       </div>
 
-      {/* Navigation Arrows */}
-      <div className={`absolute inset-y-0 left-0 right-0 z-30 flex items-center justify-between px-4 md:px-8 pointer-events-none transition-opacity duration-700 delay-500 ${ready ? "opacity-100" : "opacity-0"}`}>
-        <button
-          onClick={prevVideo}
-          className="pointer-events-auto size-12 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white flex items-center justify-center hover:bg-white/20 hover:scale-105 transition-all shadow-soft"
-          aria-label="Previous video"
-        >
-          <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-            <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-        <button
-          onClick={nextVideo}
-          className="pointer-events-auto size-12 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white flex items-center justify-center hover:bg-white/20 hover:scale-105 transition-all shadow-soft"
-          aria-label="Next video"
-        >
-          <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-            <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-      </div>
 
       {/* Floating chips — staggered fade in */}
       <div className={`absolute left-[6%] top-[22%] hidden md:block animate-float-slow transition-all duration-700 delay-[900ms] z-40 ${ready ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
@@ -729,6 +785,13 @@ function Home() {
 
   useEffect(() => {
     setMounted(true);
+    // ── Preload vid1 immediately during the cinematic intro window (~2.6s) ──
+    // This gives the browser a head-start so the first video is buffered
+    // and ready to play the moment the hero becomes visible.
+    const ct = getConnectionType();
+    if (ct !== "slow") {
+      preloadVideoSrc(HERO_VIDEOS[0]);
+    }
   }, []);
 
   const handleIntroComplete = () => {
