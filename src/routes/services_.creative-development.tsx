@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageShell } from "@/components/page-shell";
+import { ServiceThumbnailGallery } from "@/components/ServiceThumbnailGallery";
 
 import d1 from "@/assets/creative-design-images/design-1.jpeg";
 import d2 from "@/assets/creative-design-images/design-2.jpeg";
@@ -128,7 +129,7 @@ function CreativeDevelopmentPage() {
           <section key={s.slug} id={s.slug}>
             <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start ${i % 2 !== 0 ? "lg:grid-flow-dense" : ""}`}>
               <div className={i % 2 !== 0 ? "lg:col-start-2" : ""}>
-                <Gallery images={s.images} alts={s.alts} />
+                <ServiceThumbnailGallery images={s.images} alts={s.alts} />
               </div>
               <div className="flex flex-col justify-center gap-5">
                 <div>

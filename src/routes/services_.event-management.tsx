@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageShell } from "@/components/page-shell";
+import { ServiceThumbnailGallery } from "@/components/ServiceThumbnailGallery";
 
 import bday1 from "@/assets/event-management-images/Birthday-1.jpg";
 import bday2 from "@/assets/event-management-images/Birthday-2.jpg";

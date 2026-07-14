@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageShell } from "@/components/page-shell";
+import { ServiceThumbnailGallery } from "@/components/ServiceThumbnailGallery";
 
 import bb1 from "@/assets/fabrication-images/birdboard-1.webp";
 import bb2 from "@/assets/fabrication-images/birdboard-2.webp";
@@ -156,7 +157,7 @@ function FabricationInstallationPage() {
           <section key={s.slug} id={s.slug}>
             <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start ${i % 2 !== 0 ? "lg:grid-flow-dense" : ""}`}>
               <div className={i % 2 !== 0 ? "lg:col-start-2" : ""}>
-                <ImageGallery images={s.images} alts={s.imageAlts} />
+                <ServiceThumbnailGallery images={s.images} alts={s.imageAlts} />
               </div>
               <div className="flex flex-col justify-center gap-5">
                 <div>

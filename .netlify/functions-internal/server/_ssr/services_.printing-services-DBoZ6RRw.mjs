@@ -1,10 +1,10 @@
-import { r as __toESM } from "../_runtime.mjs";
+import "../_runtime.mjs";
 import { c as require_react, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as PageShell } from "./page-shell-DNYCzSgU.mjs";
 import { t as Flex_printing_1_default } from "./Flex-printing-1-7WDpveAa.mjs";
 import { a as UV_DTF_2_default, c as UV_Flatbed_2_default, d as offset_printing_2_default, f as offset_printing_3_default, g as uv_roll_to_roll_3_default, h as uv_roll_to_roll_2_default, i as UV_DTF_1_default, l as UV_Flatbed_3_default, m as uv_roll_to_roll_1_default, n as Flex_printing_2_default, o as UV_DTF_3_default, p as offset_printing_4_default, r as Flex_printing_3_default, s as UV_Flatbed_1_default, t as Digital_Rolland_Printing_1_default, u as offset_printing_1_default } from "./offset-printing-4-CKLk32O4.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/services_.printing-services-butEhZ-1.js
-var import_react = /* @__PURE__ */ __toESM(require_react());
+import { t as ServiceThumbnailGallery } from "./ServiceThumbnailGallery-CAHW1BHi.mjs";
+require_react();
 var import_jsx_runtime = require_jsx_runtime();
 var UV_DTF_4_default = "/assets/UV-DTF-4-BkuzfOzl.jpg";
 var WA = "https://wa.me/923349955475";
@@ -150,33 +150,6 @@ var services = [
 		]
 	}
 ];
-function ImageGallery({ images, alts }) {
-	const [active, setActive] = (0, import_react.useState)(0);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "space-y-3",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "aspect-[16/9] rounded-2xl overflow-hidden bg-surface",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-				src: images[active],
-				alt: alts[active],
-				className: "w-full h-full object-cover",
-				loading: "eager"
-			})
-		}), images.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "flex gap-2 flex-wrap",
-			children: images.map((img, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-				onClick: () => setActive(i),
-				className: `size-16 rounded-xl overflow-hidden border-2 transition-all ${i === active ? "border-accent-blue" : "border-transparent opacity-60 hover:opacity-100"}`,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-					src: img,
-					alt: alts[i],
-					className: "w-full h-full object-cover",
-					loading: "lazy"
-				})
-			}, i))
-		})]
-	});
-}
 function PrintingServicesPage() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(PageShell, { children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
@@ -245,7 +218,7 @@ function PrintingServicesPage() {
 					className: `grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start ${i % 2 !== 0 ? "lg:grid-flow-dense" : ""}`,
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 						className: i % 2 !== 0 ? "lg:col-start-2" : "",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ImageGallery, {
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ServiceThumbnailGallery, {
 							images: s.images,
 							alts: s.imageAlts
 						})

@@ -1,10 +1,10 @@
-import { r as __toESM } from "../_runtime.mjs";
+import "../_runtime.mjs";
 import { c as require_react, s as require_jsx_runtime } from "../_libs/@convex-dev/auth+[...].mjs";
 import { t as PageShell } from "./page-shell-DNYCzSgU.mjs";
 import { t as design_1_default } from "./design-1-BYmyhXIY.mjs";
 import { a as design_4_default, c as design_7_default, i as design_3_default, l as design_8_default, n as design_11_default, o as design_5_default, r as design_2_default, s as design_6_default, t as design_10_default, u as design_9_default } from "./design-11-BhAPgTW_.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/services_.creative-development-DEkCdUnm.js
-var import_react = /* @__PURE__ */ __toESM(require_react());
+import { t as ServiceThumbnailGallery } from "./ServiceThumbnailGallery-CAHW1BHi.mjs";
+require_react();
 var import_jsx_runtime = require_jsx_runtime();
 var WA = "https://wa.me/923349955475";
 var services = [
@@ -97,33 +97,6 @@ var services = [
 		]
 	}
 ];
-function Gallery({ images, alts }) {
-	const [active, setActive] = (0, import_react.useState)(0);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "space-y-3",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "aspect-[4/3] rounded-2xl overflow-hidden bg-surface",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-				src: images[active],
-				alt: alts[active],
-				className: "w-full h-full object-cover",
-				loading: "eager"
-			})
-		}), images.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "flex gap-2 flex-wrap",
-			children: images.map((img, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-				onClick: () => setActive(i),
-				className: `size-16 rounded-xl overflow-hidden border-2 transition-all ${i === active ? "border-accent-blue" : "border-transparent opacity-60 hover:opacity-100"}`,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-					src: img,
-					alt: alts[i],
-					className: "w-full h-full object-cover",
-					loading: "lazy"
-				})
-			}, i))
-		})]
-	});
-}
 function CreativeDevelopmentPage() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(PageShell, { children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
@@ -202,7 +175,7 @@ function CreativeDevelopmentPage() {
 					className: `grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start ${i % 2 !== 0 ? "lg:grid-flow-dense" : ""}`,
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 						className: i % 2 !== 0 ? "lg:col-start-2" : "",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Gallery, {
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ServiceThumbnailGallery, {
 							images: s.images,
 							alts: s.alts
 						})

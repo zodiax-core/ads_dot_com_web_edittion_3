@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageShell } from "@/components/page-shell";
+import { ServiceThumbnailGallery } from "@/components/ServiceThumbnailGallery";
 
 // Printing service images
 import uvRoll1 from "@/assets/printing-service-images/uv-roll-to-roll-1.jpg";
@@ -167,7 +168,7 @@ function PrintingServicesPage() {
           <section key={s.slug} id={s.slug}>
             <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start ${i % 2 !== 0 ? "lg:grid-flow-dense" : ""}`}>
               <div className={i % 2 !== 0 ? "lg:col-start-2" : ""}>
-                <ImageGallery images={s.images} alts={s.imageAlts} />
+                <ServiceThumbnailGallery images={s.images} alts={s.imageAlts} />
               </div>
               <div className="flex flex-col justify-center gap-5">
                 <div>
