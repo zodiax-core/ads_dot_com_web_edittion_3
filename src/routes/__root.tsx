@@ -94,8 +94,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "ADS DOT COM" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { name: "theme-color", content: "#f5f0eb" },
+      // Favicon / app icon meta — helps search engines discover and index the logo
+      { name: "msapplication-TileImage", content: "https://adsdotcom.net/logo.png" },
+      { name: "msapplication-TileColor", content: "#f5f0eb" },
 
-      // Open Graph
+      // Open Graph — og:site_name is the brand name shown in social/search previews
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "ADS DOT COM" },
       { property: "og:title", content: "ADS DOT COM — Integrated Creative Agency | Lahore" },
@@ -129,8 +132,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/logo.png", type: "image/png", sizes: "any" },
-      { rel: "apple-touch-icon", href: "/logo.png" },
+      // Favicon — multiple formats so all browsers + crawlers pick it up
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", href: "/logo.png", type: "image/png", sizes: "1080x1080" },
+      { rel: "shortcut icon", href: "/favicon.ico" },
+      { rel: "apple-touch-icon", href: "/logo.png", sizes: "1080x1080" },
       { rel: "manifest", href: "/manifest.json" },
       { rel: "canonical", href: "https://adsdotcom.net/" },
       { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
