@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav, Footer } from "./index";
+import { ServiceImageGrid } from "@/components/ServiceImageGrid";
 
 import d1 from "@/assets/creative-design-images/design-1.jpeg";
 import d2 from "@/assets/creative-design-images/design-2.jpeg";
@@ -135,19 +136,7 @@ function CreativeDesignService() {
               className={`flex flex-col gap-10 md:gap-16 items-center ${s.reverse ? "md:flex-row-reverse" : "md:flex-row"}`}
             >
               {/* Image grid */}
-              <div className="w-full md:w-1/2 grid grid-cols-2 gap-3">
-                <div className="col-span-2 relative aspect-[16/9] rounded-2xl overflow-hidden shadow-lift border border-ink/5 group">
-                  <img src={s.images[0]} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur text-[11px] font-bold text-ink">0{idx + 1}</span>
-                  </div>
-                </div>
-                {s.images.slice(1).map((img) => (
-                  <div key={img} className="relative aspect-[4/3] rounded-xl overflow-hidden border border-ink/5 group">
-                    <img src={img} alt={`${s.title} detail`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  </div>
-                ))}
-              </div>
+              <ServiceImageGrid images={s.images} title={s.title} idx={idx} />
 
               {/* Text */}
               <div className="w-full md:w-1/2 space-y-5">
