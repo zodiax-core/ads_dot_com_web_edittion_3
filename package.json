@@ -9,7 +9,8 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "indexnow": "node submit-indexnow.js"
   },
   "dependencies": {
     "@convex-dev/auth": "^0.0.94",
