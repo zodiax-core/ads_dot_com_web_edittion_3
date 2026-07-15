@@ -10,8 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
+import { Route as TermsConditionsRouteImport } from './routes/terms-conditions'
 import { Route as StudioRouteImport } from './routes/studio'
 import { Route as ProcessRouteImport } from './routes/process'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as R0i9876r7s7ygs89grt7r9s8rbg9rdbRouteImport } from './routes/0i9876r7s7ygs89grt7r9s8rbg9rdb'
 import { Route as IndexRouteImport } from './routes/index'
@@ -34,6 +36,11 @@ const WorkRoute = WorkRouteImport.update({
   path: '/work',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsConditionsRoute = TermsConditionsRouteImport.update({
+  id: '/terms-conditions',
+  path: '/terms-conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudioRoute = StudioRouteImport.update({
   id: '/studio',
   path: '/studio',
@@ -42,6 +49,11 @@ const StudioRoute = StudioRouteImport.update({
 const ProcessRoute = ProcessRouteImport.update({
   id: '/process',
   path: '/process',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -135,8 +147,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/blog': typeof BlogRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/process': typeof ProcessRoute
   '/studio': typeof StudioRoute
+  '/terms-conditions': typeof TermsConditionsRoute
   '/work': typeof WorkRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/creative-design': typeof ServicesCreativeDesignRoute
@@ -156,8 +170,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/blog': typeof BlogRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/process': typeof ProcessRoute
   '/studio': typeof StudioRoute
+  '/terms-conditions': typeof TermsConditionsRoute
   '/work': typeof WorkRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/creative-design': typeof ServicesCreativeDesignRoute
@@ -178,8 +194,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/0i9876r7s7ygs89grt7r9s8rbg9rdb': typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   '/blog': typeof BlogRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/process': typeof ProcessRoute
   '/studio': typeof StudioRoute
+  '/terms-conditions': typeof TermsConditionsRoute
   '/work': typeof WorkRoute
   '/blog_/$slug': typeof BlogSlugRoute
   '/services/creative-design': typeof ServicesCreativeDesignRoute
@@ -201,8 +219,10 @@ export interface FileRouteTypes {
     | '/'
     | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
     | '/blog'
+    | '/privacy-policy'
     | '/process'
     | '/studio'
+    | '/terms-conditions'
     | '/work'
     | '/blog/$slug'
     | '/services/creative-design'
@@ -222,8 +242,10 @@ export interface FileRouteTypes {
     | '/'
     | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
     | '/blog'
+    | '/privacy-policy'
     | '/process'
     | '/studio'
+    | '/terms-conditions'
     | '/work'
     | '/blog/$slug'
     | '/services/creative-design'
@@ -243,8 +265,10 @@ export interface FileRouteTypes {
     | '/'
     | '/0i9876r7s7ygs89grt7r9s8rbg9rdb'
     | '/blog'
+    | '/privacy-policy'
     | '/process'
     | '/studio'
+    | '/terms-conditions'
     | '/work'
     | '/blog_/$slug'
     | '/services/creative-design'
@@ -265,8 +289,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: typeof R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute
   BlogRoute: typeof BlogRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProcessRoute: typeof ProcessRoute
   StudioRoute: typeof StudioRoute
+  TermsConditionsRoute: typeof TermsConditionsRoute
   WorkRoute: typeof WorkRoute
   BlogSlugRoute: typeof BlogSlugRoute
   ServicesCreativeDesignRoute: typeof ServicesCreativeDesignRoute
@@ -292,6 +318,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms-conditions': {
+      id: '/terms-conditions'
+      path: '/terms-conditions'
+      fullPath: '/terms-conditions'
+      preLoaderRoute: typeof TermsConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/studio': {
       id: '/studio'
       path: '/studio'
@@ -304,6 +337,13 @@ declare module '@tanstack/react-router' {
       path: '/process'
       fullPath: '/process'
       preLoaderRoute: typeof ProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -425,8 +465,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute: R0i9876r7s7ygs89grt7r9s8rbg9rdbRoute,
   BlogRoute: BlogRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProcessRoute: ProcessRoute,
   StudioRoute: StudioRoute,
+  TermsConditionsRoute: TermsConditionsRoute,
   WorkRoute: WorkRoute,
   BlogSlugRoute: BlogSlugRoute,
   ServicesCreativeDesignRoute: ServicesCreativeDesignRoute,
