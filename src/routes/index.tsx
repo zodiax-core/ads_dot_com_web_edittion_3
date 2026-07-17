@@ -8,17 +8,18 @@ import creative from "@/assets/creative.jpg";
 import installation from "@/assets/installation.jpg";
 import printing from "@/assets/printing.jpg";
 
-import vid1 from "@/assets/Hero-vids/13690325_1920_1080_60fps.mp4";
-import vid2 from "@/assets/Hero-vids/14612597_1920_1080_24fps.mp4";
-import vid3 from "@/assets/Hero-vids/14781069_1920_1080_30fps.mp4";
-import vid4 from "@/assets/Hero-vids/15518920_1920_1080_59fps.mp4";
-import vid5 from "@/assets/Hero-vids/7687597-uhd_3840_2160_30fps.mp4";
-import vid6 from "@/assets/Hero-vids/7744205-uhd_4096_2160_25fps.mp4";
-import vid7 from "@/assets/Hero-vids/8125999-hd_1920_1080_25fps.mp4";
-import vid8 from "@/assets/Hero-vids/9594354-uhd_4096_2160_25fps.mp4";
+import vid1 from "@/assets/Hero-vids/v1.webm";
+import vid2 from "@/assets/Hero-vids/v2.webm";
+import vid3 from "@/assets/Hero-vids/v3.webm";
+import vid4 from "@/assets/Hero-vids/v4.webm";
+import vid5 from "@/assets/Hero-vids/v5.webm";
+import vid6 from "@/assets/Hero-vids/v6.webm";
+import vid7 from "@/assets/Hero-vids/v7.webm";
+import vid8 from "@/assets/Hero-vids/v8.webm";
+import vid9 from "@/assets/Hero-vids/v9.webm";
 
-// Ordered: smallest 1080p files first so slow connections load quickest
-const HERO_VIDEOS = [vid1, vid2, vid4, vid7, vid3, vid5, vid6, vid8];
+// All 9 hero videos — webm format, v1 through v9
+const HERO_VIDEOS = [vid1, vid2, vid3, vid4, vid5, vid6, vid7, vid8, vid9];
 
 // ── Connection quality detection ────────────────────────────────────────────
 type ConnectionType = "fast" | "slow" | "unknown";
