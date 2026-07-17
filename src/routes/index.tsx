@@ -31,8 +31,8 @@ function getConnectionType(): ConnectionType {
   if (!conn) return "unknown";
   if (conn.saveData) return "slow";
   const et = conn.effectiveType ?? "";
-  if (et === "slow-2g" || et === "2g") return "slow";
-  if (et === "3g") return "slow"; // still throttle on 3G for heavy UHD files
+  if (et === "slow-2g" || et === "2g") return "slow"; // Fallback only for extremely slow connections
+  if (et === "3g") return "fast"; // WebM is small enough for 3G to load smoothly
   return "fast";
 }
 
@@ -41,6 +41,16 @@ const preloadedSrcs = new Set<string>();
 function preloadVideoSrc(src: string) {
   if (preloadedSrcs.has(src)) return;
   preloadedSrcs.add(src);
+  
+  // 1. High-priority browser fetch
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "video";
+  link.type = "video/webm";
+  link.href = src;
+  document.head.appendChild(link);
+
+  // 2. Eager decode/buffer in background
   const vid = document.createElement("video");
   vid.preload = "auto";
   vid.muted = true;
@@ -262,7 +272,6 @@ function Hero({ ready = true }: { ready?: boolean }) {
             <video
               key={vid}
               ref={(el) => { videoRefs.current[idx] = el; }}
-              src={vid}
               muted
               playsInline
               loop
@@ -270,7 +279,9 @@ function Hero({ ready = true }: { ready?: boolean }) {
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
                 isActive ? "opacity-70 z-10" : "opacity-0 z-0"
               }`}
-            />
+            >
+              <source src={vid} type="video/webm" />
+            </video>
           );
         })}
 
