@@ -36,30 +36,7 @@ function getConnectionType(): ConnectionType {
   return "fast";
 }
 
-// ── Eager hidden preload of a single video src (browser cache) ──────────────
-const preloadedSrcs = new Set<string>();
-function preloadVideoSrc(src: string) {
-  if (preloadedSrcs.has(src)) return;
-  preloadedSrcs.add(src);
-  
-  // 1. High-priority browser fetch
-  const link = document.createElement("link");
-  link.rel = "preload";
-  link.as = "video";
-  link.type = "video/webm";
-  link.href = src;
-  document.head.appendChild(link);
-
-  // 2. Eager decode/buffer in background
-  const vid = document.createElement("video");
-  vid.preload = "auto";
-  vid.muted = true;
-  vid.src = src;
-  // Kick off at most ~10s of buffering then discard the element
-  const cleanup = () => vid.remove();
-  vid.addEventListener("canplaythrough", cleanup, { once: true });
-  setTimeout(cleanup, 10_000);
-}
+// Removed Eager hidden preload function to prevent aggressive network congestion on refresh.
 
 import { CinematicIntro } from "@/components/cinematic-intro";
 
@@ -71,6 +48,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "ADS DOT COM — Integrated Creative Agency | Lahore, Pakistan" },
       { property: "og:description", content: "Outdoor advertising, printing, fabrication, installation, events and creative direction. Pakistan's most integrated physical branding studio since 2006." },
       { property: "og:url", content: "https://adsdotcom.net/" },
+      { property: "og:site_name", content: "ADS DOT COM" },
+
     ],
     links: [
       { rel: "canonical", href: "https://adsdotcom.net/" },
@@ -215,12 +194,7 @@ function Hero({ ready = true }: { ready?: boolean }) {
     if (ct === "slow") setSlowConnection(true);
   }, []);
 
-  // Sequential preload: once a video is active, preload the next one
-  useEffect(() => {
-    if (slowConnection) return;
-    const nextIdx = (currentIndex + 1) % HERO_VIDEOS.length;
-    preloadVideoSrc(HERO_VIDEOS[nextIdx]);
-  }, [currentIndex, slowConnection]);
+  // Removed aggressive eager preloading. We rely on the `<video preload="metadata/auto">` native browser hints.
 
   // Imperatively play/pause the correct video when index or ready changes.
   // Changing the `autoPlay` attribute dynamically after mount is ignored by
@@ -229,20 +203,45 @@ function Hero({ ready = true }: { ready?: boolean }) {
     videoRefs.current.forEach((el, idx) => {
       if (!el) return;
       if (idx === currentIndex && ready) {
-        el.play().catch(() => {/* autoplay blocked — silently ignore */});
+        el.play().catch(() => {/* autoplay blocked — silently ignore */ });
       } else {
         el.pause();
       }
     });
   }, [currentIndex, ready]);
 
-  // Auto-advance every 6 seconds
+  // Auto-advance after 6s of ACTUAL playing time (pauses if buffering)
   useEffect(() => {
     if (!ready) return;
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
-    }, 6000);
-    return () => clearInterval(timer);
+    const activeVideo = videoRefs.current[currentIndex];
+    if (!activeVideo) return;
+
+    let timer: number;
+    const startTimer = () => {
+      clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        // Reset time so it doesn't resume from the middle next time
+        activeVideo.currentTime = 0;
+        setCurrentIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
+      }, 6000);
+    };
+
+    const clearTimer = () => clearTimeout(timer);
+
+    activeVideo.addEventListener("playing", startTimer);
+    activeVideo.addEventListener("waiting", clearTimer);
+    activeVideo.addEventListener("pause", clearTimer);
+
+    if (!activeVideo.paused && activeVideo.readyState >= 3) {
+      startTimer();
+    }
+
+    return () => {
+      clearTimer();
+      activeVideo.removeEventListener("playing", startTimer);
+      activeVideo.removeEventListener("waiting", clearTimer);
+      activeVideo.removeEventListener("pause", clearTimer);
+    };
   }, [ready, currentIndex]);
 
   const nextVideo = () => setCurrentIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
@@ -276,9 +275,8 @@ function Hero({ ready = true }: { ready?: boolean }) {
               playsInline
               loop
               preload={preloadAttr}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                isActive ? "opacity-70 z-10" : "opacity-0 z-0"
-              }`}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${isActive ? "opacity-70 z-10" : "opacity-0 z-0"
+                }`}
             >
               <source src={vid} type="video/webm" />
             </video>
@@ -798,12 +796,8 @@ function Home() {
   useEffect(() => {
     setMounted(true);
     // ── Preload vid1 immediately during the cinematic intro window (~2.6s) ──
-    // This gives the browser a head-start so the first video is buffered
-    // and ready to play the moment the hero becomes visible.
-    const ct = getConnectionType();
-    if (ct !== "slow") {
-      preloadVideoSrc(HERO_VIDEOS[0]);
-    }
+    // The Hero component now handles native HTML5 preloading via preload="auto"
+    // which starts fetching the first video inherently when mounted.
   }, []);
 
   const handleIntroComplete = () => {
